@@ -8,5 +8,7 @@ if (environment.production) {
   enableProdMode();
 }
 
+// Comment added to try a feature
+
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
