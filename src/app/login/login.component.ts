@@ -32,17 +32,20 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(): void {
-    this.authenticationService.authenticateUser(this.loginForm.value).subscribe(response => {this.responseCode = response; });
-    if (this.responseCode === 'user_ok') {
-      this.router.navigate(['user/dashboard', this.username]);
-    }
-    else if (this.responseCode === 'admin_ok') {
-      this.router.navigate(['admin/dashboard', this.username]);
-    }
-    else {
-      // TODO fai un messaggio di errore togo
-      alert('Error');
-    }
+    this.authenticationService.authenticateUser(this.loginForm.value).subscribe(response => {
+      this.responseCode = response;
+      if (this.responseCode === 'user_ok') {
+        this.router.navigate(['user/dashboard', this.username]);
+      }
+      else if (this.responseCode === 'admin_ok') {
+        this.router.navigate(['admin/dashboard', this.username]);
+      }
+      else {
+        // TODO fai un messaggio di errore togo
+        alert('Error');
+      }
+    });
+
 
   }
 
