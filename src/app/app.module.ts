@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { WorksAreaComponent } from './admin/dashboard/works-area/works-area.component';
 import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    WorksAreaComponent
   ],
   imports: [
     BrowserModule,
