@@ -7,6 +7,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { WorksAreaComponent } from './admin/dashboard/works-area/works-area.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {ReactiveFormsModule} from '@angular/forms';
       {path: 'login', component: LoginComponent}
     ]),
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
