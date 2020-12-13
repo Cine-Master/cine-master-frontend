@@ -1,32 +1,19 @@
 <div class="d-flex" id="wrapper" [ngClass]="toggled">
-
-  <div class="dark border-right" id="sidebar-wrapper">
+  <div class="dark" id="sidebar-wrapper">
     <div class="sidebar-heading">cineMAster</div>
     <div class="list-group list-group-flush" *ngFor="let e of elements">
       <a class="list-group-item list-group-item-action dark main-item" (click)="showElements(e.name)">{{e.name}}</a>
-
       <a *ngIf="e.opened === true" class="list-group-item list-group-item-action dark">Lista {{e.name}}</a>
       <a *ngIf="e.opened === true" class="list-group-item list-group-item-action dark">Inserisci {{e.name}}</a>
       <a *ngIf="e.opened === true" class="list-group-item list-group-item-action dark">Elimina {{e.name}}</a>
       <hr>
     </div>
   </div>
-
   <div id="page-content-wrapper">
-
     <nav class="navbar navbar-expand-lg navbar-dark dark border-bottom">
-      <button class="btn btn-primary" id="menu-toggle" (click)="toggle()">Menu</button>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <span></span>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <button class="btn logout-btn">Logout</button>
-      </div>
+      <button class="btn" id="menu-toggle" type="button" aria-label="Toggle navigation" (click)="toggle()"><span class="navbar-toggler-icon"></span></button>
+      <button class="btn logout-btn">Logout</button>
     </nav>
-
     <app-works-area></app-works-area>
   </div>
 </div>
