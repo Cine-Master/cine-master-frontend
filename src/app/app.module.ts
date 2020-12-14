@@ -8,6 +8,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
+import { ManageShowsComponent } from './admin/dashboard/manage-shows/manage-shows.component';
+import {CommandColumnService, EditService, GridModule, PageService} from '@syncfusion/ej2-angular-grids';
+
 import { WorkAreaComponent } from './admin/work-area/work-area.component';
 
 @NgModule({
@@ -15,20 +18,23 @@ import { WorkAreaComponent } from './admin/work-area/work-area.component';
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    ManageShowsComponent,
     WorkAreaComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {path: 'admin/dashboard', component: DashboardComponent},
-      {path: 'login', component: LoginComponent}
+      {path: 'login', component: LoginComponent},
+      {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent}
     ]),
     ReactiveFormsModule,
     HttpClientModule,
     MenuModule,
-    SidebarModule
+    SidebarModule,
+    GridModule,
   ],
-  providers: [],
+  providers: [CommandColumnService, EditService, PageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
