@@ -1,6 +1,7 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, Inject, ViewChild } from '@angular/core';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
-import { MenuItemModel } from '@syncfusion/ej2-navigations';
+import { Menu, MenuItemModel } from '@syncfusion/ej2-navigations';
+import { enableRipple } from '@syncfusion/ej2-base';
 
 
 @Component({
@@ -9,9 +10,8 @@ import { MenuItemModel } from '@syncfusion/ej2-navigations';
   styleUrls: ['./dashboard.component.css']
 })
 
-export class DashboardComponent implements OnInit {
-  constructor() {}
-
+export class DashboardComponent {
+  
   @ViewChild('sidebarMenuInstance')
   public sidebarMenuInstance: SidebarComponent;
   public width = '220px';
@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
   public target = '.main-content';
   public dockSize = '50px';
   public enableDock = true;
+
+  constructor() {}
 
   public menuItems: MenuItemModel[] = [
     {
