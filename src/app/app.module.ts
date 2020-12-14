@@ -8,12 +8,14 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
+import { WorkAreaComponent } from './admin/work-area/work-area.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    WorkAreaComponent,
   ],
   imports: [
     BrowserModule,
