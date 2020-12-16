@@ -8,10 +8,12 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
-import { ManageShowsComponent } from './admin/dashboard/manage-shows/manage-shows.component';
+import { ManageShowsComponent } from './admin/dashboard/work-area/manage-shows/manage-shows.component';
 import {CommandColumnService, EditService, GridModule, PageService} from '@syncfusion/ej2-angular-grids';
 
-import { WorkAreaComponent } from './admin/work-area/work-area.component';
+import { WorkAreaComponent } from './admin/dashboard/work-area/work-area.component';
+import { ItemDirective } from './admin/dashboard/work-area/item/item.directive';
+import { ItemService } from './admin/dashboard/work-area/item/item.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { WorkAreaComponent } from './admin/work-area/work-area.component';
     DashboardComponent,
     ManageShowsComponent,
     WorkAreaComponent,
+    ItemDirective,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { WorkAreaComponent } from './admin/work-area/work-area.component';
     SidebarModule,
     GridModule,
   ],
-  providers: [CommandColumnService, EditService, PageService],
+  entryComponents: [ ManageShowsComponent ],
+  providers: [CommandColumnService, EditService, PageService, ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

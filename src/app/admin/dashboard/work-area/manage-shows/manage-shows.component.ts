@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { EditService, PageService, CommandColumnService, CommandModel } from '@syncfusion/ej2-angular-grids';
-import {data} from './datasource';
+import {DashboardItem} from '../item/dashboard-item';
+import {ItemComponent} from '../item/item.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,8 +9,8 @@ import {data} from './datasource';
   templateUrl: './manage-shows.component.html',
   styleUrls: ['./manage-shows.component.css']
 })
-export class ManageShowsComponent implements OnInit {
-  public data: object[];
+export class ManageShowsComponent implements OnInit, ItemComponent {
+  @Input() data: object[];
   public editSettings: object;
   public orderidrules: object;
   public customeridrules: object;
@@ -19,8 +20,7 @@ export class ManageShowsComponent implements OnInit {
   public commands: CommandModel[];
 
   public ngOnInit(): void {
-    this.data = data;
-    console.log(data);
+    console.log(this.data);
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal', allowEditOnDblClick: false };
     this.orderidrules = { required: true };
     this.customeridrules = { required: true };

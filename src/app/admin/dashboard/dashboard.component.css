@@ -77,7 +77,7 @@
 /* vertical-menu styles */
 
 #sidebar-menu .e-menu-wrapper ul .e-menu-item.e-menu-caret-icon {
-  width: 220px;
+  width: 210px;
 }
 
 @media(max-width: 500px) {
@@ -244,10 +244,6 @@ body {
   font-size: 25px;
 }
 
-.e-menu-item {
-  font-size: 18px;
-  margin-left: 8px;
-}
 
 .e-film:before {
   content: '\e21e';
@@ -264,6 +260,14 @@ body {
   font-size: 30px;
 }
 
+.e-focused{
+  font-size: 15px;
+}
+
+.e-menu-item{
+  margin-left: 5px;
+}
+
 #sidebar-menu .icon,
 #header #hamburger.icon-menu {
   font-family: 'e-icons';
@@ -273,7 +277,3 @@ body {
   color: #656a70;
 }
 
-.nopad {
-  padding: 0;
-}
-/*icon styles */

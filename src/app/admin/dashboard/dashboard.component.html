@@ -17,7 +17,7 @@
             <li class="right-header list">
               <div class="horizontal-menu">
                 <!-- Menu element declaration -->
-                <ejs-menu [items]='AccountMenuItem' cssClass='dock-menu'></ejs-menu>
+                <ejs-menu [items]='AccountMenuItem' (select)='onItemSelect($event)' cssClass='dock-menu'></ejs-menu>
               </div>
             </li>
           </ul>
@@ -29,7 +29,7 @@
           <div class="main-menu">
             <p class="main-menu-header">Riepilogo</p>
             <!-- Menu element declaration -->
-            <ejs-menu [items]='menuItems' orientation='Vertical' cssClass='dock-menu'></ejs-menu>
+            <ejs-menu [items]='menuItems' orientation='Vertical' cssClass='dock-menu' (select)='onItemSelect($event)'></ejs-menu>
           </div>
 
         </ejs-sidebar>
@@ -38,10 +38,8 @@
         <!-- main-content declaration -->
         <div class="main-content" id="maintext">
           <div class="sidebar-menu-content">
-            <app-work-area></app-work-area>
+            <app-work-area #workAreaComponent [item]="item"></app-work-area>
            <!-- <div> Responsive Sidebar with Menu</div>!-->
-            <router-outlet></router-outlet>
-            <ej-grid-manageshowscomponent></ej-grid-manageshowscomponent>
           </div>
         </div>
         <!-- end of main-content -->
