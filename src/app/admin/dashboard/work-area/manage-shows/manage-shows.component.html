@@ -1,12 +1,15 @@
+
 <div class="control-section">
-  <ejs-grid [dataSource]='data' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'>
+  <ejs-grid  [dataSource]='data' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'>
     <e-columns>
-      <e-column field='OrderID' headerText='Order ID' width='120' textAlign='Right' isPrimaryKey='true' [validationRules]='orderidrules'></e-column>
-      <e-column field='CustomerID' headerText='Customer ID' width='120' textAlign='Right' [validationRules]='customeridrules'></e-column>
-      <e-column field='Freight' headerText='Freight' width='120' format='C2' textAlign='Right' editType='numericedit' [validationRules]='freightrules'></e-column>
-      <e-column field='OrderDate' headerText='Order Date' width='130' type='date' format='yMd' editType='datepickeredit' textAlign='Right'></e-column>
-      <e-column field='ShipCountry' headerText='Ship Country' width='150' editType='dropdownedit' [edit]='editparams'></e-column>
-      <e-column headerText='Manage Records' width='160' [commands]='commands'></e-column>
+      <e-column field='Title' headerText='Titolo spettacolo' width='120' textAlign='Right'  [validationRules]='titlerules'></e-column>
+      <e-column field='Description' headerText='Descrizione spettacolo' width='160' textAlign='Center' [validationRules]='descriptionrules'></e-column>
+      <e-column field='Cover' headerText='Copertina' width='120' format='C2' textAlign='Right' isPrimaryKey="True" [validationRules]='coverrules'></e-column>
+      <e-column field='Date' headerText='Data' width='130' type='date' format='yMd' editType='datepickeredit' textAlign='Right'></e-column>
+      <e-column field='StartTime' headerText='Orario Inizio' width='150' [edit]='editparams'></e-column>
+      <e-column field='EndTime' headerText='Orario Fine' width='150'  [edit]='editparams'></e-column>
+      <e-column field='Nationality' headerText='Nazionalità' width='150' [edit]='editparams'></e-column>
+      <e-column headerText='Modifica' width='160' [commands]='commands'></e-column>
     </e-columns>
   </ejs-grid>
 </div>
