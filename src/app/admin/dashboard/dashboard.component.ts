@@ -40,19 +40,35 @@ export class DashboardComponent implements OnInit{
       ]
     },
     {
-      text: ' Copertine',
-      iconCss: 'e-icons e-film',
+      text: ' Categorie',
+      iconCss: 'e-icons e-category',
       items: [
-        { id: '3', text: 'Visualizza Copertine' },
-        { id: '4', text: 'Inserisci Copertine' },
+        { id: '3', text: 'Visualizza Categoria' },
+        { id: '4', text: 'Inserisci Categorie' },
+      ]
+    },
+    {
+      text: ' Registi',
+      iconCss: 'e-icons e-producer',
+      items: [
+        { id: '5', text: 'Visualizza Registi' },
+        { id: '6', text: 'Inserisci Registi' },
+      ]
+    },
+    {
+      text: ' Attori',
+      iconCss: 'e-icons e-actors',
+      items: [
+        { id: '7', text: 'Visualizza Attori' },
+        { id: '8', text: 'Inserisci Attori' },
       ]
     },
     {
       text: ' Sale',
       iconCss: 'e-icons e-room',
       items: [
-        { id: '5', text: 'Visualizza Sale' },
-        { id: '6', text: 'Inserisci Sale' },
+        { id: '9', text: 'Visualizza Sale' },
+        { id: '10', text: 'Inserisci Sale' },
       ]
     }];
 

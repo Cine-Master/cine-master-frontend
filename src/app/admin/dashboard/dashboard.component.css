@@ -239,11 +239,26 @@ body {
   src: local(e-icons);
 }
 
+
+.e-producer:before{
+  content: '\e737';
+  font-size: 25px;
+}
+
 .e-month:before {
   content: '\e313';
   font-size: 25px;
 }
 
+.e-actors:before {
+  content: '\e424';
+  font-size: 25px;
+}
+
+.e-category:before{
+  content: '\e251';
+  font-size: 25px;
+}
 
 .e-film:before {
   content: '\e21e';

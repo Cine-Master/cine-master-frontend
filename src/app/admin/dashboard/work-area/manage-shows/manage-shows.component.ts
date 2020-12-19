@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { EditService, PageService, CommandColumnService, CommandModel } from '@syncfusion/ej2-angular-grids';
-import {DashboardItem} from '../item/dashboard-item';
 import {ItemComponent} from '../item/item.component';
 import { L10n, setCulture } from '@syncfusion/ej2-base';
 
