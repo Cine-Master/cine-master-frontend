@@ -6,7 +6,13 @@
     <e-columns>
       <e-column field='Title' headerText='Titolo spettacolo' width='120' textAlign='Right'  [validationRules]='titlerules'></e-column>
       <e-column field='Description' headerText='Descrizione spettacolo' width='160' textAlign='Center' [validationRules]='descriptionrules'></e-column>
-      <e-column field='Cover' headerText='Copertina' width='120' format='C2' textAlign='Right' isPrimaryKey="True" [validationRules]='coverrules'></e-column>
+      <e-column field='Image' headerText='Copertina' width='120' format='C2' textAlign='Right' isPrimaryKey="True" [validationRules]='coverrules'>
+        <ng-template #template let-data>
+          <a href="{{data.Image}}">
+            <img src="../../../../../assets/logos/movie.png" />
+          </a>
+        </ng-template>
+      </e-column>
       <e-column field='Date' headerText='Data' width='130' type='date' format='yMd' editType='datepickeredit' textAlign='Right'></e-column>
       <e-column field='StartTime' headerText='Orario Inizio' width='150' [edit]='editparams'></e-column>
       <e-column field='EndTime' headerText='Orario Fine' width='150'  [edit]='editparams'></e-column>
