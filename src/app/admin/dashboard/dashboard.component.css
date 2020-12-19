@@ -63,14 +63,15 @@
 /* menu styles */
 /* horizontal-menu styles */
 #header .header-list .horizontal-menu .e-menu-item {
-  height: 35px;
+  height: 40px;
   vertical-align: middle;
   font-size: 16px;
   line-height: 35px;
 }
 
 #header .e-menu-item .e-caret {
-  line-height: 35px;
+  line-height: 40px;
+  height: 40px;
 }
 
 /* end of horizontal-menu styles */
@@ -163,7 +164,7 @@
 #sidebar-menu .action-btn {
   margin-left: 16px;
   width: 165px;
-  height: 30px;
+  height: 40px;
   font-size: 13px;
   border-radius: 5px;
 }
@@ -241,22 +242,22 @@ body {
 
 
 .e-producer:before{
-  content: '\e737';
+  content: '\e756';
   font-size: 25px;
 }
 
 .e-month:before {
-  content: '\e313';
+  content: '\e7d2';
   font-size: 25px;
 }
 
 .e-actors:before {
-  content: '\e424';
+  content: '\e7d3';
   font-size: 25px;
 }
 
 .e-category:before{
-  content: '\e251';
+  content: '\e714';
   font-size: 25px;
 }
 
@@ -266,13 +267,13 @@ body {
 }
 
 .e-room:before {
-  content: '\e663';
+  content: "\e663";
   font-size: 25px;
 }
 
 #header .icon-menu:before {
-  content: '\e99a';
-  font-size: 30px;
+  content: '\e7cd';
+  font-size: 25px;
 }
 
 .e-focused{
@@ -281,6 +282,7 @@ body {
 
 .e-menu-item{
   margin-left: 5px;
+  height: 10%;
 }
 
 #sidebar-menu .icon,
@@ -290,5 +292,9 @@ body {
 
 #sidebar-menu .e-menu-icon::before {
   color: #656a70;
+}
+
+.main-menu {
+  margin-top: 10px;
 }
 

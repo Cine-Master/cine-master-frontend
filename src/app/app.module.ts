@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
@@ -14,6 +14,10 @@ import {CommandColumnService, EditService, GridModule, PageService} from '@syncf
 import { WorkAreaComponent } from './admin/dashboard/work-area/work-area.component';
 import { ItemDirective } from './admin/dashboard/work-area/item/item.directive';
 import { ItemService } from './admin/dashboard/work-area/item/item.service';
+import { SimpleTextComponent } from './admin/dashboard/work-area/simple-text/simple-text.component';
+import {InPlaceEditorModule} from '@syncfusion/ej2-angular-inplace-editor';
+import {DropDownListModule} from '@syncfusion/ej2-angular-dropdowns';
+import { SimpleListComponent } from './admin/dashboard/work-area/simple-list/simple-list.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,8 @@ import { ItemService } from './admin/dashboard/work-area/item/item.service';
     ManageShowsComponent,
     WorkAreaComponent,
     ItemDirective,
+    SimpleTextComponent,
+    SimpleListComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +42,9 @@ import { ItemService } from './admin/dashboard/work-area/item/item.service';
     MenuModule,
     SidebarModule,
     GridModule,
+    InPlaceEditorModule,
+    DropDownListModule,
+    FormsModule
   ],
   entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],

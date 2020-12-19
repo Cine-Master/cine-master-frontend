@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit{
   ];
 
   ngOnInit(): void {
-    this.item = this.itemService.getItem('0');
+    this.item = this.itemService.getItem('1');
   }
 
   // open new tab
@@ -96,54 +96,13 @@ export class DashboardComponent implements OnInit{
   }
 
   onItemSelect(args): void {
-    switch (args.item.id) {
-      case '1':
-        this.renderShowsList();
-        break;
-      case '2':
-        this.renderAddShow();
-        break;
-      case '3':
-        this.renderFilmsList();
-        break;
-      case '4':
-        this.renderAddFilm();
-        break;
-      case '5':
-        this.renderRoomsList();
-        break;
-      case '6':
-        this.renderAddRoom();
-        break;
-      case 'logout':
-        this.doLogout();
-        break;
+    if (args.item.id === 'logout'){
+      this.doLogout();
     }
-  }
-
-  renderShowsList(): void {
-    this.item = this.itemService.getItem('0');
-    this.workArea.loadComponent(this.item);
-  }
-
-  renderFilmsList(): void {
-    console.log('list film');
-  }
-
-  renderRoomsList(): void {
-    console.log('list room');
-  }
-
-  renderAddShow(): void {
-    console.log('add show');
-  }
-
-  renderAddFilm(): void {
-    console.log('add film');
-  }
-
-  renderAddRoom(): void {
-    console.log('add room');
+    else {
+      this.item = this.itemService.getItem(args.item.id);
+      this.workArea.loadComponent(this.item);
+    }
   }
 
   doLogout(): void {

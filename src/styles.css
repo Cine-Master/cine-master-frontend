@@ -1,19 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/@syncfusion/ej2-base/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-angular-inplace-editor/styles/bootstrap4.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.dark {
-  background-color: #232323;
-}
 
-.light {
-  color: white;
-}
-
-.secondary-color {
-  color: #FFBD59;
-}
 
 .nopad {
   padding: 0;

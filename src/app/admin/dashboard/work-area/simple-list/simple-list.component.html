@@ -1,0 +1,12 @@
+<div class="header">
+  <h5>Lista {{type}}</h5>
+</div>
+<div class="control-section">
+  <ejs-grid  [dataSource]='data' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings'>
+    <e-columns>
+      <e-column field='Id' headerText='ID' width='20' textAlign='Right'  [validationRules]=''></e-column>
+      <e-column field='Nome' headerText='Nome' width='160' textAlign='Center' [validationRules]='nameRules'></e-column>
+      <e-column headerText='Modifica' width='160' [commands]='commands'></e-column>
+    </e-columns>
+  </ejs-grid>
+</div>

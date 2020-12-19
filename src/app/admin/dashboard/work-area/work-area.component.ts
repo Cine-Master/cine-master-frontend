@@ -25,8 +25,6 @@ export class WorkAreaComponent implements OnInit {
     viewContainerRef.clear();
 
     const componentRef = viewContainerRef.createComponent<DashboardItem>(componentFactory);
-    componentRef.instance.data = this.item.data;
+    componentRef.instance.type = this.item.type;
   }
-
-
 }
