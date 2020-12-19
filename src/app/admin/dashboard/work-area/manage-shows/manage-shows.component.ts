@@ -36,16 +36,21 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
   IT: any;
 
   public ngOnInit(): void {
+    console.log(this.data);
+    // @ts-ignore
     // tslint:disable-next-line:max-line-length
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal', allowEditOnDblClick: false, showDeleteConfirmDialog: true };
     this.titlerules = { required: true };
     this.descriptionrules = { required: true };
-    this.coverrules =  { required: true };
     this.editparams = {  params: { popupHeight: '300px' }};
+    this.coverrules = { params: {template: '<a href="../../../../../assets/logos/movie.png"> <img class="tempimg" src="../../../../../assets/logos/movie.png" >'}};
     this.pageSettings = {pageCount: 5};
     this.commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
       { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }  },
       { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
       { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
+  }
+  public showImage(): void {
+      console.log('CIAO');
   }
 }
