@@ -1,0 +1,75 @@
+<div class="wrap" id="show-creator-container">
+  <h6>Titolo dello spettacolo</h6>
+  <div class='textboxes'>
+    <ejs-textbox placeholder="Inserisci il titolo dello spettacolo" floatLabelType="Auto" [(value)]="showTitle"></ejs-textbox>
+  </div>
+
+  <br><br>
+
+  <h6>Descrizione dello spettacolo</h6>
+  <div class='textboxes'>
+    <ejs-textbox [multiline]="true" placeholder="Inserisci la descrizione dello spettacolo" floatLabelType="Auto" [(value)]="showDescription"></ejs-textbox>
+  </div>
+
+  <br><br>
+
+  <h6>Immagine di copertina dello spettacolo</h6>
+  <ejs-uploader #coverUploader [buttons]="buttons" id='fileupload' (selected)="singleFileForcing()"></ejs-uploader>
+
+  <br><br>
+
+  <h6>Data dello spettacolo</h6>
+  <ejs-datepicker locale="it" [(value)]="showDate" format='dd/MM/yyyy' placeholder="Il giorno nel quale verrà trasmesso lo spettacolo" floatLabelType="Auto"></ejs-datepicker>
+
+
+  <br><br>
+
+  <h6>Orario inizio spettacolo</h6>
+  <ejs-timepicker locale='it' [(value)]="showStartTime" placeholder="L'orario in cui lo spettacolo inizierà" [format]="timeFormat" [step]="timeInterval" floatLabelType="Auto"></ejs-timepicker>
+
+
+  <br><br>
+
+  <h6>Orario fine spettacolo</h6>
+  <ejs-timepicker locale='it' [(value)]="showEndTime" placeholder="L'orario in cui lo spettacolo finirà" [format]="timeFormat" [step]="timeInterval" floatLabelType="Auto"></ejs-timepicker>
+
+  <br><br>
+
+  <h6>Lingua di riproduzione dello spettacolo</h6>
+  <ejs-dropdownlist [(value)]="showLanguage" [dataSource]='languages' placeholder = 'Seleziona la lingua nella quale viene trasmesso lo spettacolo' floatLabelType="Auto"></ejs-dropdownlist>
+
+  <br>
+
+  <h6>Luogo di produzione</h6>
+  <ejs-dropdownlist [(value)]="showProductionLocation" [dataSource]='nations' placeholder = 'Seleziona il luogo nel quale è stato prodotto lo spettacolo' floatLabelType="Auto"></ejs-dropdownlist>
+
+  <br><br>
+  <button ejs-button cssClass="e-custom e-block" (click)="createNewShow()">Inserisci spettacolo</button>
+
+  <ejs-toast cssClass="e-toast-danger" #invalidFieldsToastAlert [position]='position'>
+    <ng-template #title>
+      <div>Errore!</div>
+    </ng-template>
+    <ng-template #content>
+      <div>Uno o più campi inseriti non sono validi</div>
+    </ng-template>
+  </ejs-toast>
+
+  <ejs-toast cssClass="e-toast-danger" #invalidResponseToastAlert [position]='position'>
+    <ng-template #title>
+      <div>Errore!</div>
+    </ng-template>
+    <ng-template #content>
+      <div>E' stato riscontrato un errore durante l'aggiunta dello spettacolo</div>
+    </ng-template>
+  </ejs-toast>
+
+  <ejs-toast cssClass="e-toast-success" #correctResponseToastAlert [position]='position'>
+    <ng-template #title>
+      <div>Ottimo!</div>
+    </ng-template>
+    <ng-template #content>
+      <div>Spettacolo aggiunto correttamente</div>
+    </ng-template>
+  </ejs-toast>
+</div>
