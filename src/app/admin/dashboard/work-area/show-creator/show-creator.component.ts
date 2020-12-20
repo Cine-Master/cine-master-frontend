@@ -11,14 +11,15 @@ loadCldr(
 );
 
 import {ShowCreationService} from './services/show-creation.service';
-import {Show} from '../../model/Show';
+import {Show} from '../../../model/Show';
+import {ItemComponent} from '../item/item.component';
 
 @Component({
   selector: 'app-show-creator',
   templateUrl: './show-creator.component.html',
   styleUrls: ['./show-creator.component.css']
 })
-export class ShowCreatorComponent implements OnInit {
+export class ShowCreatorComponent implements OnInit, ItemComponent {
 
   timeFormat: string = 'HH:mm';
   timeInterval: number = 15;

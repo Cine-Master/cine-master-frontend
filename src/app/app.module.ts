@@ -20,7 +20,7 @@ import { ItemDirective } from './admin/dashboard/work-area/item/item.directive';
 import { ItemService } from './admin/dashboard/work-area/item/item.service';
 import { SimpleTextComponent } from './admin/dashboard/work-area/simple-text/simple-text.component';
 import { SimpleListComponent } from './admin/dashboard/work-area/simple-list/simple-list.component';
-import { ShowCreatorComponent } from './admin/dashboard/show-creator/show-creator.component';
+import { ShowCreatorComponent } from './admin/dashboard/work-area/show-creator/show-creator.component';
 import { ManageShowsComponent } from './admin/dashboard/work-area/manage-shows/manage-shows.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
