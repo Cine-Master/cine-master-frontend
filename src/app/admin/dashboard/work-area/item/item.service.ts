@@ -12,7 +12,7 @@ export class ItemService {
   getItem(id: string): DashboardItem {
     switch (id){
       case '1':
-        return new DashboardItem(ManageShowsComponent, data);
+        return new DashboardItem(ManageShowsComponent, 'Spettacoli');
       case '2':
         break;
       case '3':
