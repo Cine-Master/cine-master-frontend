@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UploaderComponent, FileInfo} from '@syncfusion/ej2-angular-inputs';
 import {loadCldr, L10n, setCulture} from '@syncfusion/ej2-base';
 declare var require: any;
@@ -21,6 +21,7 @@ import {ItemComponent} from '../item/item.component';
 })
 export class ShowCreatorComponent implements OnInit, ItemComponent {
 
+  @Input() type: string;
   timeFormat: string = 'HH:mm';
   timeInterval: number = 15;
   invalidFields: boolean = false;

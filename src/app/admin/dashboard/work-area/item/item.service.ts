@@ -4,6 +4,7 @@ import { ManageShowsComponent } from '../manage-shows/manage-shows.component';
 import {data} from '../manage-shows/datasource';
 import {SimpleTextComponent} from '../simple-text/simple-text.component';
 import {SimpleListComponent} from '../simple-list/simple-list.component';
+import {ShowCreatorComponent} from '../show-creator/show-creator.component';
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class ItemService {
       case '1':
         return new DashboardItem(ManageShowsComponent, 'Spettacoli');
       case '2':
-        break;
+        return new DashboardItem(ShowCreatorComponent, 'Spettacoli');
       case '3':
         return new DashboardItem(SimpleListComponent, 'Categorie');
       case '4':

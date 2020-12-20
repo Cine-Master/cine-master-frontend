@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import { CommandModel, GridComponent} from '@syncfusion/ej2-angular-grids';
 import { L10n, setCulture } from '@syncfusion/ej2-base';
-import {SimpleListService} from './simple-list.service';
+import { ListService } from './services/list.service';
 import {ItemComponent} from '../item/item.component';
 
 setCulture('en-US');
@@ -34,7 +34,7 @@ export class SimpleListComponent implements OnInit, ItemComponent {
   @ViewChild('grid')
   public grid: GridComponent;
 
-  constructor(private service: SimpleListService) {
+  constructor(private service: ListService) {
   }
 
   public ngOnInit(): void {
