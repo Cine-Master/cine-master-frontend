@@ -14,11 +14,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   username: FormControl;
   password: FormControl;
-  private responseCode: string;
 
   constructor(private formBuilder: FormBuilder, private authenticationService: AuthenticationService, private router: Router) {
 
-    this.responseCode = '';
     this.username = new FormControl('', [Validators.required]);
     this.loginForm = formBuilder.group({
       username: this.username,
@@ -34,20 +32,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.authenticationService.authenticateUser(this.loginForm.value).subscribe(response => {
-      this.responseCode = response;
-      if (this.responseCode === 'user_ok') {
-        this.router.navigate(['user/dashboard', this.username]);
-      }
-      else if (this.responseCode === 'admin_ok') {
+      if (response.type === 'ADMIN') {
         this.router.navigate(['admin/dashboard', this.username]);
       }
-      else {
-        // TODO fai un messaggio di errore togo
-        alert('Error');
+      if (response.type === 'USER') {
+        this.router.navigate(['user/dashboard', this.username]);
       }
-    });
-
-
+    }, error => {alert(error); });
   }
 
 }
