@@ -15,6 +15,10 @@ export class ListService {
     return this.http.get<any>(SERVICE_URI + 'shows');
   }
 
+  public getShows(): Observable<any>{
+    return this.http.get<any>(SERVICE_URI + 'shows');
+  }
+
   // TODO: modificare con url corretti dopo evere affettuato il login, gestire eventuali errori.
   public getActors(): Observable<any> {
     return this.http.get<any>(SERVICE_URI + 'shows');
