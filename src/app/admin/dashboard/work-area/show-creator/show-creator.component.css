@@ -4,11 +4,6 @@ h3, h4, h5:not(#header), h6{
   font-weight: bold;
 }
 
-.e-custom, .e-custom:hover, .e-custom:focus, .e-custom:active {
-  background-color: #ff914d;
-  color: #fff;
-}
-
 .e-custom {
   margin: 0 auto;
 }

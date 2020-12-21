@@ -9,7 +9,7 @@ import { MenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
 import { CommandColumnService, EditService, GridModule, PageService} from '@syncfusion/ej2-angular-grids';
 import { ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { TextBoxModule, NumericTextBoxModule, UploaderModule } from '@syncfusion/ej2-angular-inputs';
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownListModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
 import { InPlaceEditorModule } from '@syncfusion/ej2-angular-inplace-editor';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { DatePickerModule, TimePickerModule } from '@syncfusion/ej2-angular-calendars';
@@ -25,6 +25,9 @@ import { ManageShowsComponent } from './admin/dashboard/work-area/manage-shows/m
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { CarouselComponent } from './home/carousel/carousel.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -37,11 +40,14 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     SimpleTextComponent,
     SimpleListComponent,
     ShowCreatorComponent,
+    HomeComponent,
+    CarouselComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {path: 'admin/dashboard', component: DashboardComponent},
+      {path: 'home', component: HomeComponent},
       {path: 'login', component: LoginComponent},
       {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent},
       {path: 'admin/dashboard/create_show', component: ShowCreatorComponent}
@@ -63,7 +69,9 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     ToastModule,
     TextBoxModule,
     UploaderModule,
-    CheckBoxModule
+    CheckBoxModule,
+    MultiSelectModule,
+    NgbModule
   ],
   entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],

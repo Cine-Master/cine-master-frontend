@@ -9,9 +9,10 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  authenticateUser(loginData): Observable<string> {
+  authenticateUser(loginData): any {
     // TODO concordare URL e dati restituiti da REST
-    return this.httpClient.get<string>('http://localhost:8080/login/authenticate');
+    return this.httpClient.post<string>('http://localhost:8080/login', {username: loginData.username,
+      password: loginData.password});
   }
 
 }

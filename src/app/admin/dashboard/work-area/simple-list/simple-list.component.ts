@@ -54,7 +54,7 @@ export class SimpleListComponent implements OnInit, ItemComponent {
         });
         break;
       case 'Registi':
-        this.service.getProducers().subscribe(response => {
+        this.service.getDirectors().subscribe(response => {
           this.data = response;
           this.loaded = true;
         });
