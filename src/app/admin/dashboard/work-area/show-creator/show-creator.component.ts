@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UploaderComponent, FileInfo} from '@syncfusion/ej2-angular-inputs';
-import {loadCldr, L10n, setCulture} from '@syncfusion/ej2-base';
+import {detach, loadCldr, L10n, setCulture} from '@syncfusion/ej2-base';
 import {ListService} from '../simple-list/services/list.service';
 declare var require: any;
 loadCldr(
@@ -33,7 +33,6 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   showCategoriesList: string[] = ['Thriller', 'Horror', 'Romantico', 'Azione'];
   showActorsList: string[] = ['Leonardo DiCaprio', 'Brad Pitt', 'Al Pacino', 'John Travolta', 'Jake Gyllenhaal'];
   showRoomsList: number[] = [1, 2, 3, 4, 5];
-  buttons = { browse: "Scegli file", clear: "Clear All", upload: "Upload All" };
 
   showTitle: string;
   showDescription: string;
@@ -71,6 +70,12 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
         datepicker: {
           placeholder: 'Seleziona la data',
           today: 'Oggi'
+        },
+        uploader: {
+          invalidMaxFileSize : 'Il file selezionato supera la dimensione massima di 1.5 MB',
+          invalidFileType : 'Il file selezionato non è un file immagine supportato',
+          readyToUploadMessage : 'File pronto all\'upload',
+          Browse : 'Scegli file'
         }
       }
     });
@@ -147,7 +152,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   }
 
   evaluateShowCoverImage(): boolean {
-    if(this.showCoverImageFileInfo === undefined){
+    if(this.showCoverImageFileInfo === undefined || this.showCoverImageFileInfo.status !== 'Ready to upload'){
       this.invalidFields = true;
       return false;
     }

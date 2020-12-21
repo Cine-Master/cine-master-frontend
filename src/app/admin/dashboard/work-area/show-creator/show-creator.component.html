@@ -17,7 +17,7 @@
   <br><br>
 
   <h6>Immagine di copertina dello spettacolo</h6>
-  <ejs-uploader #coverUploader [buttons]="buttons" id='fileupload' (selected)="singleFileForcing()"></ejs-uploader>
+  <ejs-uploader locale="it" #coverUploader id='fileupload' (selected)="singleFileForcing()" maxFileSize = 1500000 allowedExtensions = '.jpg, .jpeg, .png'></ejs-uploader>
 
   <br><br>
 
