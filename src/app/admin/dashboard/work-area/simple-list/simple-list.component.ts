@@ -29,7 +29,7 @@ export class SimpleListComponent implements OnInit, ItemComponent {
   public editParams: object;
   public pageSettings: object;
   public commands: CommandModel[];
-  private loaded = false;
+  public loaded = false;
 
   @ViewChild('grid')
   public grid: GridComponent;
@@ -54,7 +54,7 @@ export class SimpleListComponent implements OnInit, ItemComponent {
         });
         break;
       case 'Registi':
-        this.service.getProducers().subscribe(response => {
+        this.service.getDirectors().subscribe(response => {
           this.data = response;
           this.loaded = true;
         });

@@ -11,4 +11,9 @@ export interface Show {
   endTime: Date;
   productionLocation: string;
   language: string;
+  actors: string[];
+  directors: string[];
+  categories: string[];
+  room: number;
+  comingSoon: boolean;
 }

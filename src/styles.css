@@ -10,6 +10,7 @@
 @import '../node_modules/@syncfusion/ej2-richtexteditor/styles/bootstrap4.css';
 @import '../node_modules/@syncfusion/ej2-calendars/styles/bootstrap4.css';
 @import '../node_modules/@syncfusion/ej2-angular-inplace-editor/styles/bootstrap4.css';
+@import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/bootstrap4.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

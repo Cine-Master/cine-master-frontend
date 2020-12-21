@@ -9,7 +9,7 @@ import { MenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
 import { CommandColumnService, EditService, GridModule, PageService} from '@syncfusion/ej2-angular-grids';
 import { ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { TextBoxModule, NumericTextBoxModule, UploaderModule } from '@syncfusion/ej2-angular-inputs';
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownListModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
 import { InPlaceEditorModule } from '@syncfusion/ej2-angular-inplace-editor';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { DatePickerModule, TimePickerModule } from '@syncfusion/ej2-angular-calendars';
@@ -63,7 +63,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     ToastModule,
     TextBoxModule,
     UploaderModule,
-    CheckBoxModule
+    CheckBoxModule,
+    MultiSelectModule
   ],
   entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],

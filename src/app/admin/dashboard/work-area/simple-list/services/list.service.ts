@@ -20,7 +20,7 @@ export class ListService {
     return this.http.get<any>(SERVICE_URI + 'shows');
   }
 
-  public getProducers(): Observable<any> {
+  public getDirectors(): Observable<any> {
     return this.http.get<any>(SERVICE_URI + 'shows');
   }
 

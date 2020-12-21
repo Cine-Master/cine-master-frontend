@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UploaderComponent, FileInfo} from '@syncfusion/ej2-angular-inputs';
 import {loadCldr, L10n, setCulture} from '@syncfusion/ej2-base';
+import {ListService} from '../simple-list/services/list.service';
 declare var require: any;
 loadCldr(
   require('cldr-data/main/it/numbers.json'),
@@ -13,6 +14,7 @@ loadCldr(
 import {ShowCreationService} from './services/show-creation.service';
 import {Show} from '../../../model/Show';
 import {ItemComponent} from '../item/item.component';
+import {MultiSelectComponent} from '@syncfusion/ej2-angular-dropdowns';
 
 @Component({
   selector: 'app-show-creator',
@@ -27,7 +29,12 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   invalidFields: boolean = false;
   nations: string[] = ['Italia', 'Stati Uniti', 'Spagna', 'Francia', 'Regno Unito', 'Portogallo'];
   languages: string[] = ['Italiano', 'Inglese', 'Spagnolo', 'Francese', 'Portoghese'];
+  showDirectorsList: string[] = ['Quentin Tarantino', 'Martin Scorsese', 'Christopher Nolan', 'David Lynch', 'Richard Kelly'];
+  showCategoriesList: string[] = ['Thriller', 'Horror', 'Romantico', 'Azione'];
+  showActorsList: string[] = ['Leonardo DiCaprio', 'Brad Pitt', 'Al Pacino', 'John Travolta', 'Jake Gyllenhaal'];
+  showRoomsList: number[] = [1, 2, 3, 4, 5];
   buttons = { browse: "Scegli file", clear: "Clear All", upload: "Upload All" };
+
   showTitle: string;
   showDescription: string;
   showCoverImageFileInfo: FileInfo;
@@ -38,6 +45,12 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   showEndTime: Date;
   showProductionLocation: string;
   showLanguage: string;
+  showActorsSelected: any;
+  showDirectorsSelected: any;
+  showCategoriesSelected: any;
+  showRoomSelected: number;
+  showComingSoon: boolean;
+
 
   @ViewChild('coverUploader')
   public uploadObj: UploaderComponent;
@@ -48,7 +61,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   public position = { X: 'Left'};
 
 
-  public constructor(public showCreationService: ShowCreationService) {
+  public constructor(private showCreationService: ShowCreationService, private listService: ListService) {
   }
 
   ngOnInit(): void {
@@ -61,6 +74,16 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
         }
       }
     });
+
+    // TODO: Implement Back-end response to use this Service
+
+    /*
+    this.listService.getCategories().subscribe( (responseData) => this.showCategoriesList = responseData);
+    this.listService.getActors().subscribe( (responseData) => this.showActorsList = responseData);
+    this.listService.getRooms().subscribe( (responseData) => this.showRoomsList = responseData);
+    this.listService.getDirectors().subscribe( (responseData) => this.showDirectorsList = responseData);
+    */
+
   }
 
   createNewShow(): void {
@@ -75,6 +98,11 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
     this.evaluateShowProductionLocation();
     this.evaluateShowStartTime();
     this.evaluateShowTitle();
+    this.evaluateShowActorsSelected();
+    this.evaluateShowCategoriesSelected();
+    this.evaluateShowDirectorsSelected();
+    this.evaluateShowComingSoon();
+    this.evaluateShowRoomSelected();
 
     if(this.invalidFields) {
       this.invalidFieldsAlert.show();
@@ -87,7 +115,9 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
       const showToAdd: Show = {id: -1, title: this.showTitle, description: this.showDescription,
         coverImageRawData: this.showCoverImageRawData, coverImageExtension: this.showCoverImageExtension,
         date: this.showDate, startTime: this.showStartTime, endTime: this.showStartTime,
-        productionLocation: this.showProductionLocation, language: this.showLanguage};
+        productionLocation: this.showProductionLocation, language: this.showLanguage, actors: this.showActorsSelected,
+      directors: this.showDirectorsSelected, categories: this.showCategoriesSelected, room: this.showRoomSelected,
+      comingSoon: this.showComingSoon};
 
       if(!this.showCreationService.createNewShow(showToAdd))
         this.invalidResponseAlert.show();
@@ -163,6 +193,51 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
 
   evaluateShowLanguage(): boolean {
     if(this.showLanguage === undefined || this.showLanguage === null){
+      this.invalidFields = true;
+      return false;
+    }
+
+    return true;
+  }
+
+  evaluateShowActorsSelected(): boolean {
+    if(this.showActorsSelected === undefined || this.showActorsSelected.length === 0){
+      this.invalidFields = true;
+      return false;
+    }
+
+    return true;
+  }
+
+  evaluateShowDirectorsSelected(): boolean {
+    if(this.showDirectorsSelected === undefined || this.showDirectorsSelected.length === 0){
+      this.invalidFields = true;
+      return false;
+    }
+
+    return true;
+  }
+
+  evaluateShowCategoriesSelected(): boolean {
+    if(this.showCategoriesSelected === undefined || this.showCategoriesSelected.length === 0){
+      this.invalidFields = true;
+      return false;
+    }
+
+    return true;
+  }
+
+  evaluateShowRoomSelected(): boolean {
+    if(this.showRoomSelected === undefined || this.showRoomSelected === null){
+      this.invalidFields = true;
+      return false;
+    }
+
+    return true;
+  }
+
+  evaluateShowComingSoon(): boolean {
+    if(this.showComingSoon === undefined || this.showComingSoon === null){
       this.invalidFields = true;
       return false;
     }

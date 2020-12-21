@@ -47,6 +47,30 @@
   <ejs-dropdownlist [(value)]="showProductionLocation" [dataSource]='nations' placeholder = 'Seleziona il luogo nel quale è stato prodotto lo spettacolo' floatLabelType="Auto"></ejs-dropdownlist>
 
   <br><br>
+
+  <h6>Attori partecipanti</h6>
+  <ejs-multiselect [(value)]="showActorsSelected" id='show-actors-selector' (change)="valueCh()" [dataSource]='showActorsList' placeholder = 'Seleziona gli attori che hanno partecipato allo spettacolo' floatLabelType="Auto"></ejs-multiselect>
+
+  <br><br>
+
+  <h6>Registi partecipanti</h6>
+  <ejs-multiselect [(value)]="showDirectorsSelected" id='show-directors-selector' [dataSource]='showDirectorsList' placeholder = 'Seleziona i registi che hanno partecipato allo spettacolo' floatLabelType="Auto"></ejs-multiselect>
+
+  <br><br>
+
+  <h6>Categorie di appartenenza</h6>
+  <ejs-multiselect [(value)]="showCategoriesSelected" id='show-categories-selector' [dataSource]='showCategoriesList' placeholder = 'Seleziona le categorie di appartenenza dello spettacolo' floatLabelType="Auto"></ejs-multiselect>
+
+  <br><br>
+
+  <h6>Sala di riproduzione</h6>
+  <ejs-dropdownlist [(value)]="showRoomSelected" id='show-room-selector' [dataSource]='showRoomsList' placeholder = 'Seleziona la sala nella quale verrà trasmesso lo spettacolo' floatLabelType="Auto"></ejs-dropdownlist>
+
+  <br><br>
+  <h6>Coming soon</h6>
+  <ejs-checkbox [(checked)]="showComingSoon" label="Seleziona se lo spettacolo non è ancora disponibile"></ejs-checkbox>
+
+  <br><br>
   <button ejs-button cssClass="e-custom e-block" (click)="createNewShow()">Inserisci spettacolo</button>
 
   <ejs-toast cssClass="e-toast-danger" #invalidFieldsToastAlert [position]='position'>
