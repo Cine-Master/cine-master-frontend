@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import { EditService, PageService, CommandColumnService, CommandModel } from '@syncfusion/ej2-angular-grids';
 import {ItemComponent} from '../item/item.component';
 import { L10n, setCulture } from '@syncfusion/ej2-base';
-import {data} from './datasource';
-import {DataManager, Query, ReturnOption, UrlAdaptor} from '@syncfusion/ej2-data';
+import { ListService } from '../simple-list/services/list.service';
+
 
 const SERVICE_URI = 'http://localhost:8080/';
 
@@ -26,19 +26,21 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
   it: any;
   IT: any;
 
+  constructor(private service: ListService) {
+  }
+
   public ngOnInit(): void {
     // @ts-ignore
     // tslint:disable-next-line:max-line-length
     // this.data = data;
     // this.data = new DataManager({ url: SERVICE_URI + 'shows', adaptor: new WebApiAdaptor() });
 
-    new DataManager({ url: SERVICE_URI , crossDomain: true, adaptor: new UrlAdaptor()}).processResponse(new Query().take(10)).then((e: ReturnOption) => {
-      console.log('entrato');
-      this.data = e.result as object[];
-      console.log('dopo');
-    }).catch((e) => true);
+    this.service.getShows().subscribe(response => {
+      this.data = response;
+      console.log(this.data);
+    });
 
-    console.log('fuori');
+
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal', allowEditOnDblClick: false, showDeleteConfirmDialog: true };
     this.titlerules = { required: true };
     this.descriptionrules = { required: true };
