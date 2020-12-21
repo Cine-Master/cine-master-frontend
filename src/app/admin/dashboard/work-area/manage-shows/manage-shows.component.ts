@@ -5,19 +5,6 @@ import { L10n, setCulture } from '@syncfusion/ej2-base';
 import {data} from './datasource';
 import {DataManager, Query, ReturnOption, UrlAdaptor} from '@syncfusion/ej2-data';
 
-setCulture('en-US');
-L10n.load({
-  'en-US': {
-    grid: {
-      ConfirmDelete : 'Sicuro di voler rimuovere lo spettacolo?'
-    },
-    pager: {
-      currentPageInfo: '{0} Di {1} Pagine',
-      totalItemsInfo: '({0} Oggetti)',
-    }
-  }
-});
-
 const SERVICE_URI = 'http://localhost:8080/';
 
 @Component({
