@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import { EditService, PageService, CommandColumnService, CommandModel } from '@syncfusion/ej2-angular-grids';
 import {ItemComponent} from '../item/item.component';
 import { L10n, setCulture } from '@syncfusion/ej2-base';
+import {data} from './datasource';
+import {DataManager, Query, ReturnOption, UrlAdaptor} from '@syncfusion/ej2-data';
 
 setCulture('en-US');
 L10n.load({
@@ -16,6 +18,8 @@ L10n.load({
   }
 });
 
+const SERVICE_URI = 'http://localhost:8080/';
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'ej-grid-manageshowscomponent',
@@ -23,7 +27,8 @@ L10n.load({
   styleUrls: ['./manage-shows.component.css']
 })
 export class ManageShowsComponent implements OnInit, ItemComponent {
-  @Input() data: object[];
+  @Input() type: string;
+  public data: object[];
   public editSettings: object;
   public titlerules: object;
   public descriptionrules: object;
@@ -35,9 +40,18 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
   IT: any;
 
   public ngOnInit(): void {
-    console.log(this.data);
     // @ts-ignore
     // tslint:disable-next-line:max-line-length
+    // this.data = data;
+    // this.data = new DataManager({ url: SERVICE_URI + 'shows', adaptor: new WebApiAdaptor() });
+
+    new DataManager({ url: SERVICE_URI , crossDomain: true, adaptor: new UrlAdaptor()}).processResponse(new Query().take(10)).then((e: ReturnOption) => {
+      console.log('entrato');
+      this.data = e.result as object[];
+      console.log('dopo');
+    }).catch((e) => true);
+
+    console.log('fuori');
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal', allowEditOnDblClick: false, showDeleteConfirmDialog: true };
     this.titlerules = { required: true };
     this.descriptionrules = { required: true };
@@ -49,7 +63,5 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
       { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
       { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
   }
-  public showImage(): void {
-      console.log('CIAO');
-  }
+
 }

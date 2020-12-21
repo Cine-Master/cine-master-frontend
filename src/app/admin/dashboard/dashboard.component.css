@@ -54,7 +54,7 @@
 
 /* content area styles */
 #maintext.main-content {
-  height: 100vh;
+  min-height: 100vh;
   z-index: 1000;
 }
 
