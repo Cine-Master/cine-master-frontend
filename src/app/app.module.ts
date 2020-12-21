@@ -25,6 +25,9 @@ import { ManageShowsComponent } from './admin/dashboard/work-area/manage-shows/m
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { CarouselComponent } from './home/carousel/carousel.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -37,11 +40,14 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     SimpleTextComponent,
     SimpleListComponent,
     ShowCreatorComponent,
+    HomeComponent,
+    CarouselComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {path: 'admin/dashboard', component: DashboardComponent},
+      {path: 'home', component: HomeComponent},
       {path: 'login', component: LoginComponent},
       {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent},
       {path: 'admin/dashboard/create_show', component: ShowCreatorComponent}
@@ -64,7 +70,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     TextBoxModule,
     UploaderModule,
     CheckBoxModule,
-    MultiSelectModule
+    MultiSelectModule,
+    NgbModule
   ],
   entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],
