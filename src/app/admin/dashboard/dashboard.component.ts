@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit{
 
   public menuItems: MenuItemModel[] = [
     {
-      text: ' Spettacoli',
+      text: '‏‏‎ ‎ ‏‏‎ ‎Spettacoli',
       iconCss: 'e-icons e-month',
       items: [
         { id: '1', text: 'Visualizza Spettacoli' },
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit{
       ]
     },
     {
-      text: ' Categorie',
+      text: ' ‏‏‎ ‎‏‏‎ ‎Categorie',
       iconCss: 'e-icons e-category',
       items: [
         { id: '3', text: 'Visualizza Categoria' },
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit{
       ]
     },
     {
-      text: ' Registi',
+      text: ' ‏‏‎ ‎‏‏‎ ‎Registi',
       iconCss: 'e-icons e-producer',
       items: [
         { id: '5', text: 'Visualizza Registi' },
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit{
       ]
     },
     {
-      text: ' Attori',
+      text: ' ‏‏‎ ‎‏‏‎ ‎Attori',
       iconCss: 'e-icons e-actors',
       items: [
         { id: '7', text: 'Visualizza Attori' },
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit{
       ]
     },
     {
-      text: ' Sale',
+      text: ' ‏‏‎ ‎‏‏‎ ‎Sale',
       iconCss: 'e-icons e-room',
       items: [
         { id: '9', text: 'Visualizza Sale' },

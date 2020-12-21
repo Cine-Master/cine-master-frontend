@@ -29,7 +29,7 @@ export class SimpleListComponent implements OnInit, ItemComponent {
   public editParams: object;
   public pageSettings: object;
   public commands: CommandModel[];
-  private loaded = false;
+  public loaded = false;
 
   @ViewChild('grid')
   public grid: GridComponent;
