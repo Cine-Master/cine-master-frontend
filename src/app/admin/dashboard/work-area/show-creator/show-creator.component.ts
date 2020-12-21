@@ -1,20 +1,9 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UploaderComponent, FileInfo} from '@syncfusion/ej2-angular-inputs';
-import {loadCldr, L10n, setCulture} from '@syncfusion/ej2-base';
 import {ListService} from '../simple-list/services/list.service';
-declare var require: any;
-loadCldr(
-  require('cldr-data/main/it/numbers.json'),
-  require('cldr-data/main/it/ca-gregorian.json'),
-  require('cldr-data/supplemental/numberingSystems.json'),
-  require('cldr-data/main/it/timeZoneNames.json'),
-  require('cldr-data/supplemental/weekdata.json')
-);
-
 import {ShowCreationService} from './services/show-creation.service';
 import {Show} from '../../../model/Show';
 import {ItemComponent} from '../item/item.component';
-import {MultiSelectComponent} from '@syncfusion/ej2-angular-dropdowns';
 
 @Component({
   selector: 'app-show-creator',
@@ -33,7 +22,6 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   showCategoriesList: string[] = ['Thriller', 'Horror', 'Romantico', 'Azione'];
   showActorsList: string[] = ['Leonardo DiCaprio', 'Brad Pitt', 'Al Pacino', 'John Travolta', 'Jake Gyllenhaal'];
   showRoomsList: number[] = [1, 2, 3, 4, 5];
-  buttons = { browse: "Scegli file", clear: "Clear All", upload: "Upload All" };
 
   showTitle: string;
   showDescription: string;
@@ -65,15 +53,6 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   }
 
   ngOnInit(): void {
-    setCulture('it');
-    L10n.load({
-      it: {
-        datepicker: {
-          placeholder: 'Seleziona la data',
-          today: 'Oggi'
-        }
-      }
-    });
 
     // TODO: Implement Back-end response to use this Service
 
@@ -147,7 +126,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   }
 
   evaluateShowCoverImage(): boolean {
-    if(this.showCoverImageFileInfo === undefined){
+    if(this.showCoverImageFileInfo === undefined || this.showCoverImageFileInfo.status !== 'Ready to upload'){
       this.invalidFields = true;
       return false;
     }

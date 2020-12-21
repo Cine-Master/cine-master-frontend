@@ -17,24 +17,24 @@
   <br><br>
 
   <h6>Immagine di copertina dello spettacolo</h6>
-  <ejs-uploader #coverUploader [buttons]="buttons" id='fileupload' (selected)="singleFileForcing()"></ejs-uploader>
+  <ejs-uploader #coverUploader id='fileupload' (selected)="singleFileForcing()" maxFileSize = 1500000 allowedExtensions = '.jpg, .jpeg, .png'></ejs-uploader>
 
   <br><br>
 
   <h6>Data dello spettacolo</h6>
-  <ejs-datepicker locale="it" [(value)]="showDate" format='dd/MM/yyyy' placeholder="Il giorno nel quale verrà trasmesso lo spettacolo" floatLabelType="Auto"></ejs-datepicker>
+  <ejs-datepicker [(value)]="showDate" format='dd/MM/yyyy' placeholder="Il giorno nel quale verrà trasmesso lo spettacolo" floatLabelType="Auto"></ejs-datepicker>
 
 
   <br><br>
 
   <h6>Orario inizio spettacolo</h6>
-  <ejs-timepicker locale='it' [(value)]="showStartTime" placeholder="L'orario in cui lo spettacolo inizierà" [format]="timeFormat" [step]="timeInterval" floatLabelType="Auto"></ejs-timepicker>
+  <ejs-timepicker [(value)]="showStartTime" placeholder="L'orario in cui lo spettacolo inizierà" [format]="timeFormat" [step]="timeInterval" floatLabelType="Auto"></ejs-timepicker>
 
 
   <br><br>
 
   <h6>Orario fine spettacolo</h6>
-  <ejs-timepicker locale='it' [(value)]="showEndTime" placeholder="L'orario in cui lo spettacolo finirà" [format]="timeFormat" [step]="timeInterval" floatLabelType="Auto"></ejs-timepicker>
+  <ejs-timepicker [(value)]="showEndTime" placeholder="L'orario in cui lo spettacolo finirà" [format]="timeFormat" [step]="timeInterval" floatLabelType="Auto"></ejs-timepicker>
 
   <br><br>
 

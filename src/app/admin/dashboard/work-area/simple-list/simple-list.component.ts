@@ -4,15 +4,6 @@ import { L10n, setCulture } from '@syncfusion/ej2-base';
 import { ListService } from './services/list.service';
 import {ItemComponent} from '../item/item.component';
 
-setCulture('en-US');
-L10n.load({
-  'en-US': {
-    grid: {
-      ConfirmDelete : 'Sicuro di voler rimuovere lo spettacolo?'
-    }
-  }
-});
-
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'ej-grid-simple-list',
