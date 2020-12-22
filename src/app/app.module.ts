@@ -29,6 +29,7 @@ import { HomeComponent } from './home/home.component';
 import { CarouselComponent } from './home/carousel/carousel.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './home/footer/footer.component';
+import { ShowDetailComponent } from './show-detail/show-detail.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { FooterComponent } from './home/footer/footer.component';
     HomeComponent,
     CarouselComponent,
     FooterComponent,
+    ShowDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { FooterComponent } from './home/footer/footer.component';
       {path: 'home', component: HomeComponent},
       {path: 'login', component: LoginComponent},
       {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent},
-      {path: 'admin/dashboard/create_show', component: ShowCreatorComponent}
+      {path: 'admin/dashboard/create_show', component: ShowCreatorComponent},
+      {path: 'show', component: ShowDetailComponent}
     ]),
     ReactiveFormsModule,
     HttpClientModule,

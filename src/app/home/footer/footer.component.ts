@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
 
 declare var H: any;
 
