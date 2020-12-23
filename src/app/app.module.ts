@@ -31,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './home/footer/footer.component';
 import { ShowDetailComponent } from './show-detail/show-detail.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { NavbarComponent } from './home/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     FooterComponent,
     ShowDetailComponent,
     ErrorPageComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
