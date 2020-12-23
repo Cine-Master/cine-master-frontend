@@ -12,7 +12,7 @@ export class AuthenticationService {
   authenticateUser(loginData): any {
     // TODO concordare URL e dati restituiti da REST
     return this.httpClient.post<string>('http://localhost:8080/login', {username: loginData.username,
-      password: loginData.password});
+      password: loginData.password}, { withCredentials: true });
   }
 
 }

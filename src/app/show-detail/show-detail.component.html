@@ -1,3 +1,106 @@
-<p>Show detail works!</p>
+<link rel="stylesheet" id="amy-movie-style-css" href="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/themes/amy-movie/css/style.css?ver=1.0.0" type="text/css" media="all">
 
+<div *ngIf="!loaded" style="text-align: center; margin-top: 5%">
+  <div class="spinner-border text-primary"></div>
+</div>
+<div id="content" class="site-content" *ngIf="loaded">
+
+
+  <section id="amy-page-header" class=" full">
+    <img width="1920" height="600"
+         src="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23.jpg"
+         class="attachment-full size-full" alt=""
+         srcset="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23.jpg 1920w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23-300x94.jpg 300w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23-768x240.jpg 768w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23-1024x320.jpg 1024w"
+         sizes="(max-width: 1920px) 100vw, 1920px">
+  </section>
+
+  <section class="main-content single-movie layout-full  has-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="page-content">
+
+            <article id="post-88"
+                     class="post-88 amy_movie type-amy_movie status-publish amy_genre-magic amy_genre-sci-fi amy_actor-alexander-cattly amy_actor-cartin-hollia amy_director-gally-peckin">
+              <div class="row amy-single-movie">
+                <div class="col-md-4 col-sm-4">
+                  <div class="entry-thumb">
+                    <img width="360" height="618"
+                         src="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_3.jpg"
+                         class="attachment-360x618 size-360x618" alt=""
+                         srcset="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_3.jpg 360w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_3-175x300.jpg 175w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_3-264x454.jpg 264w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_3-174x300.jpg 174w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_3-258x444.jpg 258w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_3-214x368.jpg 214w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_3-196x336.jpg 196w"
+                         sizes="(max-width: 360px) 100vw, 360px"></div>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                  <div class="entry-info">
+
+                    <h1 class="entry-title p-name" itemprop="name headline"><a
+                      href="http://demo.amytheme.com/movie/demo/single-cinema/amy_movie/ice-age-collision-course/"
+                      rel="bookmark" class="u-url url" itemprop="url">{{this.show.title}}</a></h1>
+                    <div class="entry-pg">
+
+                      <span class="duration"><i class="fa fa-clock-o"></i>{{show.duration}}</span></div>
+
+                    <ul class="info-list">
+                      <li>
+                        <label>Attori:</label>
+                        <span class="elements">{{show.actors}}</span>
+                      </li>
+
+                      <li>
+                        <label>Registi:</label>
+                        <span class="elements">{{show.directors}}</span>
+                      </li>
+
+                      <li>
+                        <label>Generi:</label>
+                        <span class="elements">{{show.genres}}</span>
+                      </li>
+
+                      <li>
+                        <label>Uscita:</label>
+                        <span class="elements">{{show.release}}</span>
+                      </li>
+
+                      <li>
+                        <label>Lingua:</label>
+                        <span class="elements">{{show.language}} </span>
+                      </li>
+                      <li>
+                        <label>Produzione:</label>
+                        <span class="elements">{{show.location}} </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="entry-content e-content article-body" itemprop="description articleBody">
+                    <h3 class="info-name amy-title">Descrizione</h3>
+                    <p>Descrizione del film</p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="entry-showtime single-cinema">
+                <div class="clearfix">
+                  <h3 class="info-name amy-title">Programmazione</h3>
+                </div>
+                <div class="showtime">
+                  <div class="showtime-item">
+                    <div *ngFor="let e of show.progr" class="st-item">
+                      <div class="st-title"><label>{{e.date}}</label><a href="#" class="amy-buy-ticket" target="_blank">Buy Ticket</a></div>
+                      <ul>
+                        <li *ngFor="let h of e.hours">{{h}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 

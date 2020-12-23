@@ -30,6 +30,7 @@ import { CarouselComponent } from './home/carousel/carousel.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './home/footer/footer.component';
 import { ShowDetailComponent } from './show-detail/show-detail.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ShowDetailComponent } from './show-detail/show-detail.component';
     CarouselComponent,
     FooterComponent,
     ShowDetailComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,9 @@ import { ShowDetailComponent } from './show-detail/show-detail.component';
       {path: 'login', component: LoginComponent},
       {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent},
       {path: 'admin/dashboard/create_show', component: ShowCreatorComponent},
-      {path: 'show', component: ShowDetailComponent}
+      {path: 'show/:id', component: ShowDetailComponent},
+      {path: '**', component: ErrorPageComponent},
+      {path: 'error404', component: ErrorPageComponent}
     ]),
     ReactiveFormsModule,
     HttpClientModule,

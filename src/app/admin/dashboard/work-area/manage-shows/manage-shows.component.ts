@@ -5,8 +5,6 @@ import { L10n, setCulture } from '@syncfusion/ej2-base';
 import { ListService } from '../simple-list/services/list.service';
 
 
-const SERVICE_URI = 'http://localhost:8080/';
-
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'ej-grid-manageshowscomponent',
@@ -39,7 +37,6 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
       this.data = response;
       console.log(this.data);
     });
-
 
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal', allowEditOnDblClick: false, showDeleteConfirmDialog: true };
     this.titlerules = { required: true };
