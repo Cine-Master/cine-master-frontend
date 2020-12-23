@@ -30,6 +30,7 @@ import { CarouselComponent } from './home/carousel/carousel.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './home/footer/footer.component';
 import { ShowDetailComponent } from './show-detail/show-detail.component';
+import { NavbarComponent } from './home/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ShowDetailComponent } from './show-detail/show-detail.component';
     CarouselComponent,
     FooterComponent,
     ShowDetailComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
