@@ -1,7 +1,9 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {CommandModel, GridComponent} from '@syncfusion/ej2-angular-grids';
 import {ItemComponent} from '../item/item.component';
 import { ListService } from '../services/list.service';
+import {WorkAreaComponent} from '../work-area.component';
+import {DashboardItem} from '../item/dashboard-item';
 
 
 @Component({
@@ -26,8 +28,7 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
   @ViewChild('grid')
   public grid: GridComponent;
 
-  constructor(private service: ListService) {
-  }
+  constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: ListService) {}
 
   public ngOnInit(): void {
     this.service.getShows().subscribe(response => {
@@ -52,13 +53,21 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
 
   public actionBegin(args: any): void {
     if (args.requestType === 'save'){
-      this.service.updateShow(args.data).subscribe(response => {}, error => {
+      this.service.updateShow(args.data).subscribe(response => {
+        alert('Oggetto salvato!');
+        this.parent.loadComponent(new DashboardItem(ManageShowsComponent, 'Spettacoli'));
+        }, error => {
         alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
+        this.parent.loadComponent(new DashboardItem(ManageShowsComponent, 'Spettacoli'));
       });
     }
     else if (args.requestType === 'delete') {
-      this.service.deleteShow(args.data[0].id).subscribe(response => {}, error => {
+      this.service.deleteShow(args.data[0].id).subscribe(response => {
+        alert('Oggetto eliminato!');
+        this.parent.loadComponent(new DashboardItem(ManageShowsComponent, 'Spettacoli'));
+        }, error => {
         alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
+        this.parent.loadComponent(new DashboardItem(ManageShowsComponent, 'Spettacoli'));
       });
     }
   }

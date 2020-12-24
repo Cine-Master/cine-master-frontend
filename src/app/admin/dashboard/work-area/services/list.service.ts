@@ -53,22 +53,22 @@ export class ListService {
   }
 
   public deleteRoom(id: string): any{
-    return this.http.request('delete', SERVICE_URI + 'rooms', { body: {id}, withCredentials: true });
+    return this.http.request('delete', SERVICE_URI + 'rooms', { body: {id}, withCredentials: true, responseType: 'text' });
   }
 
   public deleteShow(id: string): Observable<any>{
-    return this.http.request('delete', SERVICE_URI + 'shows', { body: {id}, withCredentials: true });
+    return this.http.request('delete', SERVICE_URI + 'shows', { body: {id}, withCredentials: true, responseType: 'text' });
   }
 
   public deleteActor(id: string): Observable<any> {
-    return this.http.request('delete', SERVICE_URI + 'actors', { body: {id}, withCredentials: true });
+    return this.http.request('delete', SERVICE_URI + 'actors', { body: {id}, withCredentials: true, responseType: 'text' });
   }
 
   public deleteDirector(id: string): Observable<any> {
-    return this.http.request('delete', SERVICE_URI + 'directors', { body: {id}, withCredentials: true });
+    return this.http.request('delete', SERVICE_URI + 'directors', { body: {id}, withCredentials: true, responseType: 'text' });
   }
 
   public deleteCategorie(id: string): Observable<any> {
-    return this.http.request('delete', SERVICE_URI + 'categories', { body: {id}, withCredentials: true });
+    return this.http.request('delete', SERVICE_URI + 'categories', { body: {id}, withCredentials: true, responseType: 'text' });
   }
 }

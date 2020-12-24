@@ -1,8 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import { CommandModel, GridComponent} from '@syncfusion/ej2-angular-grids';
 import { ListService } from '../services/list.service';
 import {ItemComponent} from '../item/item.component';
 import { map, tap} from 'rxjs/operators';
+import {WorkAreaComponent} from '../work-area.component';
+import {DashboardItem} from '../item/dashboard-item';
+import {ManageShowsComponent} from '../manage-shows/manage-shows.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -25,7 +28,7 @@ export class SimpleListComponent implements OnInit, ItemComponent {
   @ViewChild('grid')
   public grid: GridComponent;
 
-  constructor(private service: ListService) {
+  constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: ListService) {
   }
 
   public ngOnInit(): void {
@@ -84,23 +87,39 @@ export class SimpleListComponent implements OnInit, ItemComponent {
     if (args.requestType === 'save'){
       switch (this.type){
         case 'Sale':
-          this.service.updateRoom(args.data).subscribe(response => { alert('Oggetto salvato!'); }, error => {
+          this.service.updateRoom(args.data).subscribe(response => {
+            alert('Oggetto salvato!');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Sale'));
+            }, error => {
             alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Sale'));
           });
           break;
         case 'Attori':
-          this.service.updateActor(args.data).subscribe(response => { alert('Oggetto salvato!'); }, error => {
+          this.service.updateActor(args.data).subscribe(response => {
+            alert('Oggetto salvato!');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Attori'));
+            }, error => {
             alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Attori'));
           });
           break;
         case 'Registi':
-          this.service.updateDirector(args.data).subscribe(response => { alert('Oggetto salvato!'); }, error => {
+          this.service.updateDirector(args.data).subscribe(response => {
+            alert('Oggetto salvato!');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Registi'));
+            }, error => {
             alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Registi'));
           });
           break;
         case 'Categorie':
-          this.service.updateCategorie(args.data).subscribe(response => { alert('Oggetto salvato!'); }, error => {
+          this.service.updateCategorie(args.data).subscribe(response => {
+            alert('Oggetto salvato!');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Categorie'));
+            }, error => {
             alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Categorie'));
           });
           break;
       }
@@ -108,26 +127,39 @@ export class SimpleListComponent implements OnInit, ItemComponent {
     else if (args.requestType === 'delete'){
       switch (this.type){
         case 'Sale':
-          this.service.deleteRoom(args.data[0].id).pipe(
-            map((result: any) => result as string),
-            tap((result: string) => {
-                console.log('response from server:', result);
-              })
-          );
+          this.service.deleteRoom(args.data[0].id).subscribe(response => {
+            alert('Oggetto eliminato correttamente!');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Sale'));
+            }, error => {
+            alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Sale'));
+          });
           break;
         case 'Attori':
-          this.service.deleteActor(args.data[0].id).subscribe(response => { alert('Oggetto eliminato correttamente!'); }, error => {
+          this.service.deleteActor(args.data[0].id).subscribe(response => {
+            alert('Oggetto eliminato correttamente!');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Attori'));
+            }, error => {
             alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Attori'));
           });
           break;
         case 'Registi':
-          this.service.deleteDirector(args.data[0].id).subscribe(response => { alert('Oggetto eliminato correttamente!'); }, error => {
+          this.service.deleteDirector(args.data[0].id).subscribe(response => {
+            alert('Oggetto eliminato correttamente!');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Registi'));
+            }, error => {
             alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Registi'));
           });
           break;
         case 'Categorie':
-          this.service.deleteCategorie(args.data[0].id).subscribe(response => { alert('Oggetto eliminato correttamente!'); }, error => {
+          this.service.deleteCategorie(args.data[0].id).subscribe(response => {
+            alert('Oggetto eliminato correttamente!');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Catgorie'));
+            }, error => {
             alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
+            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Catgorie'));
           });
           break;
       }
