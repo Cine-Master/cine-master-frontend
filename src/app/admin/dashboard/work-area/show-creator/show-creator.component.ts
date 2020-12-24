@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UploaderComponent, FileInfo} from '@syncfusion/ej2-angular-inputs';
-import {ListService} from '../simple-list/services/list.service';
+import {ListService} from '../services/list.service';
 import {ShowCreationService} from './services/show-creation.service';
 import {Show} from '../../../model/Show';
 import {ItemComponent} from '../item/item.component';

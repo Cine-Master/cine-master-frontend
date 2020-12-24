@@ -1,7 +1,8 @@
-import {Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {InPlaceEditorComponent, MultiSelectService, RteService} from '@syncfusion/ej2-angular-inplace-editor';
 import {TextBoxModel} from '@syncfusion/ej2-inputs';
 import {ItemComponent} from '../item/item.component';
+import {SimpleTextService} from './services/simple-text.service';
 
 @Component({
   selector: 'app-simple-text',
@@ -27,12 +28,39 @@ export class SimpleTextComponent implements OnInit, ItemComponent {
     Title: { required: [true, 'Inserisci un nome valido'] }
   };
 
+  constructor(private service: SimpleTextService) {
+  }
 
   ngOnInit(): void {
   }
 
-  storeElement(event): void {
-
+  storeElement(): void {
+    if (this.titleEditorObj.value !== null){
+      switch (this.type){
+        case 'Attori':
+          this.service.addActor({name: this.titleEditorObj.value}).subscribe(response => {
+            alert('Oggetto salvato!');
+          }, error => { alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...'); });
+          break;
+        case 'Registi':
+          this.service.addDirector({name: this.titleEditorObj.value}).subscribe(response => {
+            alert('Oggetto salvato!');
+          }, error => { alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...'); });
+          break;
+        case 'Generi':
+          this.service.addActor({name: this.titleEditorObj.value}).subscribe(response => {
+            alert('Oggetto salvato!');
+          }, error => { alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...'); });
+          break;
+        case 'Sale':
+          this.service.addRoom({name: this.titleEditorObj.value}).subscribe(response => {
+            alert('Oggetto salvato!');
+          }, error => { alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...'); });
+          break;
+      }
+    } else {
+      alert('Inserisci un nome valido e riprova per favore...');
+    }
   }
 
 }

@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { EditService, PageService, CommandColumnService, CommandModel } from '@syncfusion/ej2-angular-grids';
+import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {CommandModel, GridComponent} from '@syncfusion/ej2-angular-grids';
 import {ItemComponent} from '../item/item.component';
-import { L10n, setCulture } from '@syncfusion/ej2-base';
-import { ListService } from '../simple-list/services/list.service';
+import { ListService } from '../services/list.service';
+import {WorkAreaComponent} from '../work-area.component';
+import {DashboardItem} from '../item/dashboard-item';
 
 
 @Component({
@@ -21,24 +22,24 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
   public editparams: object;
   public pageSettings: object;
   public commands: CommandModel[];
+  public loaded = false;
   it: any;
-  IT: any;
 
-  constructor(private service: ListService) {
-  }
+  @ViewChild('grid')
+  public grid: GridComponent;
+
+  constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: ListService) {}
 
   public ngOnInit(): void {
-    // @ts-ignore
-    // tslint:disable-next-line:max-line-length
-    // this.data = data;
-    // this.data = new DataManager({ url: SERVICE_URI + 'shows', adaptor: new WebApiAdaptor() });
-
     this.service.getShows().subscribe(response => {
       this.data = response;
-      console.log(this.data);
+      this.loaded = true;
+    }, error => {
+      alert('Qualcosa è andato storto!');
     });
 
-    this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal', allowEditOnDblClick: false, showDeleteConfirmDialog: true };
+    this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
+      showDeleteConfirmDialog: true };
     this.titlerules = { required: true };
     this.descriptionrules = { required: true };
     this.editparams = {  params: { popupHeight: '300px' }};
@@ -48,6 +49,27 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
       { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }  },
       { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
       { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
+  }
+
+  public actionBegin(args: any): void {
+    if (args.requestType === 'save'){
+      this.service.updateShow(args.data).subscribe(response => {
+        alert('Oggetto salvato!');
+        this.parent.loadComponent(new DashboardItem(ManageShowsComponent, 'Spettacoli'));
+        }, error => {
+        alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
+        this.parent.loadComponent(new DashboardItem(ManageShowsComponent, 'Spettacoli'));
+      });
+    }
+    else if (args.requestType === 'delete') {
+      this.service.deleteShow(args.data[0].id).subscribe(response => {
+        alert('Oggetto eliminato!');
+        this.parent.loadComponent(new DashboardItem(ManageShowsComponent, 'Spettacoli'));
+        }, error => {
+        alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
+        this.parent.loadComponent(new DashboardItem(ManageShowsComponent, 'Spettacoli'));
+      });
+    }
   }
 
 }
