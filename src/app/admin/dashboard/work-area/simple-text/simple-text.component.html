@@ -10,10 +10,10 @@
           <label class="col-sm-6 control-label" style="text-align: left;font-size: 14px; font-weight: bold; " >
             Nome</label>
           <ejs-inplaceeditor #inplaceTitleEditor mode="Inline" emptyText='Inserisci il nome'
-                             name='Title' [validationRules]='titleRule' data-underline="false" [model]="titleEditorModel" [value]='titleEditorValue'></ejs-inplaceeditor>
+                             name='Title' [validationRules]='titleRule' data-underline="false" [model]="titleEditorModel"></ejs-inplaceeditor>
         </div>
         <div class="btn-container">
-          <button class="btn btn-success" (click)="storeElement($event)">Salva</button>
+          <button (click)="storeElement()" class="btn btn-success">Salva</button>
         </div>
       </form>
 
