@@ -3,6 +3,10 @@ import {UploaderComponent, FileInfo} from '@syncfusion/ej2-angular-inputs';
 import {ListService} from '../services/list.service';
 import {ShowCreationService} from './services/show-creation.service';
 import {Show} from '../../../model/Show';
+import {ShowActor} from '../../../model/ShowActor';
+import {ShowDirector} from '../../../model/ShowDirector';
+import {ShowRoom} from '../../../model/ShowRoom';
+import {ShowCategory} from '../../../model/ShowCategory';
 import {ItemComponent} from '../item/item.component';
 
 @Component({
@@ -19,14 +23,15 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   nations: string[] = ['Italia', 'Stati Uniti', 'Spagna', 'Francia', 'Regno Unito', 'Portogallo'];
   languages: string[] = ['Italiano', 'Inglese', 'Spagnolo', 'Francese', 'Portoghese'];
 
-  showDirectorsList: string[] = ['Quentin Tarantino', 'Martin Scorsese', 'Christopher Nolan', 'David Lynch', 'Richard Kelly'];
-  showCategoriesList: string[] = ['Thriller', 'Horror', 'Romantico', 'Azione'];
-  showActorsList: string[] = ['Leonardo DiCaprio', 'Brad Pitt', 'Al Pacino', 'John Travolta', 'Jake Gyllenhaal'];
-  showActorsObjects: any[];
-  showDirectorsObjects: any[];
-  showRoomsObjects: any[];
-  showCategoriesObjects: any[];
-  showRoomsList: number[] = [1, 2, 3, 4, 5];
+  showActorsObjects: ShowActor[];
+  showDirectorsObjects: ShowDirector[];
+  showRoomsObjects: ShowRoom[];
+  showCategoriesObjects: ShowCategory[];
+
+  showRoomsList: number[] = [];
+  showDirectorsList: string[] = [];
+  showCategoriesList: string[] = [];
+  showActorsList: string[] = [];
 
   showTitle: string;
   showDescription: string;
@@ -67,6 +72,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
 
   createNewShow(): void {
 
+    // TODO: To be used in the next Sprint
     // this.showCoverImageFileInfo = this.uploadObj.getFilesData()[0];
 
     this.evaluateShowDate();
@@ -88,17 +94,10 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
       this.invalidFields = false;
     } else {
 
-      // TODO: To implement in the next Sprint
+      // TODO: To be used in the next Sprint
 
       /*this.showCoverImageRawData = this.showCoverImageFileInfo.rawFile;
       this.showCoverImageExtension = this.showCoverImageFileInfo.name.split('.')[1];*/
-
-      /*const showToAdd: Show = {id: -1, title: this.showTitle, description: this.showDescription,
-        coverImageRawData: this.showCoverImageRawData, coverImageExtension: this.showCoverImageExtension,
-        date: this.showDate, startTime: this.showStartTime, endTime: this.showStartTime,
-        productionLocation: this.showProductionLocation, language: this.showLanguage, actors: this.showActorsSelected,
-      directors: this.showDirectorsSelected, categories: this.showCategoriesSelected, room: this.showRoomSelected,
-      comingSoon: this.showComingSoon};*/
 
       let month: string;
       let day: string;
@@ -161,7 +160,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
 
       for (let i = 0; i < this.showCategoriesSelected.length; i++){
         for (let j = 0; j < this.showCategoriesObjects.length; j++){
-          if(this.showCategoriesObjects[j].name === this.showCategoriesSelected[i].name){
+          if(this.showCategoriesObjects[j].name === this.showCategoriesSelected[i]){
             categories.push({
               id: this.showCategoriesObjects[j].id,
               name: this.showCategoriesObjects[j].name
@@ -173,8 +172,8 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
 
       for (let i = 0; i < this.showDirectorsSelected.length; i++){
         for (let j = 0; j < this.showDirectorsObjects.length; j++){
-          if(this.showDirectorsObjects[j].name === this.showDirectorsSelected[i].name){
-            categories.push({
+          if(this.showDirectorsObjects[j].name === this.showDirectorsSelected[i]){
+            directors.push({
               id: this.showDirectorsObjects[j].id,
               name: this.showDirectorsObjects[j].name
             });
@@ -185,8 +184,8 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
 
       for (let i = 0; i < this.showActorsSelected.length; i++){
         for (let j = 0; j < this.showActorsObjects.length; j++){
-          if(this.showActorsObjects[j].name === this.showActorsSelected[i].name){
-            categories.push({
+          if(this.showActorsObjects[j].name === this.showActorsSelected[i]){
+            actors.push({
               id: this.showActorsObjects[j].id,
               name: this.showActorsObjects[j].name
             });

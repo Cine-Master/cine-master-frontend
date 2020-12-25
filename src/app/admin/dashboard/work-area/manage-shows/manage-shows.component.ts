@@ -4,6 +4,7 @@ import {ItemComponent} from '../item/item.component';
 import { ListService } from '../services/list.service';
 import {WorkAreaComponent} from '../work-area.component';
 import {DashboardItem} from '../item/dashboard-item';
+import {Show} from '../../../model/Show';
 
 
 @Component({
@@ -14,7 +15,7 @@ import {DashboardItem} from '../item/dashboard-item';
 })
 export class ManageShowsComponent implements OnInit, ItemComponent {
   @Input() type: string;
-  public data: object[];
+  public data: Show[];
   public editSettings: object;
   public titlerules: object;
   public descriptionrules: object;
