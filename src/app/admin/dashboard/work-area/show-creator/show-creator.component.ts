@@ -23,6 +23,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   nations: string[] = ['Italia', 'Stati Uniti', 'Spagna', 'Francia', 'Regno Unito', 'Portogallo'];
   languages: string[] = ['Italiano', 'Inglese', 'Spagnolo', 'Francese', 'Portoghese'];
 
+  requestResponseShow: Show;
   showActorsObjects: ShowActor[];
   showDirectorsObjects: ShowDirector[];
   showRoomsObjects: ShowRoom[];
@@ -194,18 +195,26 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
         }
       }
 
-      const showToAdd: Show = {id: -1, name: this.showTitle, description: this.showDescription,
+      const showToAdd: Show = {id: null, name: this.showTitle, description: this.showDescription,
         photoUrl: this.showPhotoUrl, date: formattedShowDate, startTime: formattedStartTime,
         endTime: formattedEndTime,
         productionLocation: this.showProductionLocation, language: this.showLanguage, actors: actors,
         directors: directors, categories: categories, room: room,
         comingSoon: this.showComingSoon};
 
-      if(!this.showCreationService.createNewShow(showToAdd))
-        this.invalidResponseAlert.show();
-      else
-        this.correctResponseAlert.show();
-
+      this.showCreationService.createNewShow(showToAdd).subscribe(
+        data => {
+          this.requestResponseShow = data;
+        },
+        error => {
+            this.invalidResponseAlert.show();
+          },
+        () => {
+          if(this.requestResponseShow.id !== -1)
+            this.correctResponseAlert.show();
+          else
+            this.invalidResponseAlert.show();
+        });
     }
 
   }
