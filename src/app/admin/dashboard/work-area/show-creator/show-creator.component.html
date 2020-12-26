@@ -16,8 +16,16 @@
 
   <br><br>
 
+  <!-- To implement in the next Sprint -->
+  <!--
   <h6>Immagine di copertina dello spettacolo</h6>
   <ejs-uploader #coverUploader id='fileupload' (selected)="singleFileForcing()" maxFileSize = 1500000 allowedExtensions = '.jpg, .jpeg, .png'></ejs-uploader>
+  -->
+
+  <h6>URL immagine di copertina</h6>
+  <div class='textboxes'>
+    <ejs-textbox placeholder="Inserisci l'URL dell'immagine di copertina" floatLabelType="Auto" [(value)]="showPhotoUrl"></ejs-textbox>
+  </div>
 
   <br><br>
 

@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {ShowActor} from '../../../model/ShowActor';
+import {ShowDirector} from '../../../model/ShowDirector';
+import {ShowRoom} from '../../../model/ShowRoom';
+import {ShowCategory} from '../../../model/ShowCategory';
+import {Show} from '../../../model/Show';
 
 const SERVICE_URI = 'http://localhost:8080/admin/';
 
@@ -12,24 +17,24 @@ export class ListService {
   constructor(private http: HttpClient) {
   }
 
-  public getRooms(): Observable<any>{
-    return this.http.get<any>(SERVICE_URI + 'rooms', this.options);
+  public getRooms(): Observable<ShowRoom>{
+    return this.http.get<ShowRoom>(SERVICE_URI + 'rooms', this.options);
   }
 
-  public getShows(): Observable<any>{
-    return this.http.get<any>(SERVICE_URI + 'shows', this.options);
+  public getShows(): Observable<Show[]>{
+    return this.http.get<Show[]>(SERVICE_URI + 'shows', this.options);
   }
 
-  public getActors(): Observable<any> {
-    return this.http.get<any>(SERVICE_URI + 'actors', this.options);
+  public getActors(): Observable<ShowActor> {
+    return this.http.get<ShowActor>(SERVICE_URI + 'actors', this.options);
   }
 
-  public getDirectors(): Observable<any> {
-    return this.http.get<any>(SERVICE_URI + 'directors', this.options);
+  public getDirectors(): Observable<ShowDirector> {
+    return this.http.get<ShowDirector>(SERVICE_URI + 'directors', this.options);
   }
 
-  public getCategories(): Observable<any> {
-    return this.http.get<any>(SERVICE_URI + 'categories', this.options);
+  public getCategories(): Observable<ShowDirector> {
+    return this.http.get<ShowDirector>(SERVICE_URI + 'categories', this.options);
   }
 
   public updateShow(show: object): Observable<any> {

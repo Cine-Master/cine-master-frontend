@@ -2,18 +2,24 @@ import {FileInfo} from '@syncfusion/ej2-angular-inputs';
 
 export interface Show {
   id: number;
-  title: string;
+  name: string;
   description: string;
+
+  // TODO: To implement in the next Sprint
+
+  /*
   coverImageRawData: string | Blob;
   coverImageExtension: string;
-  date: Date;
-  startTime: Date;
-  endTime: Date;
+  */
+  photoUrl: string;
+  date: string;
+  startTime: string;
+  endTime: string;
   productionLocation: string;
   language: string;
-  actors: string[];
-  directors: string[];
-  categories: string[];
-  room: number;
+  actors: any[];
+  directors: any[];
+  categories: any[];
+  room: any;
   comingSoon: boolean;
 }
