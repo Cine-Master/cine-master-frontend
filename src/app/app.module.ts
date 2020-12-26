@@ -66,7 +66,6 @@ import { ShowsSliderComponent } from './home/shows-slider/shows-slider.component
       {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent},
       {path: 'admin/dashboard/create_show', component: ShowCreatorComponent},
       {path: 'show/:id', component: ShowDetailComponent},
-      {path: 'home/slider', component: ShowsSliderComponent},
       {path: 'seats', component: SeatReservationComponent},
       {path: '**', component: ErrorPageComponent},
       {path: 'error404', component: ErrorPageComponent}
