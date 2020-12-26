@@ -337,11 +337,10 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   }
 
   evaluateShowComingSoon(): boolean {
-    if(this.showComingSoon === undefined || this.showComingSoon === null){
-      this.invalidFields = true;
-      return false;
-    }
+    if(this.showComingSoon === undefined || this.showComingSoon === null)
+      this.showComingSoon = false;
 
+    console.log(this.showComingSoon);
     return true;
   }
 
