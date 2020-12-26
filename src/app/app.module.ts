@@ -32,6 +32,7 @@ import { FooterComponent } from './home/footer/footer.component';
 import { ShowDetailComponent } from './show-detail/show-detail.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './home/navbar/navbar.component';
+import { SeatReservationComponent } from './show-detail/seat-reservation/seat-reservation.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { NavbarComponent } from './home/navbar/navbar.component';
     ShowDetailComponent,
     ErrorPageComponent,
     NavbarComponent,
+    SeatReservationComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { NavbarComponent } from './home/navbar/navbar.component';
       {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent},
       {path: 'admin/dashboard/create_show', component: ShowCreatorComponent},
       {path: 'show/:id', component: ShowDetailComponent},
+      {path: 'seats', component: SeatReservationComponent},
       {path: '**', component: ErrorPageComponent},
       {path: 'error404', component: ErrorPageComponent}
     ]),
