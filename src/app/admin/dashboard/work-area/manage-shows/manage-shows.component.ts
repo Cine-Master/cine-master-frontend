@@ -4,7 +4,7 @@ import {ItemComponent} from '../item/item.component';
 import { ListService } from '../services/list.service';
 import {WorkAreaComponent} from '../work-area.component';
 import {DashboardItem} from '../item/dashboard-item';
-import {Show} from '../../../model/Show';
+import {Show} from '../../../../model/Show';
 
 
 @Component({

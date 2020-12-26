@@ -14,6 +14,8 @@ import { InPlaceEditorModule } from '@syncfusion/ej2-angular-inplace-editor';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { DatePickerModule, TimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { ToastModule } from '@syncfusion/ej2-angular-notifications';
+import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { WorkAreaComponent } from './admin/dashboard/work-area/work-area.component';
 import { ItemDirective } from './admin/dashboard/work-area/item/item.directive';
@@ -33,6 +35,7 @@ import { ShowDetailComponent } from './show-detail/show-detail.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './home/navbar/navbar.component';
 import { SeatReservationComponent } from './show-detail/seat-reservation/seat-reservation.component';
+import { ShowsSliderComponent } from './home/shows-slider/shows-slider.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,7 @@ import { SeatReservationComponent } from './show-detail/seat-reservation/seat-re
     ErrorPageComponent,
     NavbarComponent,
     SeatReservationComponent,
+    ShowsSliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +66,7 @@ import { SeatReservationComponent } from './show-detail/seat-reservation/seat-re
       {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent},
       {path: 'admin/dashboard/create_show', component: ShowCreatorComponent},
       {path: 'show/:id', component: ShowDetailComponent},
+      {path: 'home/slider', component: ShowsSliderComponent},
       {path: 'seats', component: SeatReservationComponent},
       {path: '**', component: ErrorPageComponent},
       {path: 'error404', component: ErrorPageComponent}
@@ -85,7 +90,9 @@ import { SeatReservationComponent } from './show-detail/seat-reservation/seat-re
     UploaderModule,
     CheckBoxModule,
     MultiSelectModule,
-    NgbModule
+    NgbModule,
+    SlickCarouselModule,
+    TabModule
   ],
   entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],

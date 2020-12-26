@@ -2,11 +2,11 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UploaderComponent, FileInfo} from '@syncfusion/ej2-angular-inputs';
 import {ListService} from '../services/list.service';
 import {ShowCreationService} from './services/show-creation.service';
-import {Show} from '../../../model/Show';
-import {ShowActor} from '../../../model/ShowActor';
-import {ShowDirector} from '../../../model/ShowDirector';
-import {ShowRoom} from '../../../model/ShowRoom';
-import {ShowCategory} from '../../../model/ShowCategory';
+import {Show} from '../../../../model/Show';
+import {ShowActor} from '../../../../model/ShowActor';
+import {ShowDirector} from '../../../../model/ShowDirector';
+import {ShowRoom} from '../../../../model/ShowRoom';
+import {ShowCategory} from '../../../../model/ShowCategory';
 import {ItemComponent} from '../item/item.component';
 
 @Component({
