@@ -1,6 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ShowDetailService} from './services/show-detail.service';
 import {ActivatedRoute} from '@angular/router';
+import {SeatReservationComponent} from './seat-reservation/seat-reservation.component';
 
 @Component({
   selector: 'app-show-detail',
@@ -8,29 +9,32 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./show-detail.component.css']
 })
 export class ShowDetailComponent implements OnInit {
-
+  @ViewChild('seatReservationComponent')
+  private seatReservation: SeatReservationComponent;
   public show = {
-    title: '',
-    description: '',
-    duration: '',
-    actors: '',
-    directors: '',
-    genres: '',
-    release: '',
-    language: '',
+    title: 'Average',
+    description: 'NICE',
+    duration: '344',
+    actors: 'Alviano',
+    directors: 'Alviano',
+    genres: 'AAAA',
+    release: 'Above',
+    language: 'Iraniano',
     progr: [{
-      date: '',
-      hours: ['']
+      date: '10 Dic 2020',
+      hours: ['20:00', '22:00']
     }],
     location: ''};
   public loaded = false;
+  public wantsToBuy = false;
   constructor(private service: ShowDetailService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.loadData();
+    // this.loadData();
   }
 
-  loadData(): void {
+  // TODO: modificare in base alle nuove api implementate
+  private loadData(): void {
     this.service.getShowDetail(this.route.snapshot.params.id).subscribe(response => {
       const start = new Date();
       const [hours, minutes, seconds] = response.startTime.split(':');
@@ -70,8 +74,12 @@ export class ShowDetailComponent implements OnInit {
       this.show.location = response.productionLocation;
       this.loaded = true;
     }, error => {
-      window.location.href = 'http://localhost:8080/error404';
+      window.location.href = 'http://localhost:4200/error404';
     });
+  }
+
+  public renderSeatPlan(date: string, hour: string): void{
+    this.seatReservation.loadData(date, hour);
   }
 
 }

@@ -1,17 +1,16 @@
 import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
-import { CommandModel, GridComponent} from '@syncfusion/ej2-angular-grids';
+import { CommandModel, GridComponent, ToolbarService} from '@syncfusion/ej2-angular-grids';
 import { ListService } from '../services/list.service';
 import {ItemComponent} from '../item/item.component';
-import { map, tap} from 'rxjs/operators';
 import {WorkAreaComponent} from '../work-area.component';
 import {DashboardItem} from '../item/dashboard-item';
-import {ManageShowsComponent} from '../manage-shows/manage-shows.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'ej-grid-simple-list',
   templateUrl: './simple-list.component.html',
   styleUrls: ['./simple-list.component.css'],
+  providers: [ToolbarService]
 })
 export class SimpleListComponent implements OnInit, ItemComponent {
 
@@ -24,6 +23,7 @@ export class SimpleListComponent implements OnInit, ItemComponent {
   public pageSettings: object;
   public commands: CommandModel[];
   public loaded = false;
+  public toolbar: string[];
 
   @ViewChild('grid')
   public grid: GridComponent;
@@ -71,10 +71,11 @@ export class SimpleListComponent implements OnInit, ItemComponent {
         this.data = null;
     }
 
-    this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
+    this.editSettings = { allowEditing: true, allowDeleting: true, allowAdding: true, mode: 'Dialog', allowEditOnDblClick: false,
       showDeleteConfirmDialog: true};
+    this.toolbar = ['Add', 'Edit', 'Delete'];
     this.nameRules = { required: true };
-    this.idRules = { required: true };
+    this.idRules = { required: false, maxLenghth: 0 };
     this.editParams = {  params: { popupHeight: '300px' }};
     this.pageSettings = {pageCount: 8};
     this.commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },

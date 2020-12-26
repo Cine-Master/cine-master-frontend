@@ -1,20 +1,11 @@
 <link rel="stylesheet" id="amy-movie-style-css" href="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/themes/amy-movie/css/style.css?ver=1.0.0" type="text/css" media="all">
 
-<div *ngIf="!loaded" style="text-align: center; margin-top: 5%">
+<div *ngIf="loaded" style="text-align: center; margin-top: 5%">
   <div class="spinner-border text-primary"></div>
 </div>
-<div id="content" class="site-content" *ngIf="loaded">
+<div id="content" class="site-content" *ngIf="!loaded">
 
-
-  <section id="amy-page-header" class=" full">
-    <img width="1920" height="600"
-         src="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23.jpg"
-         class="attachment-full size-full" alt=""
-         srcset="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23.jpg 1920w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23-300x94.jpg 300w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23-768x240.jpg 768w, http://demo.amytheme.com/movie/demo/single-cinema/wp-content/uploads/2019/04/img_23-1024x320.jpg 1024w"
-         sizes="(max-width: 1920px) 100vw, 1920px">
-  </section>
-
-  <section class="main-content single-movie layout-full  has-banner">
+  <section class="main-content single-movie layout-full  no-banner">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -88,13 +79,17 @@
                 <div class="showtime">
                   <div class="showtime-item">
                     <div *ngFor="let e of show.progr" class="st-item">
-                      <div class="st-title"><label>{{e.date}}</label><a href="#" class="amy-buy-ticket" target="_blank">Buy Ticket</a></div>
+                      <div class="st-title"><label>{{e.date}}</label></div>
                       <ul>
-                        <li *ngFor="let h of e.hours">{{h}}</li>
+                        <li style="cursor: pointer" *ngFor="let h of e.hours" (click)="renderSeatPlan(e.date, h)">{{h}}</li>
                       </ul>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div class="entry-map single-cinema">
+                <app-seat-reservation #seatReservationComponent></app-seat-reservation>
               </div>
             </article>
           </div>
@@ -103,4 +98,5 @@
     </div>
   </section>
 </div>
+
 
