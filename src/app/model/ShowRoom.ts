@@ -1,7 +1,9 @@
+import {RoomSeat} from './RoomSeat';
+
 export interface ShowRoom {
   id: number;
   name: string;
-  rows: number;
-  columns: number;
-  seats: object[];
+  nRows: number;
+  nColumns: number;
+  seats: RoomSeat[];
 }
