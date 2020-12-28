@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ShowActor} from '../../../model/ShowActor';
-import {ShowDirector} from '../../../model/ShowDirector';
-import {ShowRoom} from '../../../model/ShowRoom';
-import {ShowCategory} from '../../../model/ShowCategory';
-import {Show} from '../../../model/Show';
+import {ShowActor} from '../../../../model/ShowActor';
+import {ShowDirector} from '../../../../model/ShowDirector';
+import {ShowRoom} from '../../../../model/ShowRoom';
+import {ShowCategory} from '../../../../model/ShowCategory';
+import {Show} from '../../../../model/Show';
 
 const SERVICE_URI = 'http://localhost:8080/admin/';
 

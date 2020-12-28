@@ -14,6 +14,8 @@ import { InPlaceEditorModule } from '@syncfusion/ej2-angular-inplace-editor';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { DatePickerModule, TimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { ToastModule } from '@syncfusion/ej2-angular-notifications';
+import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { WorkAreaComponent } from './admin/dashboard/work-area/work-area.component';
 import { ItemDirective } from './admin/dashboard/work-area/item/item.directive';
@@ -55,6 +57,7 @@ import {SplitterModule} from '@syncfusion/ej2-angular-layouts';
     NavbarComponent,
     SeatReservationComponent,
     RoomCreatorComponent,
+    ShowsSliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +93,9 @@ import {SplitterModule} from '@syncfusion/ej2-angular-layouts';
     MultiSelectModule,
     NgbModule,
     SplitterModule,
+    NgbModule,
+    SlickCarouselModule,
+    TabModule
   ],
   entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],
