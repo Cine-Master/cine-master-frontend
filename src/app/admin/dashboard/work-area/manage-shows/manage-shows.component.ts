@@ -32,12 +32,12 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
   constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: ListService) {}
 
   public ngOnInit(): void {
-    this.service.getShows().subscribe(response => {
-      this.data = response;
-      this.loaded = true;
-    }, error => {
-      alert('Qualcosa è andato storto!');
-    });
+    // this.service.getShows().subscribe(response => {
+    //   this.data = response;
+    //   this.loaded = true;
+    // }, error => {
+    //   alert('Qualcosa è andato storto!');
+    // });
 
     this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
       showDeleteConfirmDialog: true };

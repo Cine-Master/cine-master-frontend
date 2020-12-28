@@ -33,6 +33,8 @@ import { ShowDetailComponent } from './show-detail/show-detail.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './home/navbar/navbar.component';
 import { SeatReservationComponent } from './show-detail/seat-reservation/seat-reservation.component';
+import { RoomCreatorComponent } from './admin/dashboard/work-area/room-creator/room-creator.component';
+import {SplitterModule} from '@syncfusion/ej2-angular-layouts';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { SeatReservationComponent } from './show-detail/seat-reservation/seat-re
     ErrorPageComponent,
     NavbarComponent,
     SeatReservationComponent,
+    RoomCreatorComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +88,8 @@ import { SeatReservationComponent } from './show-detail/seat-reservation/seat-re
     UploaderModule,
     CheckBoxModule,
     MultiSelectModule,
-    NgbModule
+    NgbModule,
+    SplitterModule,
   ],
   entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],
