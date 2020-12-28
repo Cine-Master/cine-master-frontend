@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, Injector, OnInit, ViewContainerRef} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {HomeComponent} from '../home.component';
+import {SearchService} from '../../services/search.service';
 
 
 
@@ -11,11 +14,15 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class NavbarComponent implements OnInit {
   name: any;
   myForm: any;
-  constructor() {
+  private parent: HomeComponent;
+  constructor(private searchService: SearchService, private router: Router, private injector: Injector) {
+    this.parent = this.injector.get<HomeComponent>(HomeComponent);
+
     this.myForm = new FormGroup({
       name: new FormControl()
     });
   }
+
 
 
   ngOnInit(): void {}
@@ -24,6 +31,14 @@ export class NavbarComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchFilm() {
-    alert(this.myForm.value.name);
+    this.searchService.searchShowByName(this.myForm.value.name).subscribe(response => {
+    this.parent.userIsSearching = true;
+    this.parent.fillSearchResultsComponent(response);
+    }, error => {console.log(error); });
+  }
+
+  // tslint:disable-next-line:typedef
+  resetView() {
+    this.parent.userIsSearching = false;
   }
 }

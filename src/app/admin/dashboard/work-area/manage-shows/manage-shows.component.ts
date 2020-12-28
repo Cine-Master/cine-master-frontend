@@ -5,6 +5,7 @@ import { ListService } from '../services/list.service';
 import {WorkAreaComponent} from '../work-area.component';
 import {DashboardItem} from '../item/dashboard-item';
 import {Show} from '../../../../model/Show';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -29,14 +30,15 @@ export class ManageShowsComponent implements OnInit, ItemComponent {
   @ViewChild('grid')
   public grid: GridComponent;
 
-  constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: ListService) {}
+  constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: ListService, private router: Router) {}
 
   public ngOnInit(): void {
     this.service.getShows().subscribe(response => {
       this.data = response;
       this.loaded = true;
     }, error => {
-      alert('Qualcosa è andato storto!');
+      alert('Devi effettuare l\'accesso come amministratore. Sarai reindirizzato alla pagina di login.');
+      this.router.navigate(['login']);
     });
 
     this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
