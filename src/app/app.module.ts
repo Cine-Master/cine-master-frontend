@@ -37,6 +37,7 @@ import { NavbarComponent } from './home/navbar/navbar.component';
 import { SeatReservationComponent } from './show-detail/seat-reservation/seat-reservation.component';
 import { RoomCreatorComponent } from './admin/dashboard/work-area/room-creator/room-creator.component';
 import {SplitterModule} from '@syncfusion/ej2-angular-layouts';
+import {ShowsSliderComponent} from './home/shows-slider/shows-slider.component';
 
 @NgModule({
   declarations: [

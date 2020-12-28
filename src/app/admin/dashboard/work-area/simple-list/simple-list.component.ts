@@ -33,43 +33,43 @@ export class SimpleListComponent implements OnInit, ItemComponent {
 
   public ngOnInit(): void {
 
-    // // tslint:disable:new-parens
-    // switch (this.type){
-    //   case 'Sale':
-    //     this.service.getRooms().subscribe(response => {
-    //       this.data = response;
-    //       this.loaded = true;
-    //     }, error => {
-    //       alert('Qualcosa è andato storto!');
-    //     });
-    //     break;
-    //   case 'Attori':
-    //     this.service.getActors().subscribe(response => {
-    //       this.data = response;
-    //       this.loaded = true;
-    //     }, error => {
-    //     alert('Qualcosa è andato storto!');
-    //   });
-    //     break;
-    //   case 'Registi':
-    //     this.service.getDirectors().subscribe(response => {
-    //       this.data = response;
-    //       this.loaded = true;
-    //     }, error => {
-    //     alert('Qualcosa è andato storto!');
-    //     });
-    //     break;
-    //   case 'Categorie':
-    //     this.service.getCategories().subscribe(response => {
-    //       this.data = response;
-    //       this.loaded = true;
-    //     }, error => {
-    //       alert('Qualcosa è andato storto!');
-    //     });
-    //     break;
-    //   default:
-    //     this.data = null;
-    // }
+    // tslint:disable:new-parens
+    switch (this.type){
+      case 'Sale':
+        this.service.getRooms().subscribe(response => {
+          this.data = response;
+          this.loaded = true;
+        }, error => {
+          alert('Qualcosa è andato storto!');
+        });
+        break;
+      case 'Attori':
+        this.service.getActors().subscribe(response => {
+          this.data = response;
+          this.loaded = true;
+        }, error => {
+        alert('Qualcosa è andato storto!');
+      });
+        break;
+      case 'Registi':
+        this.service.getDirectors().subscribe(response => {
+          this.data = response;
+          this.loaded = true;
+        }, error => {
+        alert('Qualcosa è andato storto!');
+        });
+        break;
+      case 'Categorie':
+        this.service.getCategories().subscribe(response => {
+          this.data = response;
+          this.loaded = true;
+        }, error => {
+          alert('Qualcosa è andato storto!');
+        });
+        break;
+      default:
+        this.data = null;
+    }
 
     this.editSettings = { allowEditing: true, allowDeleting: true, allowAdding: true, mode: 'Dialog', allowEditOnDblClick: false,
       showDeleteConfirmDialog: true};
