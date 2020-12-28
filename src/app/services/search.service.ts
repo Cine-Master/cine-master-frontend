@@ -15,4 +15,8 @@ export class SearchService {
   }
 
 
+  getHighlightedShows(): Observable<object> {
+    const params = new HttpParams().set('highlighted', 'true');
+    return this.httpClient.get('http://localhost:8080/shows/search', {withCredentials: true, params});
+  }
 }
