@@ -35,14 +35,6 @@ export class SimpleListComponent implements OnInit, ItemComponent {
 
     // tslint:disable:new-parens
     switch (this.type){
-      case 'Sale':
-        this.service.getRooms().subscribe(response => {
-          this.data = response;
-          this.loaded = true;
-        }, error => {
-          alert('Qualcosa è andato storto!');
-        });
-        break;
       case 'Attori':
         this.service.getActors().subscribe(response => {
           this.data = response;
@@ -87,15 +79,6 @@ export class SimpleListComponent implements OnInit, ItemComponent {
   public actionBegin(args: any): void {
     if (args.requestType === 'save'){
       switch (this.type){
-        case 'Sale':
-          this.service.updateRoom(args.data).subscribe(response => {
-            alert('Oggetto salvato!');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Sale'));
-            }, error => {
-            alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Sale'));
-          });
-          break;
         case 'Attori':
           this.service.updateActor(args.data).subscribe(response => {
             alert('Oggetto salvato!');
@@ -127,15 +110,6 @@ export class SimpleListComponent implements OnInit, ItemComponent {
     }
     else if (args.requestType === 'delete'){
       switch (this.type){
-        case 'Sale':
-          this.service.deleteRoom(args.data[0].id).subscribe(response => {
-            alert('Oggetto eliminato correttamente!');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Sale'));
-            }, error => {
-            alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Sale'));
-          });
-          break;
         case 'Attori':
           this.service.deleteActor(args.data[0].id).subscribe(response => {
             alert('Oggetto eliminato correttamente!');

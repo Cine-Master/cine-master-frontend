@@ -1,8 +1,7 @@
 import {Component, Inject, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {ItemComponent} from '../item/item.component';
-import {WorkAreaComponent} from '../work-area.component';
+import {ItemComponent} from '../../item/item.component';
+import {WorkAreaComponent} from '../../work-area.component';
 import {RoomCreatorService} from './services/room-creator.service';
-import {TextBoxModel} from '@syncfusion/ej2-inputs';
 
 @Component({
   selector: 'app-room-creator',

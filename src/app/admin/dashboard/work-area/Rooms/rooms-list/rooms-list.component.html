@@ -1,0 +1,56 @@
+<div class="header">
+  <h5>Lista {{this.type}}</h5>
+</div>
+<div *ngIf="!loaded" style="text-align: center; margin-top: 5%; color: #ff914d;">
+  <div class="spinner-border"></div>
+</div>
+<!--<div *ngIf="loaded" id="target" class="control-section default-splitter">-->
+<!--  <div class="pane1">-->
+<!--    <ejs-splitter separatorSize=3 width='100%'>-->
+<!--      <e-panes>-->
+<!--        <e-pane size='50%'>-->
+<!--          <ng-template #content>-->
+<!--&lt;!&ndash;              <ejs-grid #grid [dataSource]='data'>&ndash;&gt;-->
+<!--&lt;!&ndash;                <e-columns>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <e-column field='id' headerText='Id' width='50' textAlign='Center'></e-column>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <e-column field='name' headerText='Nome' width='100' textAlign='Center'></e-column>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <e-column field='nRows' headerText='Numero Righe' width='50' textAlign='Center'></e-column>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <e-column field='nColumns' headerText='Numero Colonne' width='50' textAlign='Center'></e-column>&ndash;&gt;-->
+<!--&lt;!&ndash;                  &lt;!&ndash;<e-column headerText='Modifica' width='160' [commands]='commands'></e-column>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                </e-columns>&ndash;&gt;-->
+<!--&lt;!&ndash;              </ejs-grid>&ndash;&gt;-->
+<!--          </ng-template>-->
+<!--        </e-pane>-->
+<!--        <e-pane size='50%'>-->
+<!--          <ng-template #content>-->
+<!--          </ng-template>-->
+<!--        </e-pane>-->
+<!--      </e-panes>-->
+<!--    </ejs-splitter>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div id="target" class="control-section default-splitter">
+  <div class="pane1">
+    <ejs-splitter separatorSize=3 width='100%'>
+      <e-panes>
+        <!-- options content -->
+        <e-pane size='25%'>
+          <ng-template #content>
+            <div class="content option-content">
+            </div>
+          </ng-template>
+        </e-pane>
+        <!-- seats content -->
+        <e-pane size='75%'>
+          <ng-template #content>
+            <div class="content">
+
+            </div>
+          </ng-template>
+        </e-pane>
+      </e-panes>
+    </ejs-splitter>
+  </div>
+</div>
+

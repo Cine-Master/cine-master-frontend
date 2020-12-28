@@ -3,8 +3,6 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ShowActor} from '../../../../model/ShowActor';
 import {ShowDirector} from '../../../../model/ShowDirector';
-import {ShowRoom} from '../../../../model/ShowRoom';
-import {ShowCategory} from '../../../../model/ShowCategory';
 import {Show} from '../../../../model/Show';
 
 const SERVICE_URI = 'http://localhost:8080/admin/';
@@ -15,10 +13,6 @@ const SERVICE_URI = 'http://localhost:8080/admin/';
 export class ListService {
   private options = { withCredentials: true };
   constructor(private http: HttpClient) {
-  }
-
-  public getRooms(): Observable<ShowRoom>{
-    return this.http.get<ShowRoom>(SERVICE_URI + 'rooms', this.options);
   }
 
   public getShows(): Observable<Show[]>{
@@ -45,9 +39,9 @@ export class ListService {
     return this.http.put<object>(SERVICE_URI + 'actors', actor, this.options);
   }
 
-  public updateRoom(room: object): Observable<any> {
-    return this.http.put<object>(SERVICE_URI + 'rooms', room, this.options);
-  }
+  // public updateRoom(room: object): Observable<any> {
+  //   return this.http.put<object>(SERVICE_URI + 'rooms', room, this.options);
+  // }
 
   public updateDirector(director: object): Observable<any> {
     return this.http.put<object>(SERVICE_URI + 'directors', director, this.options);

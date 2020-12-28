@@ -8,6 +8,7 @@ import {ShowDirector} from '../../../../model/ShowDirector';
 import {ShowRoom} from '../../../../model/ShowRoom';
 import {ShowCategory} from '../../../../model/ShowCategory';
 import {ItemComponent} from '../item/item.component';
+import {RoomsListService} from '../Rooms/rooms-list/services/rooms-list.service';
 
 @Component({
   selector: 'app-show-creator',
@@ -61,13 +62,14 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   public position = { X: 'Left'};
 
 
-  public constructor(private showCreationService: ShowCreationService, private listService: ListService) {
+  public constructor(private showCreationService: ShowCreationService, private listService: ListService,
+                     private roomService: RoomsListService) {
   }
 
   ngOnInit(): void {
     this.listService.getCategories().subscribe( (responseData) => this.assignCategories(responseData));
     this.listService.getActors().subscribe( (responseData) => this.assignActors(responseData));
-    this.listService.getRooms().subscribe( (responseData) => this.assignRooms(responseData));
+    this.roomService.getRooms().subscribe( (responseData) => this.assignRooms(responseData));
     this.listService.getDirectors().subscribe( (responseData) => this.assignDirectors(responseData));
   }
 

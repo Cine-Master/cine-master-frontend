@@ -35,9 +35,10 @@ import { ShowDetailComponent } from './show-detail/show-detail.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NavbarComponent } from './home/navbar/navbar.component';
 import { SeatReservationComponent } from './show-detail/seat-reservation/seat-reservation.component';
-import { RoomCreatorComponent } from './admin/dashboard/work-area/room-creator/room-creator.component';
+import { RoomCreatorComponent } from './admin/dashboard/work-area/Rooms/room-creator/room-creator.component';
 import {SplitterModule} from '@syncfusion/ej2-angular-layouts';
 import {ShowsSliderComponent} from './home/shows-slider/shows-slider.component';
+import { RoomsListComponent } from './admin/dashboard/work-area/Rooms/rooms-list/rooms-list.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {ShowsSliderComponent} from './home/shows-slider/shows-slider.component';
     SeatReservationComponent,
     RoomCreatorComponent,
     ShowsSliderComponent,
+    RoomsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,10 +95,9 @@ import {ShowsSliderComponent} from './home/shows-slider/shows-slider.component';
     CheckBoxModule,
     MultiSelectModule,
     NgbModule,
-    SplitterModule,
-    NgbModule,
     SlickCarouselModule,
-    TabModule
+    TabModule,
+    SplitterModule
   ],
   entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],

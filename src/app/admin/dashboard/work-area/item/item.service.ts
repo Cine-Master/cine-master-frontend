@@ -5,7 +5,8 @@ import {data} from '../manage-shows/datasource';
 import {SimpleTextComponent} from '../simple-text/simple-text.component';
 import {SimpleListComponent} from '../simple-list/simple-list.component';
 import {ShowCreatorComponent} from '../show-creator/show-creator.component';
-import {RoomCreatorComponent} from '../room-creator/room-creator.component';
+import {RoomCreatorComponent} from '../Rooms/room-creator/room-creator.component';
+import {RoomsListComponent} from '../Rooms/rooms-list/rooms-list.component';
 
 
 @Injectable()
@@ -30,7 +31,7 @@ export class ItemService {
       case '8':
         return new DashboardItem(SimpleTextComponent, 'Attori');
       case '9':
-        return new DashboardItem(SimpleListComponent, 'Sale');
+        return new DashboardItem(RoomsListComponent, 'Sale');
       case '10':
         return new DashboardItem(RoomCreatorComponent, 'Sale');
       default:
