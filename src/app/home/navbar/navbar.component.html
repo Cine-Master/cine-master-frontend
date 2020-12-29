@@ -12,9 +12,17 @@
         <a class="nav-link" href="#">Login</a>
       </li>
     </ul>
-    <form (ngSubmit)="searchFilm()" [formGroup]="myForm" class="form-inline my-2 my-lg-0">
+    <div class="d-inline-block" ngbDropdown #catDrop="ngbDropdown">
+      <button class="btn  mr-2" style="background-color: #ff914d;" id="dropdownManual" ngbDropdownAnchor (focus)="catDrop.open()">Categorie</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownManual" >
+        <button *ngFor="let category of categoryList" ngbDropdownItem (click)="this.searchFilmByCategory(category.name)">{{category.name}}</button>
+
+      </div>
+    </div>
+    <form (ngSubmit)="searchFilmByName()" [formGroup]="myForm" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" formControlName="name" placeholder="Search" aria-label="Search">
       <button class="btn search" type="submit" >Cerca spettacolo</button>
     </form>
+
   </div>
 </nav>

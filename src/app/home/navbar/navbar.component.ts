@@ -15,8 +15,12 @@ export class NavbarComponent implements OnInit {
   name: any;
   myForm: any;
   private parent: HomeComponent;
-  constructor(private searchService: SearchService, private router: Router, private injector: Injector) {
+  categoryList: any;
+  private searchService: SearchService;
+
+  constructor(private s: SearchService, private router: Router, private injector: Injector) {
     this.parent = this.injector.get<HomeComponent>(HomeComponent);
+    this.searchService = s;
 
     this.myForm = new FormGroup({
       name: new FormControl()
@@ -25,17 +29,26 @@ export class NavbarComponent implements OnInit {
 
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.searchService.getAllCategories().subscribe(response => {this.categoryList = response; }, error => {console.log(error); });
+  }
 
   // tslint:disable-next-line:typedef
-
-  // tslint:disable-next-line:typedef
-  searchFilm() {
+  searchFilmByName() {
     this.searchService.searchShowByName(this.myForm.value.name).subscribe(response => {
     this.parent.userIsSearching = true;
     this.parent.fillSearchResultsComponent(response);
     }, error => {console.log(error); });
   }
+
+  searchFilmByCategory(catName): void {
+    this.searchService.searchShowByCategory(catName).subscribe(response => {
+      this.parent.userIsSearching = true;
+      this.parent.fillSearchResultsComponent(response);
+    }, error => {console.log(error); });
+  }
+
 
   // tslint:disable-next-line:typedef
   resetView() {
