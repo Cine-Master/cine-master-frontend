@@ -42,6 +42,7 @@ import { SearchResultsComponent } from './home/search-results/search-results.com
 import {ResultItemComponent} from './home/search-results/result-item/result-item.component';
 import {RoomCreatorComponent} from './admin/dashboard/work-area/Rooms/room-creator/room-creator.component';
 import { EventCreatorComponent } from './admin/dashboard/work-area/event-creator/event-creator.component';
+import {RegistrationComponent} from './login/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { EventCreatorComponent } from './admin/dashboard/work-area/event-creator
     SearchResultsComponent,
     ResultItemComponent,
     EventCreatorComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
