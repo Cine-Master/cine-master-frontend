@@ -14,5 +14,12 @@ export class AuthenticationService {
     return this.httpClient.post<string>('http://localhost:8080/login', {username: loginData.username,
       password: loginData.password}, { withCredentials: true });
   }
+  registrationUser(registrationData): any{
+    console.log(registrationData.birthdate);
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.post<string>('http://localhost:8080/registration', {username: registrationData.username, firstName: registrationData.firstname, hashedPassword: registrationData.password,
+      // tslint:disable-next-line:max-line-length
+      lastName: registrationData.lastname, email: registrationData.email, birthdate: registrationData.birthdate, gender: registrationData.gender}, { withCredentials: true });
+  }
 
 }
