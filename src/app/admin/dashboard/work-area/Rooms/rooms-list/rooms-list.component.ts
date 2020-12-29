@@ -1,6 +1,6 @@
 import {Component, Inject, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {ItemComponent} from '../../item/item.component';
-import {ShowRoom} from '../../../../../model/ShowRoom';
+import {EventRoom} from '../../../../../model/EventRoom';
 import {WorkAreaComponent} from '../../work-area.component';
 import {RoomsListService} from './services/rooms-list.service';
 
@@ -11,7 +11,7 @@ import {RoomsListService} from './services/rooms-list.service';
 })
 export class RoomsListComponent implements OnInit, ItemComponent {
   @Input() type: string;
-  public data: ShowRoom[];
+  public data: EventRoom[];
   public loaded = false;
   public standard: string[] = [];
   public premium: string[] = [];

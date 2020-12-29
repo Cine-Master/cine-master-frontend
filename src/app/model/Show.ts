@@ -12,14 +12,13 @@ export interface Show {
   coverImageExtension: string;
   */
   photoUrl: string;
-  date: string;
-  startTime: string;
-  endTime: string;
   productionLocation: string;
   language: string;
   actors: any[];
   directors: any[];
-  categories: any[];
-  room: any;
   comingSoon: boolean;
+  categories: any[];
+  highlighted: boolean;
+  lenght: number;
+  releaseDate: string;
 }

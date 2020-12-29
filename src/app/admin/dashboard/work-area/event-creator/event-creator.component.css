@@ -1,0 +1,7 @@
+.e-plus-icon::before {
+  content: '\e823';
+}
+
+#event-creator-container {
+  padding: 20px;
+}

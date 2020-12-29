@@ -41,6 +41,7 @@ import { RoomsListComponent } from './admin/dashboard/work-area/Rooms/rooms-list
 import { SearchResultsComponent } from './home/search-results/search-results.component';
 import {ResultItemComponent} from './home/search-results/result-item/result-item.component';
 import {RoomCreatorComponent} from './admin/dashboard/work-area/Rooms/room-creator/room-creator.component';
+import { EventCreatorComponent } from './admin/dashboard/work-area/event-creator/event-creator.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import {RoomCreatorComponent} from './admin/dashboard/work-area/Rooms/room-creat
     RoomsListComponent,
     SearchResultsComponent,
     ResultItemComponent,
+    EventCreatorComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +76,7 @@ import {RoomCreatorComponent} from './admin/dashboard/work-area/Rooms/room-creat
       {path: 'login', component: LoginComponent},
       {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent},
       {path: 'admin/dashboard/create_show', component: ShowCreatorComponent},
+      {path: 'admin/dashboard/event', component: EventCreatorComponent},
       {path: 'show/:id', component: ShowDetailComponent},
       {path: 'seats', component: SeatReservationComponent},
       {path: '**', component: ErrorPageComponent},

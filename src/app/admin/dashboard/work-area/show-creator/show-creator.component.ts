@@ -5,10 +5,8 @@ import {ShowCreationService} from './services/show-creation.service';
 import {Show} from '../../../../model/Show';
 import {ShowActor} from '../../../../model/ShowActor';
 import {ShowDirector} from '../../../../model/ShowDirector';
-import {ShowRoom} from '../../../../model/ShowRoom';
 import {ShowCategory} from '../../../../model/ShowCategory';
 import {ItemComponent} from '../item/item.component';
-import {RoomsListService} from '../Rooms/rooms-list/services/rooms-list.service';
 
 @Component({
   selector: 'app-show-creator',
@@ -18,8 +16,6 @@ import {RoomsListService} from '../Rooms/rooms-list/services/rooms-list.service'
 export class ShowCreatorComponent implements OnInit, ItemComponent {
 
   @Input() type: string;
-  timeFormat: string = 'HH:mm';
-  timeInterval: number = 15;
   invalidFields: boolean = false;
   nations: string[] = ['Italia', 'Stati Uniti', 'Spagna', 'Francia', 'Regno Unito', 'Portogallo'];
   languages: string[] = ['Italiano', 'Inglese', 'Spagnolo', 'Francese', 'Portoghese'];
@@ -27,30 +23,31 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   requestResponseShow: Show;
   showActorsObjects: ShowActor[];
   showDirectorsObjects: ShowDirector[];
-  showRoomsObjects: ShowRoom[];
   showCategoriesObjects: ShowCategory[];
 
-  showRoomsList: number[] = [];
   showDirectorsList: string[] = [];
   showCategoriesList: string[] = [];
   showActorsList: string[] = [];
 
-  showTitle: string;
-  showDescription: string;
+  // TODO: To be used in the next Sprints
+  /*
   showCoverImageFileInfo: FileInfo;
   showCoverImageRawData: string | Blob;
   showCoverImageExtension: string;
-  showDate: Date;
-  showStartTime: Date;
-  showEndTime: Date;
+  */
+
+  showName: string;
+  showDescription: string;
+  showReleaseDate: Date;
   showProductionLocation: string;
   showLanguage: string;
   showActorsSelected: any;
   showDirectorsSelected: any;
   showCategoriesSelected: any;
-  showRoomSelected: string;
   showComingSoon: boolean;
   showPhotoUrl: string;
+  showIsHighlighted: boolean;
+  showLenght: number;
 
 
   @ViewChild('coverUploader')
@@ -62,14 +59,12 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   public position = { X: 'Left'};
 
 
-  public constructor(private showCreationService: ShowCreationService, private listService: ListService,
-                     private roomService: RoomsListService) {
+  public constructor(private showCreationService: ShowCreationService, private listService: ListService) {
   }
 
   ngOnInit(): void {
     this.listService.getCategories().subscribe( (responseData) => this.assignCategories(responseData));
     this.listService.getActors().subscribe( (responseData) => this.assignActors(responseData));
-    this.roomService.getRooms().subscribe( (responseData) => this.assignRooms(responseData));
     this.listService.getDirectors().subscribe( (responseData) => this.assignDirectors(responseData));
   }
 
@@ -78,19 +73,19 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
     // TODO: To be used in the next Sprint
     // this.showCoverImageFileInfo = this.uploadObj.getFilesData()[0];
 
-    this.evaluateShowDate();
+    this.evaluateShowName();
     this.evaluateShowDescription();
     this.evaluateShowCoverImage();
-    this.evaluateShowEndTime();
+    this.evaluateShowReleaseDate();
     this.evaluateShowLanguage();
     this.evaluateShowProductionLocation();
-    this.evaluateShowStartTime();
-    this.evaluateShowTitle();
     this.evaluateShowActorsSelected();
     this.evaluateShowCategoriesSelected();
     this.evaluateShowDirectorsSelected();
-    this.evaluateShowComingSoon();
-    this.evaluateShowRoomSelected();
+    this.evaluateShowIsHighlighted();
+    this.evaluateShowLenght();
+    this.showComingSoon = true;
+
 
     if(this.invalidFields) {
       this.invalidFieldsAlert.show();
@@ -104,62 +99,23 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
 
       let month: string;
       let day: string;
-      let startTimeMinutes: string;
-      let startTimeHours: string;
-      let endTimeMinutes: string;
-      let endTimeHours: string;
 
-      if(this.showDate.getMonth() + 1 < 10)
-        month = '0' + (this.showDate.getMonth() + 1).toString();
+      if(this.showReleaseDate.getMonth() + 1 < 10)
+        month = '0' + (this.showReleaseDate.getMonth() + 1).toString();
       else
-        month = (this.showDate.getMonth() + 1).toString();
+        month = (this.showReleaseDate.getMonth() + 1).toString();
 
-      if(this.showDate.getDate() < 10)
-        day = '0' + this.showDate.getDate().toString();
+      if(this.showReleaseDate.getDate() < 10)
+        day = '0' + this.showReleaseDate.getDate().toString();
       else
-        day = this.showDate.getDate().toString();
+        day = this.showReleaseDate.getDate().toString();
 
-      const formattedShowDate = this.showDate.getFullYear().toString() + '-' +
+      const formattedShowReleaseDate = this.showReleaseDate.getFullYear().toString() + '-' +
         month + '-' + day;
 
-      if(this.showStartTime.getHours() < 10)
-        startTimeHours = '0' + this.showStartTime.getHours().toString();
-      else
-        startTimeHours = this.showStartTime.getHours().toString();
-
-      if(this.showStartTime.getMinutes() < 10)
-        startTimeMinutes = '0' + this.showStartTime.getMinutes().toString();
-      else
-        startTimeMinutes = this.showStartTime.getMinutes().toString();
-
-      const formattedStartTime = startTimeHours + ':' + startTimeMinutes;
-
-      if(this.showEndTime.getHours() < 10)
-        endTimeHours = '0' + this.showEndTime.getHours().toString();
-      else
-        endTimeHours = this.showEndTime.getHours().toString();
-
-      if(this.showEndTime.getMinutes() < 10)
-        endTimeMinutes = '0' + this.showEndTime.getMinutes().toString();
-      else
-        endTimeMinutes = this.showEndTime.getMinutes().toString();
-
-      const formattedEndTime = endTimeHours + ':' + endTimeMinutes;
-
-      let room;
-      let actors = [];
-      let directors = [];
-      let categories = [];
-
-      for (let i = 0; i < this.showRoomsObjects.length; i++){
-        if(this.showRoomsObjects[i].name === this.showRoomSelected){
-          room = {
-            id: this.showRoomsObjects[i].id,
-            name: this.showRoomsObjects[i].name
-          };
-          break;
-        }
-      }
+      const actors = [];
+      const directors = [];
+      const categories = [];
 
       for (let i = 0; i < this.showCategoriesSelected.length; i++){
         for (let j = 0; j < this.showCategoriesObjects.length; j++){
@@ -197,12 +153,11 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
         }
       }
 
-      const showToAdd: Show = {id: null, name: this.showTitle, description: this.showDescription,
-        photoUrl: this.showPhotoUrl, date: formattedShowDate, startTime: formattedStartTime,
-        endTime: formattedEndTime,
+      const showToAdd: Show = {id: null, name: this.showName, description: this.showDescription,
+        photoUrl: this.showPhotoUrl, releaseDate: formattedShowReleaseDate,
         productionLocation: this.showProductionLocation, language: this.showLanguage, actors: actors,
-        directors: directors, categories: categories, room: room,
-        comingSoon: this.showComingSoon};
+        directors: directors, categories: categories, comingSoon: this.showComingSoon,
+        highlighted: this.showIsHighlighted, lenght: this.showLenght};
 
       this.showCreationService.createNewShow(showToAdd).subscribe(
         data => {
@@ -221,8 +176,8 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
 
   }
 
-  evaluateShowTitle(): boolean {
-    if(this.showTitle === '') {
+  evaluateShowName(): boolean {
+    if(this.showName === '') {
       this.invalidFields = true;
       return false;
     }
@@ -232,6 +187,15 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
 
   evaluateShowDescription(): boolean {
     if(this.showDescription === ''){
+      this.invalidFields = true;
+      return false;
+    }
+
+    return true;
+  }
+
+  evaluateShowLenght(): boolean {
+    if(this.showLenght === undefined || this.showLenght === null){
       this.invalidFields = true;
       return false;
     }
@@ -257,26 +221,8 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
     return true;
   }
 
-  evaluateShowDate(): boolean {
-    if(this.showDate === undefined || this.showDate === null){
-      this.invalidFields = true;
-      return false;
-    }
-
-    return true;
-  }
-
-  evaluateShowStartTime(): boolean {
-    if(this.showStartTime === undefined || this.showStartTime === null){
-      this.invalidFields = true;
-      return false;
-    }
-
-    return true;
-  }
-
-  evaluateShowEndTime(): boolean {
-    if(this.showEndTime === undefined || this.showEndTime === null){
+  evaluateShowReleaseDate(): boolean {
+    if(this.showReleaseDate === undefined || this.showReleaseDate === null){
       this.invalidFields = true;
       return false;
     }
@@ -321,7 +267,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   }
 
   evaluateShowCategoriesSelected(): boolean {
-    if(this.showCategoriesSelected === undefined || this.showCategoriesSelected.length === 0){
+    if (this.showCategoriesSelected === undefined || this.showCategoriesSelected.length === 0) {
       this.invalidFields = true;
       return false;
     }
@@ -329,20 +275,10 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
     return true;
   }
 
-  evaluateShowRoomSelected(): boolean {
-    if(this.showRoomSelected === undefined || this.showRoomSelected === null){
-      this.invalidFields = true;
-      return false;
-    }
+  evaluateShowIsHighlighted(): boolean {
+    if(this.showIsHighlighted === undefined || this.showIsHighlighted === null)
+      this.showIsHighlighted = false;
 
-    return true;
-  }
-
-  evaluateShowComingSoon(): boolean {
-    if(this.showComingSoon === undefined || this.showComingSoon === null)
-      this.showComingSoon = false;
-
-    console.log(this.showComingSoon);
     return true;
   }
 
@@ -360,12 +296,6 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
     this.showDirectorsObjects = directors;
     for (let i = 0; i < directors.length; i++)
       this.showDirectorsList.push(directors[i].name);
-  }
-
-  assignRooms(rooms): void {
-    this.showRoomsObjects = rooms;
-    for (let i = 0; i < rooms.length; i++)
-      this.showRoomsList.push(rooms[i].name);
   }
 
   assignCategories(categories): void {

@@ -8,13 +8,6 @@ import {Observable} from 'rxjs';
 })
 export class ShowCreationService {
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'multipart/form-data',
-    }),
-    withCredentials: true
-  };
-
   constructor(private httpClient: HttpClient) { }
 
   createNewShow(show: Show): Observable<Show> {
