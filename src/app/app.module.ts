@@ -74,8 +74,6 @@ import { EventCreatorComponent } from './admin/dashboard/work-area/event-creator
       {path: 'admin/dashboard', component: DashboardComponent},
       {path: 'home', component: HomeComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'admin/dashboard/manage_shows', component: ManageShowsComponent},
-      {path: 'admin/dashboard/create_show', component: ShowCreatorComponent},
       {path: 'admin/dashboard/event', component: EventCreatorComponent},
       {path: 'show/:id', component: ShowDetailComponent},
       {path: 'seats', component: SeatReservationComponent},

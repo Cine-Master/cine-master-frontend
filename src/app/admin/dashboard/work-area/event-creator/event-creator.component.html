@@ -45,7 +45,7 @@
 
   <ng-container #timesContainer id="event-time-slots"></ng-container>
   <ng-template #timeSlotTemplate let-viewName="name">
-    <h6>Orario fine spettacolo</h6>
+    <h6>Orario inizio spettacolo</h6>
     <ejs-timepicker [(value)]="eventTimeSlotsSelected[viewName]" placeholder="L'orario in cui lo spettacolo inizierà" [format]="timeFormat" [step]="timeInterval" floatLabelType="Auto"></ejs-timepicker>
     <br><br>
   </ng-template>

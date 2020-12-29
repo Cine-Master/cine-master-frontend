@@ -74,6 +74,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
     this.evaluateEventStartDate();
     this.evaluateEventTimeSlots();
     this.evaluateShowSelected();
+    this.evaluateEventStartAndEndDate();
 
 
     if (this.invalidFields) {
@@ -88,8 +89,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
       for (let i = 0; i < this.eventRoomsObjects.length; i++) {
         if (this.eventRoomsObjects[i].name === this.eventRoomNameSelected) {
           room = {
-            id: this.eventRoomsObjects[i].id,
-            name: this.eventRoomsObjects[i].name
+            id: this.eventRoomsObjects[i].id
           };
           break;
         }
@@ -160,6 +160,8 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
         room: room
       };
 
+      console.log(eventToAdd);
+
       this.eventCreatorService.createNewEvent(eventToAdd).subscribe(
         data => {
           this.requestResponseEvent = data;
@@ -168,10 +170,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
           this.invalidResponseAlert.show();
         },
         () => {
-          if(this.requestResponseEvent.id !== -1)
-            this.correctResponseAlert.show();
-          else
-            this.invalidResponseAlert.show();
+          this.correctResponseAlert.show();
         });
     }
   }
@@ -192,6 +191,13 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
       this.invalidFields = true;
       return false;
     }
+
+    return true;
+  }
+
+  evaluateEventStartAndEndDate(): boolean {
+    if(Math.floor((Date.UTC(this.eventEndDate.getFullYear(), this.eventEndDate.getMonth(), this.eventEndDate.getDate()) - Date.UTC(this.eventStardDate.getFullYear(), this.eventStardDate.getMonth(), this.eventStardDate.getDate())) / (1000 * 60 * 60 * 24)) < 0)
+      return false;
 
     return true;
   }
