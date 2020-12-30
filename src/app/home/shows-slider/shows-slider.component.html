@@ -1,4 +1,8 @@
-<ejs-tab id="shows-list-container" class="e-fill" xmlns="http://www.w3.org/1999/html">
+<div id="shows-list-spinner" *ngIf="!loaded" style="text-align: center; margin-top: 5%; color: #ff914d;">
+  <div class="spinner-border"></div>
+</div>
+
+<ejs-tab *ngIf="loaded" id="shows-list-container" class="e-fill" xmlns="http://www.w3.org/1999/html">
   <e-tabitems>
     <e-tabitem>
       <ng-template #headerText>
@@ -14,13 +18,13 @@
                               [config]="actionSliderConfig">
             <div ngxSlickItem *ngFor="let slide of availableSliderShows" class="slide">
               <div class="carousel-thumb">
-                <a href="#"><img src="{{ slide.show.photoUrl }}" alt="" width="100%"></a>
+                <a href="#"><img src="{{ slide.photoUrl }}" alt="" width="100%"></a>
               </div>
               <div class="carousel-content">
                 <h2 class="carousel-title">
-                  <a href="#" tabindex="0">{{slide.show.name}}</a>
+                  <a href="#" tabindex="0">{{slide.name}}</a>
                 </h2>
-                <div class="carousel-release">Trasmesso il :<span>{{slide.startDate}}</span>
+                <div class="carousel-release">Trasmesso il :<span>{{slide.releaseDate}}</span>
                 </div>
                 <div class="carousel-button">
                   <a href="#" tabindex="0">
@@ -50,13 +54,13 @@
                               [config]="actionSliderConfig">
             <div ngxSlickItem *ngFor="let slide of comingSoonSliderShows" class="slide">
               <div class="carousel-thumb">
-                <a href="#"><img src="{{ slide.show.photoUrl }}" alt="" width="100%"></a>
+                <a href="#"><img src="{{ slide.photoUrl }}" alt="" width="100%"></a>
               </div>
               <div class="carousel-content">
                 <h2 class="carousel-title">
-                  <a href="#" tabindex="0">{{slide.show.name}}</a>
+                  <a href="#" tabindex="0">{{slide.name}}</a>
                 </h2>
-                <div class="carousel-release">Trasmesso il :<span>{{slide.startDate}}</span>
+                <div class="carousel-release">Trasmesso il :<span>{{slide.releaseDate}}</span>
                 </div>
                 <div class="carousel-button">
                   <a href="#" tabindex="0">

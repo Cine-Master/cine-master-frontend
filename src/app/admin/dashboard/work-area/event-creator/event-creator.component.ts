@@ -160,8 +160,6 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
         room: room
       };
 
-      console.log(eventToAdd);
-
       this.eventCreatorService.createNewEvent(eventToAdd).subscribe(
         data => {
           this.requestResponseEvent = data;
