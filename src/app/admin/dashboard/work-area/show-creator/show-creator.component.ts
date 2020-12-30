@@ -157,7 +157,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
         photoUrl: this.showPhotoUrl, releaseDate: formattedShowReleaseDate,
         productionLocation: this.showProductionLocation, language: this.showLanguage, actors: actors,
         directors: directors, categories: categories, comingSoon: this.showComingSoon,
-        highlighted: this.showIsHighlighted, lenght: this.showLenght};
+        highlighted: this.showIsHighlighted, length: this.showLenght};
 
       this.showCreationService.createNewShow(showToAdd).subscribe(
         data => {

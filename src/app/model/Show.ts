@@ -14,11 +14,11 @@ export interface Show {
   photoUrl: string;
   productionLocation: string;
   language: string;
-  actors: any[];
-  directors: any[];
+  actors: any[] | string;
+  directors: any[] | string;
   comingSoon: boolean;
-  categories: any[];
+  categories: any[] | string;
   highlighted: boolean;
-  lenght: number;
+  length: number | string;
   releaseDate: string;
 }

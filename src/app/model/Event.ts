@@ -5,9 +5,9 @@ import {EventRoom} from './EventRoom';
 export interface Event {
   id: number;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   startTimes: string[];
   price: EventPrice;
-  show: Show;
+  show: Show | null;
   room: EventRoom;
 }

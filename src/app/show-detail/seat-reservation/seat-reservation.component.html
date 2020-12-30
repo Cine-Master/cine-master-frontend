@@ -1,38 +1,35 @@
-<div class="container">
-  <main class="innerContainer">
+<div class="container" *ngIf="!firstLoad">
+  <main class="innerContainer" *ngFor="let plant of plants; index as i">
     <div class="movie">
       <h3 class="movieTitle">{{movieTitle}}</h3>
-      <div class="movieDetails">{{date}} - {{hour}}</div>
+      <div class="movieDetails">{{date}} - {{hour}} - {{plant.name}}</div>
     </div>
 
-    <!-- Showing a static legend bar -->
-    <div class="legend">
-      <span class="freeSeat"><i class="fa fa-square" aria-hidden="true"></i></span> FREE
-      <span class="reservedSeat padding-left"><i class="fa fa-square" aria-hidden="true"></i></span> TAKEN
-      <span class="selectedSeat padding-left"><i class="fa fa-square" aria-hidden="true"></i></span> SELECTED
+    <div *ngIf="!loaded" style="text-align: center; margin-top: 5%; color: #ff914d">
+      <div class="spinner-border text-primary"></div>
     </div>
-    <!-- Generate the seating grid -->
-    <div *ngFor="let row of rows">
-            <span class="seat" *ngFor="let col of cols" (click)="seatClicked(row + col)"
-                  [ngSwitch]="getStatus(row + col)">
-                <span *ngSwitchCase="'selected'" class="selectedSeat"><i class="fa fa-square" aria-hidden="true"></i></span>
-                <span *ngSwitchCase="'reserved'" class="reservedSeat"><i class="fa fa-square" aria-hidden="true"></i></span>
-                <span *ngSwitchDefault class="freeSeat"><i class="fa fa-square" aria-hidden="true"></i></span>
-            </span>
-    </div>
+    <div *ngIf="loaded">
 
-    <!-- Structural directive - only visible on selection -->
-    <div *ngIf="selected.length > 0" class="font14 marginTB10" style="color: black">
-      <div class="wordWrap">SEATS RESERVED : {{selected.length}} <span class="count">({{selected}})</span></div>
-      <div>PRICE : {{ticketPrice}} * {{selected.length}} = {{currency}}.{{ticketPrice*selected.length}} </div>
-      <div>CONVENIENCE FEE : {{currency}}.{{convFee}}</div>
-      <div>TOTAL : {{currency}}.{{ticketPrice * selected.length + convFee}}</div>
-    </div>
+      <div class="legend">
+        <span class="standardSeat"><i class="fa fa-square" aria-hidden="true"></i></span> STANDARD
+        <span class="premiumSeat padding-left"><i class="fa fa-square" aria-hidden="true"></i></span> PREMIUM
+        <span class="vipSeat padding-left"><i class="fa fa-square" aria-hidden="true"></i></span> VIP
+        <span class="reservedSeat padding-left"><i class="fa fa-square" aria-hidden="true"></i></span> OCCUPATO
+      </div>
 
-    <!-- Action buttons -->
-    <div class="container-fluid marginTop5">
-      <button (click)="clearSelected()" [disabled]="selected.length === 0" class="btn btn-default btn-lg">Clear</button>
-      <button (click)="showSelected()" [disabled]="selected.length === 0" class="btn btn-success btn-lg">Buy Tickets</button>
+      <div *ngFor="let row of plant.rowLetters">
+              <span class="seat" *ngFor="let col of plant.columnNumber" (click)="seatClicked(row + col, i)"
+                    [ngSwitch]="getStatus(row + col, i)">
+                  <span *ngSwitchCase="'selected-vip'" class="selected-vip"><i class="fa fa-square" aria-hidden="true"></i></span>
+                  <span *ngSwitchCase="'selected-premium'" class="selected-premium"><i class="fa fa-square" aria-hidden="true"></i></span>
+                  <span *ngSwitchCase="'selected-standard'" class="selected-standard"><i class="fa fa-square" aria-hidden="true"></i></span>
+                  <span *ngSwitchCase="'reserved'" class="reservedSeat"><i class="fa fa-square" aria-hidden="true"></i></span>
+                  <span *ngSwitchCase="'vip'" class="vipSeat"><i class="fa fa-square" aria-hidden="true"></i></span>
+                  <span *ngSwitchCase="'premium'" class="premiumSeat"><i class="fa fa-square" aria-hidden="true"></i></span>
+                  <span *ngSwitchCase="'standard'" class="standardSeat"><i class="fa fa-square" aria-hidden="true"></i></span>
+              </span>
+      </div>
     </div>
   </main>
 </div>
+

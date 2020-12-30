@@ -1,5 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ShowDetailComponent} from '../show-detail.component';
+import {ShowDetailService} from '../services/show-detail.service';
+import {EventRoom} from '../../model/EventRoom';
+import {newArray} from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-seat-reservation',
@@ -11,63 +14,158 @@ export class SeatReservationComponent implements OnInit {
   public movieTitle: string;
   public date: string;
   public hour: string;
+  public plants: any[];
 
-  rows: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-  cols: number[]  = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  public loaded = false;
+  public firstLoad = true;
 
-  reserved: string[] = ['A2', 'A3', 'F5', 'F1', 'F2', 'F6', 'F7', 'F8', 'H1', 'H2', 'H3', 'H4'];
-  selected: string[] = [];
+  private rowName(n): string {
+    const ordA = 'A'.charCodeAt(0);
+    const ordZ = 'Z'.charCodeAt(0);
+    const len = ordZ - ordA + 1;
 
-  ticketPrice = 120;
-  convFee = 30;
-  totalPrice = 0;
-  currency = '€';
-
-  constructor(@Inject(ShowDetailComponent) private showDetail: ShowDetailComponent) {
-    this.movieTitle = showDetail.show.title;
+    let s = '';
+    while (n >= 0) {
+      s = String.fromCharCode(n % len + ordA) + s;
+      n = Math.floor(n / len) - 1;
+    }
+    return s;
   }
 
-  public loadData(date: string, hour: string): void {
+  constructor(@Inject(ShowDetailComponent) private showDetail: ShowDetailComponent, private service: ShowDetailService) {
+    this.movieTitle = this.showDetail.show.name;
+    this.plants = [];
+  }
+
+  public loadData(date, hour, rooms): void {
+    this.loaded = false;
     this.date = date;
     this.hour = hour;
+    this.plants = [];
+    for (const room of rooms) {
+      const obj = {
+        name: room.room.name,
+        rowLetters: new Array(room.room.nRows),
+        columnNumber: Array.from({length: room.room.nColumns}, (_, i) => i + 1),
+        rows: room.room.nRows,
+        columns: room.room.nColumns,
+        reserved: [],
+        selected: [],
+        standard: [],
+        premium: [],
+        vip: [],
+        price: {
+          standardPrice: room.price.standardPrice,
+          premiumPrice: room.price.premiumPrice,
+          vipPrice: room.price.vipPrice,
+        },
+        eventId: room.id
+      };
+
+      for (let i = 0; i < obj.rows; i++) {
+        obj.rowLetters[i] = this.rowName(i);
+      }
+      for (const seat of room.room.seats) {
+        if (seat.seatType === 'VIP') {
+          obj.vip.push(seat.row + seat.column);
+        }
+        if (seat.seatType === 'PREMIUM') {
+          obj.premium.push(seat.row + seat.column);
+        }
+        if (seat.seatType === 'STANDARD') {
+          obj.standard.push(seat.row + seat.column);
+        }
+      }
+      this.service.getBookedSeats(obj.eventId).subscribe(response => {
+        for (const seats of response) {
+          obj.reserved.push(seats.row.concat(seats.column));
+        }
+        this.loaded = true;
+        this.firstLoad = false;
+      }, error => {
+      });
+
+      this.plants.push(obj);
+    }
   }
 
   ngOnInit(): void {
   }
 
-  public getStatus( seatPos: string ): string {
-    if (this.reserved.indexOf(seatPos) !== -1) {
+  public getStatus( seatPos, index ): string {
+
+    if (this.plants[index].reserved.indexOf(seatPos) !== -1) {
       return 'reserved';
-    } else if (this.selected.indexOf(seatPos) !== -1) {
-      return 'selected';
+    }
+    else {
+      if (this.plants[index].vip.indexOf(seatPos) !== -1) {
+              if (this.plants[index].selected.indexOf(seatPos) !== -1) {
+                return 'selected-vip';
+              }
+              return 'vip';
+          } else if (this.plants[index].standard.indexOf(seatPos) !== -1) {
+            if (this.plants[index].selected.indexOf(seatPos) !== -1) {
+              return 'selected-standard';
+            }
+            return 'standard';
+          } else if (this.plants[index].premium.indexOf(seatPos) !== -1) {
+            if (this.plants[index].selected.indexOf(seatPos) !== -1) {
+              return 'selected-premium';
+            }
+            return 'premium';
+          }
     }
   }
 
-  public clearSelected(): void {
-    this.selected = [];
-  }
+  public seatClicked( seatPos: string, index ): void {
+    const index1 = this.plants[index].selected.indexOf(seatPos);
 
-  public seatClicked( seatPos: string ): void {
-    const index = this.selected.indexOf(seatPos);
-
-    if (index !== -1) {
+    if (index1 !== -1) {
       // seat already selected, remove
-      this.selected.splice(index, 1);
+      this.plants[index].selected.splice(index1, 1);
     } else {
       // push to selected array only if it is not reserved
-      if ( this.reserved.indexOf(seatPos) === -1 ) {
-        this.selected.push(seatPos);
+      if ( this.plants[index].reserved.indexOf(seatPos) === -1 ) {
+        this.plants[index].selected.push(seatPos);
       }
 
     }
-  }
-
-  public showSelected(): void {
-    if (this.selected.length > 0) {
-      alert('Selected Seats: ' + this.selected + '\nTotal: ' + (this.ticketPrice * this.selected.length + this.convFee));
-    } else {
-      alert('No seats selected!');
+    for (const e of this.plants) {
+      if (e.selected.length > 0) {
+        this.showDetail.wantsToBuy = true;
+        return;
+      }
     }
+    this.showDetail.wantsToBuy = false;
   }
 
+  public seatSelected(): string[] {
+    const retVal = [];
+    for (const plant of this.plants) {
+      let s = plant.name + ': ';
+      for ( const e of plant.selected ) {
+         s += e + ' ';
+      }
+      retVal.push(s);
+    }
+    return retVal;
+  }
+
+  public getAmount(): number {
+    let amount = 0;
+    for (const element of this.plants){
+      for (const e of element.selected) {
+        if (element.vip.indexOf(e) !== -1){
+          amount += element.price.vipPrice;
+        }
+        else if (element.standard.indexOf(e) !== -1){
+          amount += element.price.standardPrice;
+        }else if (element.premium.indexOf(e) !== -1){
+          amount += element.price.premiumPrice;
+        }
+      }
+    }
+
+    return amount;
+  }
 }

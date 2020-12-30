@@ -1,56 +1,73 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ShowDetailService} from './services/show-detail.service';
 import {ActivatedRoute} from '@angular/router';
 import {SeatReservationComponent} from './seat-reservation/seat-reservation.component';
+import {Show} from '../model/Show';
+import {HomeComponent} from '../home/home.component';
+import {EventRoom} from '../model/EventRoom';
 
 @Component({
   selector: 'app-show-detail',
   templateUrl: './show-detail.component.html',
-  styleUrls: ['./show-detail.component.css']
+  styleUrls: ['./show-detail.component.css'],
+  providers: [HomeComponent]
 })
 export class ShowDetailComponent implements OnInit {
-  @ViewChild('seatReservationComponent')
-  private seatReservation: SeatReservationComponent;
-  public show = {
-    title: 'Average',
-    description: 'NICE',
-    duration: '344',
-    actors: 'Alviano',
-    directors: 'Alviano',
-    genres: 'AAAA',
-    release: 'Above',
-    language: 'Iraniano',
-    progr: [{
-      date: '10 Dic 2020',
-      hours: ['20:00', '22:00']
-    }],
-    location: ''};
-  public loaded = false;
-  public wantsToBuy = false;
-  constructor(private service: ShowDetailService, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
-    // this.loadData();
+  @ViewChild('seatReservationComponent')
+  public seatReservation: SeatReservationComponent;
+  public show: Show;
+  public showLoaded = false;
+  public eventsLoaded = false;
+  public events: Map<string, any>;
+  public uniqueHours: Map<string, string[]>;
+  public wantsToBuy = false;
+  constructor(private service: ShowDetailService, private route: ActivatedRoute) {
+    // tslint:disable-next-line:new-parens
+    this.show = new class implements Show {
+      actors: any[] | string;
+      categories: any[] | string;
+      comingSoon: boolean;
+      description: string;
+      directors: any[] | string;
+      highlighted: boolean;
+      id: number;
+      language: string;
+      length: number | string;
+      name: string;
+      photoUrl: string;
+      productionLocation: string;
+      releaseDate: string;
+    };
+    type myEvent = {
+      hour: string,
+      room: EventRoom,
+      id: string,
+      price: {}
+    };
+    this.events = new Map<string, myEvent[]>();
+    this.uniqueHours = new Map<string, string[]>();
   }
 
-  // TODO: modificare in base alle nuove api implementate
-  private loadData(): void {
+  ngOnInit(): void {
+    this.loadDetail();
+    this.loadEvents();
+  }
+
+  private loadDetail(): void {
     this.service.getShowDetail(this.route.snapshot.params.id).subscribe(response => {
-      const start = new Date();
-      const [hours, minutes, seconds] = response.startTime.split(':');
-      start.setHours(hours);
-      start.setMinutes(minutes);
-      start.setSeconds(seconds);
-      const end = new Date();
-      const [hours1, minutes1, seconds1] = response.endTime.split(':');
-      end.setHours(hours1);
-      end.setMinutes(minutes1);
-      end.setSeconds(seconds1);
-      const dur = end.getTime() - start.getTime();
-      const duration = '' + Math.floor(dur / 3600000) + ' h ' + dur % 3600000 + ' min';
-      this.show.title = response.name;
+      this.show.name = response.name;
       this.show.description = response.description;
-      this.show.duration = duration;
+      this.show.length = '' + Math.floor(response.length / 60) + ' h ' + response.length % 60 + ' min';
+      this.show.releaseDate = response.releaseDate;
+      this.show.language = response.language;
+      this.show.productionLocation = response.productionLocation;
+      this.show.photoUrl = response.photoUrl;
+      let gen = '';
+      for (const a of response.categories) {
+        gen += a.name + ' ';
+      }
+      this.show.categories = gen;
       let act = '';
       for (const a of response.actors) {
         act += a.name + ' ';
@@ -61,25 +78,58 @@ export class ShowDetailComponent implements OnInit {
         dir += a.name + ' ';
       }
       this.show.directors = dir;
-      let gen = '';
-      for (const a of response.categories) {
-        gen += a.name + ' ';
-      }
-      this.show.genres = gen;
-      this.show.language = response.language;
-      this.show.progr[0].date = new Date(response.date).toLocaleDateString('it-IT',
-        {weekday: 'long', year: 'numeric', month: 'long', day: '2-digit'});
-      this.show.progr[0].hours[0] = start.toLocaleString('it-IT', {hour: '2-digit', minute: '2-digit'});
-      this.show.release = '15/02/2020';
-      this.show.location = response.productionLocation;
-      this.loaded = true;
-    }, error => {
-      window.location.href = 'http://localhost:4200/error404';
-    });
+      this.showLoaded = true;
+    }, error => { this.error(); }
+    );
+  }
+
+  private loadEvents(): void {
+    this.service.getshowEvents(this.route.snapshot.params.id).subscribe(
+      response => {
+          for (const e of response) {
+            const date = new Date(e.date).toLocaleDateString('it-IT', {weekday: 'long', year: 'numeric', month: 'long', day: '2-digit'});
+            const hour = new Date();
+            const [hours, minutes, seconds] = e.startTime.split(':');
+            hour.setHours(hours);
+            hour.setMinutes(minutes);
+            hour.setSeconds(seconds);
+            const h = hour.toLocaleString('it-IT', {hour: '2-digit', minute: '2-digit'});
+            if (this.events.has(date)) {
+              this.events.get(date).push({hour: h, room: e.room, id: e.id, price: e.price});
+              if (this.uniqueHours.get(date).indexOf(h) === -1) {
+                this.uniqueHours.get(date).push(h);
+              }
+            } else {
+              this.events.set(date, [{hour: h, room: e.room, id: e.id, price: e.price}]);
+              this.uniqueHours.set(date, [h]);
+            }
+          }
+          this.eventsLoaded = true;
+        },
+      error => { this.error(); }
+    );
   }
 
   public renderSeatPlan(date: string, hour: string): void{
-    this.seatReservation.loadData(date, hour);
+    const events = this.events.get(date);
+    const eventsRoom = [];
+    for (const e of events) {
+      if (e.hour === hour) {
+        eventsRoom.push({id: e.id, room: e.room, price: e.price});
+      }
+    }
+    this.seatReservation.loadData(date, hour, eventsRoom);
   }
+
+  private error(): void {
+    window.location.href = 'http://localhost:4200/error404';
+  }
+
+  public getKeys(map): any{
+    return Array.from(map.keys());
+  }
+
+  // TODO: creare sandbox paypal button ecc
+
 
 }
