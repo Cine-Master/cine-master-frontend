@@ -54,6 +54,7 @@ export class SeatReservationComponent implements OnInit {
         standard: [],
         premium: [],
         vip: [],
+        ids: new Map(),
         price: {
           standardPrice: room.price.standardPrice,
           premiumPrice: room.price.premiumPrice,
@@ -75,6 +76,7 @@ export class SeatReservationComponent implements OnInit {
         if (seat.seatType === 'STANDARD') {
           obj.standard.push(seat.row + seat.column);
         }
+        obj.ids.set(seat.row + seat.column, seat.id);
       }
       this.service.getBookedSeats(obj.eventId).subscribe(response => {
         for (const seats of response) {
@@ -86,6 +88,7 @@ export class SeatReservationComponent implements OnInit {
       });
 
       this.plants.push(obj);
+      console.log(obj);
     }
   }
 
