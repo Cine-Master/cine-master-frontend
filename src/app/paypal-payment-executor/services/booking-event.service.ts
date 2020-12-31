@@ -13,4 +13,8 @@ export class BookingEventService {
   bookEventsSeats(book: any): Observable<any> {
     return this.httpClient.post<any>('http://localhost:8080/booking/select', book, { withCredentials: true });
   }
+
+  paymentCompletedNotification(booking: any): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/booking/confirm', booking, {withCredentials: true, responseType: 'text'});
+  }
 }

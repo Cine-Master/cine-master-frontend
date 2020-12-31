@@ -18,21 +18,33 @@ export class PaypalPaymentExecutorComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   bookingCompleted: boolean;
   bookingTrying: boolean;
-  showSuccess: boolean;
+  bookingConfirmation: boolean;
+  bookingIdentifier: object;
   @Input() eventsBookingDetails: object[];
+  @Input() eventsBookingTotalPrice: number;
 
   constructor(private bookingEventService: BookingEventService) { }
 
   ngOnInit(): void {
     this.bookingCompleted = false;
+    this.bookingTrying = false;
+    this.bookingConfirmation = false;
+  }
+
+  private countTotalSeatsBooked(bookingDetails: object[]): number {
+    let seats = 0;
+    for (let i = 0; i < bookingDetails.length; i++) {
+      seats += bookingDetails[i]['seats'].length;
+    }
+
+    return seats;
   }
 
   private checkBookingAvailability(): void{
     this.bookingTrying = true;
-    console.log(this.eventsBookingDetails);
-    /*this.bookingEventService.bookEventsSeats(this.eventsBookingDetails).subscribe(
-      value => {
-
+    this.bookingEventService.bookEventsSeats(this.eventsBookingDetails).subscribe(
+      data => {
+        this.bookingIdentifier = data;
       },
       error => {
         this.bookingFailedAlert.show();
@@ -43,7 +55,7 @@ export class PaypalPaymentExecutorComponent implements OnInit {
         this.bookingCompleted = true;
         this.initConfig();
       }
-    );*/
+    );
   }
 
   private initConfig(): void {
@@ -56,22 +68,22 @@ export class PaypalPaymentExecutorComponent implements OnInit {
           {
             amount: {
               currency_code: 'EUR',
-              value: '9.99',
+              value: this.eventsBookingTotalPrice.toString(),
               breakdown: {
                 item_total: {
                   currency_code: 'EUR',
-                  value: '9.99'
+                  value: this.eventsBookingTotalPrice.toString()
                 }
               }
             },
             items: [
               {
-                name: 'Enterprise Subscription',
-                quantity: '1',
+                name: 'Prenotazione Biglietti CineMaster',
+                quantity: this.countTotalSeatsBooked(this.eventsBookingDetails).toString(),
                 category: 'DIGITAL_GOODS',
                 unit_amount: {
                   currency_code: 'EUR',
-                  value: '9.99',
+                  value: this.eventsBookingTotalPrice.toString(),
                 },
               }
             ]
@@ -86,24 +98,31 @@ export class PaypalPaymentExecutorComponent implements OnInit {
         layout: 'vertical'
       },
       onApprove: (data, actions) => {
-        console.log('onApprove - transaction was approved, but not authorized', data, actions);
-        actions.order.get().then(details => {
-          console.log('onApprove - you can get full order details inside onApprove: ', details);
-        });
+        actions.order.get().then(details => {});
       },
       onClientAuthorization: (data) => {
-        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-        this.showSuccess = true;
+        this.bookingConfirmation = true;
+        this.bookingEventService.paymentCompletedNotification([{
+          booking: this.bookingIdentifier[0],
+          price: this.eventsBookingTotalPrice
+        }]).subscribe(
+          value => {
+
+          },
+          error => {
+            this.paymentFailedAlert.show();
+          },
+          () => {
+            this.paymentCompletedAlert.show();
+            this.bookingCompleted = false;
+            this.bookingTrying = false;
+            this.bookingConfirmation = false;
+          }
+        );
       },
-      onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
-      },
-      onError: err => {
-        console.log('OnError', err);
-      },
-      onClick: (data, actions) => {
-        console.log('onClick', data, actions);
-      },
+      onCancel: (data, actions) => {},
+      onError: err => {},
+      onClick: (data, actions) => {},
     };
   }
 

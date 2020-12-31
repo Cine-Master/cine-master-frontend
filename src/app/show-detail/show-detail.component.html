@@ -106,7 +106,7 @@
                 <h4>Totale:</h4>
                 <h6>&nbsp;&nbsp;&nbsp;&nbsp; {{seatReservation.getAmount()}} €</h6>
                 <div>
-                  <app-paypal-payment-executor [eventsBookingDetails]="this.seatReservation.getReservedSeatByEvent()"></app-paypal-payment-executor><!-- paypal button -->
+                  <app-paypal-payment-executor [eventsBookingTotalPrice]="this.seatReservation.getAmount()" [eventsBookingDetails]="this.seatReservation.getReservedSeatByEvent()"></app-paypal-payment-executor><!-- paypal button -->
                 </div>
               </div>
             </article>

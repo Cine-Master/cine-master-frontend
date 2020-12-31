@@ -1,8 +1,8 @@
-<ngx-paypal *ngIf="bookingCompleted" [config]="payPalConfig"></ngx-paypal>
+<ngx-paypal *ngIf="bookingCompleted && !bookingConfirmation" [config]="payPalConfig"></ngx-paypal>
 
 <button *ngIf="!bookingTrying" ejs-button cssClass="e-custom e-block" (click)="checkBookingAvailability()">Prenota e procedi al pagamento</button>
 
-<div id="booking-spinner" *ngIf="bookingTrying && !bookingCompleted" style="text-align: center; margin-top: 5%; color: #ff914d;">
+<div id="booking-spinner" *ngIf="(bookingTrying && !bookingCompleted) || bookingConfirmation" style="text-align: center; margin-top: 5%; color: #ff914d;">
   <div class="spinner-border"></div>
 </div>
 
