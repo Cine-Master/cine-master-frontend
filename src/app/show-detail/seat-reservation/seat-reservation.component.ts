@@ -86,9 +86,7 @@ export class SeatReservationComponent implements OnInit {
         this.firstLoad = false;
       }, error => {
       });
-
       this.plants.push(obj);
-      console.log(obj);
     }
   }
 
@@ -168,7 +166,24 @@ export class SeatReservationComponent implements OnInit {
         }
       }
     }
-
     return amount;
   }
+
+  public getReservedSeatByEvent(): object[] {
+    const retval = [];
+    for (const plant of this.plants) {
+      const obj = {
+        event: plant.eventId,
+        seats: []
+      };
+      for ( const e of plant.selected ) {
+        obj.seats.push(plant.ids.get(e));
+      }
+      if ( obj.seats.length > 0) {
+        retval.push(obj);
+      }
+    }
+    return retval;
+  }
+
 }
