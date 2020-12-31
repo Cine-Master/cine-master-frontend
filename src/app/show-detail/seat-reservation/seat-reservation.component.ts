@@ -173,11 +173,11 @@ export class SeatReservationComponent implements OnInit {
     const retval = [];
     for (const plant of this.plants) {
       const obj = {
-        event: plant.eventId,
+        event: { id: plant.eventId} ,
         seats: []
       };
       for ( const e of plant.selected ) {
-        obj.seats.push(plant.ids.get(e));
+        obj.seats.push({id: plant.ids.get(e)});
       }
       if ( obj.seats.length > 0) {
         retval.push(obj);

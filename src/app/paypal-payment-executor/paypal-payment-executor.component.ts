@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ICreateOrderRequest, IPayPalConfig} from 'ngx-paypal';
+import {BookingEventService} from './services/booking-event.service';
 
 @Component({
   selector: 'app-paypal-payment-executor',
@@ -8,13 +9,41 @@ import {ICreateOrderRequest, IPayPalConfig} from 'ngx-paypal';
 })
 export class PaypalPaymentExecutorComponent implements OnInit {
 
-  public payPalConfig?: IPayPalConfig;
-  showSuccess: boolean;
+  @ViewChild('bookingFailedToastAlert') bookingFailedAlert;
+  @ViewChild('paymentFailedToastAlert') paymentFailedAlert;
+  @ViewChild('bookingCompletedToastAlert') bookingCompletedAlert;
+  @ViewChild('paymentCompletedToastAlert') paymentCompletedAlert;
+  public position = { X: 'Left'};
 
-  constructor() { }
+  public payPalConfig?: IPayPalConfig;
+  bookingCompleted: boolean;
+  bookingTrying: boolean;
+  showSuccess: boolean;
+  @Input() eventsBookingDetails: object[];
+
+  constructor(private bookingEventService: BookingEventService) { }
 
   ngOnInit(): void {
-    this.initConfig();
+    this.bookingCompleted = false;
+  }
+
+  private checkBookingAvailability(): void{
+    this.bookingTrying = true;
+    console.log(this.eventsBookingDetails);
+    /*this.bookingEventService.bookEventsSeats(this.eventsBookingDetails).subscribe(
+      value => {
+
+      },
+      error => {
+        this.bookingFailedAlert.show();
+        this.bookingTrying = false;
+      },
+      () => {
+        this.bookingCompletedAlert.show();
+        this.bookingCompleted = true;
+        this.initConfig();
+      }
+    );*/
   }
 
   private initConfig(): void {

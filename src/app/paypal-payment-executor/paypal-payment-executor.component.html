@@ -1,1 +1,43 @@
-<ngx-paypal [config]="payPalConfig"></ngx-paypal>
+<ngx-paypal *ngIf="bookingCompleted" [config]="payPalConfig"></ngx-paypal>
+
+<button *ngIf="!bookingTrying" ejs-button cssClass="e-custom e-block" (click)="checkBookingAvailability()">Prenota e procedi al pagamento</button>
+
+<div id="booking-spinner" *ngIf="bookingTrying && !bookingCompleted" style="text-align: center; margin-top: 5%; color: #ff914d;">
+  <div class="spinner-border"></div>
+</div>
+
+<ejs-toast cssClass="e-toast-danger" #bookingFailedToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Errore!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>I posti selezionati non sono più disponibili, selezionane altri</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-danger" #paymentFailedToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Errore!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>E' stato riscontrato un errore durante il pagamento, riprova</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #bookingCompletedToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Ottimo!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Prenotazione completata, procedi con il pagamento</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #paymentCompletedToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Ottimo!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Pagamento eseguito correttamente</div>
+  </ng-template>
+</ejs-toast>

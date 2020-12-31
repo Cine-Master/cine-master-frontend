@@ -129,7 +129,5 @@ export class ShowDetailComponent implements OnInit {
     return Array.from(map.keys());
   }
 
-  // TODO: creare sandbox paypal button ecc
-
 
 }
