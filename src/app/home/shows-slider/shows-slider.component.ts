@@ -11,9 +11,11 @@ import {SearchService} from '../../services/search.service';
 })
 export class ShowsSliderComponent implements OnInit {
 
-  availableSliderShows: Event[] = [];
+  loaded: boolean;
 
-  comingSoonSliderShows: Event[] = [];
+  availableSliderShows: Show[] = [];
+
+  comingSoonSliderShows: Show[] = [];
 
   actionSliderConfig = {
     slidesToShow: 5,
@@ -34,10 +36,15 @@ export class ShowsSliderComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.searchService.getEvents().subscribe(
+    this.loaded = false;
+    this.searchService.getShowsWithEvents().subscribe(
       (data) => {
         this.availableSliderShows = data;
         this.comingSoonSliderShows = data;
+      },
+      error => {},
+      () => {
+        this.loaded = true;
       }
     );
   }

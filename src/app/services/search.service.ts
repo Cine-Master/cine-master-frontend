@@ -30,6 +30,10 @@ export class SearchService {
     return this.httpClient.get<Event[]>('http://localhost:8080/admin/events', { withCredentials: true });
   }
 
+  getShowsWithEvents(): Observable<Show[]> {
+    return this.httpClient.get<Show[]>('http://localhost:8080/shows/next-week', { withCredentials: true });
+  }
+
   searchShowByCategory(catName: string): Observable<object> {
     const params = new HttpParams().set('category', catName);
     return this.httpClient.get('http://localhost:8080/shows/search', {withCredentials: true, params});

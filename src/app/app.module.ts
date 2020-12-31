@@ -43,6 +43,8 @@ import {ResultItemComponent} from './home/search-results/result-item/result-item
 import {RoomCreatorComponent} from './admin/dashboard/work-area/Rooms/room-creator/room-creator.component';
 import { EventCreatorComponent } from './admin/dashboard/work-area/event-creator/event-creator.component';
 import {RegistrationComponent} from './login/registration/registration.component';
+import {NgxPayPalModule} from 'ngx-paypal';
+import { PaypalPaymentExecutorComponent } from './paypal-payment-executor/paypal-payment-executor.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,7 @@ import {RegistrationComponent} from './login/registration/registration.component
     ResultItemComponent,
     EventCreatorComponent,
     RegistrationComponent,
+    PaypalPaymentExecutorComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,7 @@ import {RegistrationComponent} from './login/registration/registration.component
       {path: 'admin/dashboard', component: DashboardComponent},
       {path: 'home', component: HomeComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'admin/dashboard/event', component: EventCreatorComponent},
+      {path: 'admin/dashboard/event', component: PaypalPaymentExecutorComponent},
       {path: 'show/:id', component: ShowDetailComponent},
       {path: 'seats', component: SeatReservationComponent},
       {path: '**', component: ErrorPageComponent},
@@ -104,7 +107,8 @@ import {RegistrationComponent} from './login/registration/registration.component
     NgbModule,
     SlickCarouselModule,
     TabModule,
-    SplitterModule
+    SplitterModule,
+    NgxPayPalModule
   ],
   entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],
