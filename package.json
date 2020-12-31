@@ -65,6 +65,7 @@
     "cldr-data": "^36.0.0",
     "ng-bootstrap": "^1.6.3",
     "ngx-slick-carousel": "^0.5.1",
+    "ngx-paypal": "^6.2.0",
     "slick-carousel": "^1.8.1",
     "jquery": "^3.5.1",
     "rxjs": "~6.6.0",
