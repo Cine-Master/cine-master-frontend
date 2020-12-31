@@ -79,7 +79,6 @@ import { PaypalPaymentExecutorComponent } from './paypal-payment-executor/paypal
       {path: 'admin/dashboard', component: DashboardComponent},
       {path: 'home', component: HomeComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'admin/dashboard/event', component: PaypalPaymentExecutorComponent},
       {path: 'show/:id', component: ShowDetailComponent},
       {path: 'seats', component: SeatReservationComponent},
       {path: '**', component: ErrorPageComponent},
