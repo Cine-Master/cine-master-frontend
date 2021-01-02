@@ -64,7 +64,7 @@ export class RegistrationComponent implements OnInit {
     }, error => {
       // tslint:disable-next-line:triple-equals
       if (error.status == 500) {
-        alert('Attenzione,esiste già un account con questo username.');
+        alert('Attenzione, esiste già un account con questo username.');
       }
     });
 
