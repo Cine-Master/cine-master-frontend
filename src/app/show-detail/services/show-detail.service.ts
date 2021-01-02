@@ -17,10 +17,10 @@ export class ShowDetailService {
   }
 
   public getshowEvents(id: string): Observable<any>{
-    return this.http.get<any>(SHOW_PATH + 'events?id=' + id);
+    return this.http.get<any>(SHOW_PATH + 'Events?id=' + id);
   }
 
   public getBookedSeats(id: string): Observable<any>{
-    return this.http.get<any>(SHOW_PATH + 'events/seats/booked?id=' + id);
+    return this.http.get<any>(SHOW_PATH + 'Events/seats/booked?id=' + id);
   }
 }

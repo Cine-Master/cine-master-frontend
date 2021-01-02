@@ -32,43 +32,51 @@ export class DashboardComponent implements OnInit{
 
   public menuItems: MenuItemModel[] = [
     {
-      text: '‏‏‎ ‎ ‏‏‎ ‎Spettacoli',
-      iconCss: 'e-icons e-month',
+      text: '‏‏‎ ‎ ‏‏‎ ‎Copertine',
+      iconCss: 'e-icons e-film',
       items: [
         { id: '1', text: 'Visualizza Spettacoli' },
         { id: '2', text: 'Inserisci Spettacoli' },
       ]
     },
     {
+      text: '‏‏‎ ‎ ‏‏‎ ‎Eventi',
+      iconCss: 'e-icons e-month',
+      items: [
+        { id: '3', text: 'Visualizza Eventi' },
+        { id: '4', text: 'Inserisci Eventi' },
+      ]
+    },
+    {
       text: ' ‏‏‎ ‎‏‏‎ ‎Categorie',
       iconCss: 'e-icons e-category',
       items: [
-        { id: '3', text: 'Visualizza Categoria' },
-        { id: '4', text: 'Inserisci Categorie' },
+        { id: '5', text: 'Visualizza Categoria' },
+        { id: '6', text: 'Inserisci Categorie' },
       ]
     },
     {
       text: ' ‏‏‎ ‎‏‏‎ ‎Registi',
       iconCss: 'e-icons e-producer',
       items: [
-        { id: '5', text: 'Visualizza Registi' },
-        { id: '6', text: 'Inserisci Registi' },
+        { id: '7', text: 'Visualizza Registi' },
+        { id: '8', text: 'Inserisci Registi' },
       ]
     },
     {
       text: ' ‏‏‎ ‎‏‏‎ ‎Attori',
       iconCss: 'e-icons e-actors',
       items: [
-        { id: '7', text: 'Visualizza Attori' },
-        { id: '8', text: 'Inserisci Attori' },
+        { id: '9', text: 'Visualizza Attori' },
+        { id: '10', text: 'Inserisci Attori' },
       ]
     },
     {
       text: ' ‏‏‎ ‎‏‏‎ ‎Sale',
       iconCss: 'e-icons e-room',
       items: [
-        { id: '9', text: 'Visualizza Sale' },
-        { id: '10', text: 'Inserisci Sale' },
+        { id: '11', text: 'Visualizza Sale' },
+        { id: '12', text: 'Inserisci Sale' },
       ]
     }];
 

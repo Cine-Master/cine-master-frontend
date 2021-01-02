@@ -271,6 +271,11 @@ body {
   font-size: 25px;
 }
 
+.e-film:before {
+  content: "\e782";
+  font-size: 25px;
+}
+
 #header .icon-menu:before {
   content: '\e7cd';
   font-size: 25px;

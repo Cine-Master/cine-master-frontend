@@ -45,6 +45,7 @@ import { EventCreatorComponent } from './admin/dashboard/work-area/event-creator
 import {RegistrationComponent} from './login/registration/registration.component';
 import {NgxPayPalModule} from 'ngx-paypal';
 import { PaypalPaymentExecutorComponent } from './paypal-payment-executor/paypal-payment-executor.component';
+import { EventListComponent } from './admin/dashboard/work-area/event-list/event-list.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { PaypalPaymentExecutorComponent } from './paypal-payment-executor/paypal
     EventCreatorComponent,
     RegistrationComponent,
     PaypalPaymentExecutorComponent,
+    EventListComponent,
   ],
   imports: [
     BrowserModule,

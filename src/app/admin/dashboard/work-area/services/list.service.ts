@@ -51,9 +51,9 @@ export class ListService {
     return this.http.put<object>(SERVICE_URI + 'categories', categorie, this.options);
   }
 
-  public deleteRoom(id: string): any{
-    return this.http.request('delete', SERVICE_URI + 'rooms', { body: {id}, withCredentials: true, responseType: 'text' });
-  }
+  // public deleteRoom(id: string): any{
+  //   return this.http.request('delete', SERVICE_URI + 'rooms', { body: {id}, withCredentials: true, responseType: 'text' });
+  // }
 
   public deleteShow(id: string): Observable<any>{
     return this.http.request('delete', SERVICE_URI + 'shows', { body: {id}, withCredentials: true, responseType: 'text' });

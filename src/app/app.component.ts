@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {L10n, loadCldr, setCulture} from '@syncfusion/ej2-base';
+import {L10n, loadCldr, setCulture, setCurrencyCode} from '@syncfusion/ej2-base';
 declare var require: any;
 loadCldr(
   require('cldr-data/main/it/numbers.json'),
@@ -18,7 +18,8 @@ export class AppComponent implements OnInit{
   title = 'CineMasterFrontEnd';
 
   ngOnInit(): void {
-    setCulture('it');
+    setCulture('it-IT');
+    setCurrencyCode('EUR');
     L10n.load({
       it: {
         datepicker: {
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit{
         pager: {
           currentPageInfo: '{0} Di {1} Pagine',
           totalItemsInfo: '({0} Oggetti)',
-        }
+        },
       }
     });
   }
