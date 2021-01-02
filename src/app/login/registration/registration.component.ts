@@ -47,9 +47,10 @@ export class RegistrationComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSubmit() {
     this.loaded = false;
+    this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-      this.loaded = false;
+      this.loaded = true;
       return;
     }
     if (this.submitted)
@@ -63,8 +64,8 @@ export class RegistrationComponent implements OnInit {
       this.router.navigate(['home']);
     }, error => {
       // tslint:disable-next-line:triple-equals
-      if (error.status == 500) {
-        alert('Attenzione,esiste già un account con questo username.');
+      if (error.status == 400) {
+        alert('Attenzione, esiste già un account con questo username.');
       }
     });
 

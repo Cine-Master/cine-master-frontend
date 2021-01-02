@@ -81,7 +81,6 @@ import { ShowListComponent } from './admin/dashboard/work-area/Shows/show-list/s
       {path: 'admin/dashboard', component: DashboardComponent},
       {path: 'home', component: HomeComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'admin/dashboard/event', component: PaypalPaymentExecutorComponent},
       {path: 'show/:id', component: ShowDetailComponent},
       {path: 'seats', component: SeatReservationComponent},
       {path: '**', component: ErrorPageComponent},
