@@ -20,10 +20,9 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { WorkAreaComponent } from './admin/dashboard/work-area/work-area.component';
 import { ItemDirective } from './admin/dashboard/work-area/item/item.directive';
 import { ItemService } from './admin/dashboard/work-area/item/item.service';
-import { SimpleTextComponent } from './admin/dashboard/work-area/simple-text/simple-text.component';
-import { SimpleListComponent } from './admin/dashboard/work-area/simple-list/simple-list.component';
-import { ShowCreatorComponent } from './admin/dashboard/work-area/show-creator/show-creator.component';
-import { ManageShowsComponent } from './admin/dashboard/work-area/manage-shows/manage-shows.component';
+import { SimpleTextComponent } from './admin/dashboard/work-area/Default/simple-text/simple-text.component';
+import { SimpleListComponent } from './admin/dashboard/work-area/Default/simple-list/simple-list.component';
+import { ShowCreatorComponent } from './admin/dashboard/work-area/Shows/show-creator/show-creator.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
@@ -46,13 +45,13 @@ import {RegistrationComponent} from './login/registration/registration.component
 import {NgxPayPalModule} from 'ngx-paypal';
 import { PaypalPaymentExecutorComponent } from './paypal-payment-executor/paypal-payment-executor.component';
 import { EventListComponent } from './admin/dashboard/work-area/event-list/event-list.component';
+import { ShowListComponent } from './admin/dashboard/work-area/Shows/show-list/show-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    ManageShowsComponent,
     WorkAreaComponent,
     ItemDirective,
     SimpleTextComponent,
@@ -74,6 +73,7 @@ import { EventListComponent } from './admin/dashboard/work-area/event-list/event
     RegistrationComponent,
     PaypalPaymentExecutorComponent,
     EventListComponent,
+    ShowListComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,7 +112,6 @@ import { EventListComponent } from './admin/dashboard/work-area/event-list/event
     SplitterModule,
     NgxPayPalModule
   ],
-  entryComponents: [ ManageShowsComponent ],
   providers: [CommandColumnService, EditService, PageService, ItemService],
   bootstrap: [AppComponent]
 })

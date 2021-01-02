@@ -5,8 +5,9 @@ import {Show} from '../../../../model/Show';
 import {Event} from '../../../../model/Event';
 import {EventPrice} from '../../../../model/EventPrice';
 import {ItemComponent} from '../item/item.component';
-import {ListService} from '../services/list.service';
+import {ListService} from '../Default/services/list.service';
 import {EventCreatorService} from './services/event-creator.service';
+import {ShowService} from '../Shows/services/show.service';
 
 @Component({
   selector: 'app-event-creator',
@@ -24,8 +25,8 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   @ViewChild('correctResponseToastAlert') correctResponseAlert;
   public position = { X: 'Left'};
 
-  timeFormat: string = 'HH:mm';
-  timeInterval: number = 15;
+  timeFormat = 'HH:mm';
+  timeInterval = 15;
   timeSlotsViewCreated: number;
   invalidFields: boolean;
 
@@ -42,9 +43,9 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   eventEndDate: Date;
   eventTimeSlotsSelected: Date[];
   requestResponseEvent: Event;
+  eventId: string;
 
-
-  constructor(private roomService: RoomsListService, private showService: ListService, private eventCreatorService: EventCreatorService) { }
+  constructor(private roomService: RoomsListService, private showService: ShowService, private eventCreatorService: EventCreatorService) {}
 
   ngOnInit(): void {
     this.timeSlotsViewCreated = 1;
@@ -86,6 +87,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
       let show: any;
       const startTimes = [];
 
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.eventRoomsObjects.length; i++) {
         if (this.eventRoomsObjects[i].name === this.eventRoomNameSelected) {
           room = {
@@ -95,6 +97,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
         }
       }
 
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.availablesShowsObjects.length; i++) {
         if (this.availablesShowsObjects[i].name === this.showSelectedName) {
           show = {
@@ -107,28 +110,36 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
       let month;
       let day;
 
-      if(this.eventStardDate.getMonth() + 1 < 10)
+      if (this.eventStardDate.getMonth() + 1 < 10) {
         month = '0' + (this.eventStardDate.getMonth() + 1).toString();
-      else
+      }
+      else {
         month = (this.eventStardDate.getMonth() + 1).toString();
+      }
 
-      if(this.eventStardDate.getDate() < 10)
+      if (this.eventStardDate.getDate() < 10) {
         day = '0' + this.eventStardDate.getDate().toString();
-      else
+      }
+      else {
         day = this.eventStardDate.getDate().toString();
+      }
 
       const formattedEventStartDate = this.eventStardDate.getFullYear().toString() + '-' +
         month + '-' + day;
 
-      if(this.eventEndDate.getMonth() + 1 < 10)
+      if (this.eventEndDate.getMonth() + 1 < 10) {
         month = '0' + (this.eventEndDate.getMonth() + 1).toString();
-      else
+      }
+      else {
         month = (this.eventEndDate.getMonth() + 1).toString();
+      }
 
-      if(this.eventEndDate.getDate() < 10)
+      if (this.eventEndDate.getDate() < 10) {
         day = '0' + this.eventEndDate.getDate().toString();
-      else
+      }
+      else {
         day = this.eventEndDate.getDate().toString();
+      }
 
       const formattedEventEndDate = this.eventEndDate.getFullYear().toString() + '-' +
         month + '-' + day;
@@ -136,28 +147,33 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
       let startTimeHours;
       let startTimeMinutes;
 
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.eventTimeSlotsSelected.length; i++) {
-        if (this.eventTimeSlotsSelected[i].getHours() < 10)
+        if (this.eventTimeSlotsSelected[i].getHours() < 10) {
           startTimeHours = '0' + this.eventTimeSlotsSelected[i].getHours().toString();
-        else
+        }
+        else {
           startTimeHours = this.eventTimeSlotsSelected[i].getHours().toString();
+        }
 
-        if (this.eventTimeSlotsSelected[i].getMinutes() < 10)
+        if (this.eventTimeSlotsSelected[i].getMinutes() < 10) {
           startTimeMinutes = '0' + this.eventTimeSlotsSelected[i].getMinutes().toString();
-        else
+        }
+        else {
           startTimeMinutes = this.eventTimeSlotsSelected[i].getMinutes().toString();
+        }
 
         startTimes.push(startTimeHours + ':' + startTimeMinutes);
       }
 
       const eventToAdd: Event = {
         id: null,
-        show: show,
+        show,
         price: this.eventPriceSelected,
         startDate: formattedEventStartDate,
         endDate: formattedEventEndDate,
-        startTimes: startTimes,
-        room: room
+        startTimes,
+        room
       };
 
       this.eventCreatorService.createNewEvent(eventToAdd).subscribe(
@@ -174,8 +190,9 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   }
 
   evaluateEventTimeSlots(): boolean {
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.eventTimeSlotsSelected.length; i++) {
-      if(this.eventTimeSlotsSelected[i] === undefined || this.eventTimeSlotsSelected[i] === null){
+      if (this.eventTimeSlotsSelected[i] === undefined || this.eventTimeSlotsSelected[i] === null){
         this.invalidFields = true;
         return false;
       }
@@ -185,7 +202,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   }
 
   evaluateEventStartDate(): boolean {
-    if(this.eventStardDate === undefined || this.eventStardDate === null){
+    if (this.eventStardDate === undefined || this.eventStardDate === null){
       this.invalidFields = true;
       return false;
     }
@@ -194,14 +211,16 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   }
 
   evaluateEventStartAndEndDate(): boolean {
-    if(Math.floor((Date.UTC(this.eventEndDate.getFullYear(), this.eventEndDate.getMonth(), this.eventEndDate.getDate()) - Date.UTC(this.eventStardDate.getFullYear(), this.eventStardDate.getMonth(), this.eventStardDate.getDate())) / (1000 * 60 * 60 * 24)) < 0)
+    if (Math.floor((Date.UTC(this.eventEndDate.getFullYear(), this.eventEndDate.getMonth(),
+      this.eventEndDate.getDate()) - Date.UTC(this.eventStardDate.getFullYear(), this.eventStardDate.getMonth(),
+      this.eventStardDate.getDate())) / (1000 * 60 * 60 * 24)) < 0) {
       return false;
-
+    }
     return true;
   }
 
   evaluateEventEndDate(): boolean {
-    if(this.eventEndDate === undefined || this.eventEndDate === null){
+    if (this.eventEndDate === undefined || this.eventEndDate === null){
       this.invalidFields = true;
       return false;
     }
@@ -219,7 +238,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   }
 
   evaluateShowSelected(): boolean {
-    if(this.showSelectedName === undefined || this.showSelectedName === null){
+    if (this.showSelectedName === undefined || this.showSelectedName === null){
       this.invalidFields = true;
       return false;
     }
@@ -228,17 +247,17 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   }
 
   evaluateEventPrice(): boolean {
-    if(isNaN(Number(this.eventPriceSelected.standardPrice)) || Number(this.eventPriceSelected.standardPrice) === 0){
+    if (isNaN(Number(this.eventPriceSelected.standardPrice)) || Number(this.eventPriceSelected.standardPrice) === 0){
       this.invalidFields = true;
       return false;
     }
 
-    if(isNaN(Number(this.eventPriceSelected.premiumPrice)) || Number(this.eventPriceSelected.premiumPrice) === 0){
+    if (isNaN(Number(this.eventPriceSelected.premiumPrice)) || Number(this.eventPriceSelected.premiumPrice) === 0){
       this.invalidFields = true;
       return false;
     }
 
-    if(isNaN(Number(this.eventPriceSelected.vipPrice)) || Number(this.eventPriceSelected.vipPrice) === 0){
+    if (isNaN(Number(this.eventPriceSelected.vipPrice)) || Number(this.eventPriceSelected.vipPrice) === 0){
       this.invalidFields = true;
       return false;
     }
@@ -248,14 +267,18 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
 
   assignRooms(rooms): void {
     this.eventRoomsObjects = rooms;
-    for (let i = 0; i < rooms.length; i++)
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < rooms.length; i++) {
       this.eventRoomsList.push(rooms[i].name);
+    }
   }
 
   assignShows(shows): void {
     this.availablesShowsObjects = shows;
-    for (let i = 0; i < shows.length; i++)
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < shows.length; i++) {
       this.availablesShowsList.push(shows[i].name);
+    }
   }
 
 }

@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit{
 
   public menuItems: MenuItemModel[] = [
     {
-      text: '‏‏‎ ‎ ‏‏‎ ‎Copertine',
+      text: '‏‏‎ ‎ ‏‏‎ ‎Spettacoli',
       iconCss: 'e-icons e-film',
       items: [
         { id: '1', text: 'Visualizza Spettacoli' },

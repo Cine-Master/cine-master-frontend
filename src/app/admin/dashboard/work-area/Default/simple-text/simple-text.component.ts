@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {InPlaceEditorComponent, MultiSelectService, RteService} from '@syncfusion/ej2-angular-inplace-editor';
 import {TextBoxModel} from '@syncfusion/ej2-inputs';
-import {ItemComponent} from '../item/item.component';
+import {ItemComponent} from '../../item/item.component';
 import {SimpleTextService} from './services/simple-text.service';
 
 @Component({

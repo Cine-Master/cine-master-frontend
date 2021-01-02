@@ -6,7 +6,8 @@ loadCldr(
   require('cldr-data/main/it/ca-gregorian.json'),
   require('cldr-data/supplemental/numberingSystems.json'),
   require('cldr-data/main/it/timeZoneNames.json'),
-  require('cldr-data/supplemental/weekdata.json')
+  require('cldr-data/supplemental/weekdata.json'),
+  require('cldr-data/main/it/currencies.json')
 );
 
 @Component({
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit{
   title = 'CineMasterFrontEnd';
 
   ngOnInit(): void {
-    setCulture('it-IT');
+    setCulture('it');
     setCurrencyCode('EUR');
     L10n.load({
       it: {
@@ -39,7 +40,7 @@ export class AppComponent implements OnInit{
         pager: {
           currentPageInfo: '{0} Di {1} Pagine',
           totalItemsInfo: '({0} Oggetti)',
-        },
+        }
       }
     });
   }

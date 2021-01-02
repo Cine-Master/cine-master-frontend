@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ShowActor} from '../../../../model/ShowActor';
-import {ShowDirector} from '../../../../model/ShowDirector';
-import {Show} from '../../../../model/Show';
+import {ShowActor} from '../../../../../model/ShowActor';
+import {ShowDirector} from '../../../../../model/ShowDirector';
 
 const SERVICE_URI = 'http://localhost:8080/admin/';
 
@@ -13,10 +12,6 @@ const SERVICE_URI = 'http://localhost:8080/admin/';
 export class ListService {
   private options = { withCredentials: true };
   constructor(private http: HttpClient) {
-  }
-
-  public getShows(): Observable<Show[]>{
-    return this.http.get<Show[]>(SERVICE_URI + 'shows', this.options);
   }
 
   public getActors(): Observable<ShowActor> {
@@ -29,10 +24,6 @@ export class ListService {
 
   public getCategories(): Observable<ShowDirector> {
     return this.http.get<ShowDirector>(SERVICE_URI + 'categories', this.options);
-  }
-
-  public updateShow(show: object): Observable<any> {
-    return this.http.put<object>(SERVICE_URI + 'shows', show, this.options);
   }
 
   public updateActor(actor: object): Observable<any> {
@@ -54,10 +45,6 @@ export class ListService {
   // public deleteRoom(id: string): any{
   //   return this.http.request('delete', SERVICE_URI + 'rooms', { body: {id}, withCredentials: true, responseType: 'text' });
   // }
-
-  public deleteShow(id: string): Observable<any>{
-    return this.http.request('delete', SERVICE_URI + 'shows', { body: {id}, withCredentials: true, responseType: 'text' });
-  }
 
   public deleteActor(id: string): Observable<any> {
     return this.http.request('delete', SERVICE_URI + 'actors', { body: {id}, withCredentials: true, responseType: 'text' });

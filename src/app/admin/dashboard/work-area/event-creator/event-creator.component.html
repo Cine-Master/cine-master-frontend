@@ -1,5 +1,5 @@
 <div class="header">
-  <h5 id="header">Inserisci {{type}}</h5>
+  <h5 id="header" *ngIf="type === 'modify'">Inserisci {{type}}</h5>
 </div>
 
 <div class="wrap" id="event-creator-container">

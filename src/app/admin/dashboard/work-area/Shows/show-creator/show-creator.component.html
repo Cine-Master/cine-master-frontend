@@ -1,5 +1,7 @@
 <div class="header">
-  <h5 id="header">Inserisci {{type}}</h5>
+  <h5 id="header" *ngIf="type === 'Add' else elseBlock">Aggiungi Spettacoli</h5>
+  <ng-template #elseBlock><h5 id="header">Modifica Spettacolo {{showId}}</h5></ng-template>
+
 </div>
 <div class="wrap" id="show-creator-container">
   <h6>Nome dello spettacolo</h6>
@@ -47,7 +49,7 @@
 
   <h6>Durata dello spettacolo</h6>
   <div class='textboxes'>
-    <ejs-textbox placeholder="Inserisci la durata, in minuti, dello spettacolo" floatLabelType="Auto" [(value)]="showLenght"></ejs-textbox>
+    <ejs-textbox placeholder="Inserisci la durata, in minuti, dello spettacolo" floatLabelType="Auto" [(value)]="showLength"></ejs-textbox>
   </div>
 
   <br><br>
@@ -71,7 +73,8 @@
   <ejs-checkbox [(checked)]="showIsHighlighted" label="Seleziona se lo spettacolo sarà mostrato nel Carousel della home page"></ejs-checkbox>
 
   <br><br>
-  <button ejs-button cssClass="e-custom e-block" (click)="createNewShow()">Inserisci spettacolo</button>
+  <button ejs-button cssClass="e-custom e-block" (click)="createNewShow()" *ngIf="type === 'Add' else elseClause">Inserisci spettacolo</button>
+  <ng-template #elseClause><button ejs-button cssClass="e-custom e-block" (click)="updateShow()">Modifica spettacolo {{showId}}</button></ng-template>
 
   <ejs-toast cssClass="e-toast-danger" #invalidFieldsToastAlert [position]='position'>
     <ng-template #title>

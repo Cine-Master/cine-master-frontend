@@ -26,5 +26,6 @@ export class WorkAreaComponent implements OnInit {
 
     const componentRef = viewContainerRef.createComponent<DashboardItem>(componentFactory);
     componentRef.instance.type = this.item.type;
+    componentRef.instance.info = this.item.info;
   }
 }
