@@ -32,13 +32,23 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.authenticationService.authenticateUser(this.loginForm.value).subscribe(response => {
+      console.log(response.type);
       if (response.type === 'ADMIN') {
+        localStorage.setItem("loggato", "true");
         this.router.navigate(['admin/dashboard', this.username]);
       }
       if (response.type === 'USER') {
-        this.router.navigate(['user/dashboard', this.username]);
+        localStorage.setItem("loggato", "true");
+        this.router.navigate(['home', this.username]);
       }
-    }, error => {alert(error); });
+    }, error => {
+      if (error.status == 400) {
+        alert('Attenzione, questo utente non esiste.');
+      }
+      if (error.status == 404 || error.status==500) {
+        alert('Attenzione, servizio momentaneamente non disponibile.');
+      }
+    });
   }
 
 }

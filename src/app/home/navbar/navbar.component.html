@@ -8,8 +8,11 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Home<span class="sr-only"></span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+      <li class="nav-item" *ngIf="getItem()=='false'">
+        <a class="nav-link" (click)="login()">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="getItem()=='true'">
+        <a class="nav-link btn-danger" (click)="logout()">Logout</a>
       </li>
     </ul>
     <div class="d-inline-block" ngbDropdown #catDrop="ngbDropdown">
@@ -22,6 +25,5 @@
       <input class="form-control mr-sm-2" type="search" formControlName="name" placeholder="Search" aria-label="Search">
       <button class="btn search" type="submit" >Cerca spettacolo</button>
     </form>
-
   </div>
 </nav>

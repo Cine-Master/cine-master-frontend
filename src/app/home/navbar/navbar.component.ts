@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HomeComponent} from '../home.component';
 import {SearchService} from '../../services/search.service';
-
+import {AuthenticationService} from '../../services/authentication.service';
 
 
 @Component({
@@ -17,10 +17,15 @@ export class NavbarComponent implements OnInit {
   private parent: HomeComponent;
   categoryList: any;
   private searchService: SearchService;
+  public authentication: AuthenticationService;
 
-  constructor(private s: SearchService, private router: Router, private injector: Injector) {
+
+
+
+  constructor(private s: SearchService, private router: Router, private injector: Injector, private authenticationService: AuthenticationService) {
     this.parent = this.injector.get<HomeComponent>(HomeComponent);
     this.searchService = s;
+    this.authentication = authenticationService;
 
     this.myForm = new FormGroup({
       name: new FormControl()
@@ -50,8 +55,19 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  // tslint:disable-next-line:typedef
   resetView() {
     this.parent.userIsSearching = false;
+  }
+
+  login() {
+    this.router.navigate(['login']);
+  }
+
+  logout() {
+    localStorage.setItem('loggato','false');
+  }
+
+  getItem() {
+    return localStorage.getItem('loggato');
   }
 }

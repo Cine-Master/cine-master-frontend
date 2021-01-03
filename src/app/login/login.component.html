@@ -2,7 +2,7 @@
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" method="post">
     <h2 class="sr-only">Login Form</h2>
     <div class="illustration"><img src="../../assets/logos/logo.png" style="width: 267px;height: 267px;" alt="Logo"></div>
-    <div class="form-group"><input class="form-control" type="email" formControlName="username" placeholder="Email"></div>
+    <div class="form-group"><input class="form-control" formControlName="username" placeholder="Nome utente"></div>
     <div class="form-group"><input class="form-control" type="password" formControlName="password" placeholder="Password"></div>
     <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
     <div class="form-group"><button class="btn btn-primary btn-block" (click)="regComp.show();" type="button">Registrazione</button></div>
