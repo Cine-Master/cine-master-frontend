@@ -16,6 +16,7 @@ export class ShowService {
     return this.http.get<Show[]>(SERVICE_URI + 'shows', this.options);
   }
 
+
   public updateShow(show: object): Observable<any> {
     return this.http.put<object>(SERVICE_URI + 'shows', show, this.options);
   }

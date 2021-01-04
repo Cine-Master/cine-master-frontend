@@ -26,6 +26,7 @@ export class SearchService {
     return this.httpClient.get('http://localhost:8080/shows/search', {withCredentials: true, params});
   }
 
+
   getEvents(): Observable<Event[]> {
     return this.httpClient.get<Event[]>('http://localhost:8080/admin/events', { withCredentials: true });
   }

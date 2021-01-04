@@ -46,6 +46,7 @@ import {NgxPayPalModule} from 'ngx-paypal';
 import { PaypalPaymentExecutorComponent } from './paypal-payment-executor/paypal-payment-executor.component';
 import { EventListComponent } from './admin/dashboard/work-area/event-list/event-list.component';
 import { ShowListComponent } from './admin/dashboard/work-area/Shows/show-list/show-list.component';
+import { PersonalAreaComponent } from './personal-area/personal-area.component';
 
 @NgModule({
   declarations: [
@@ -74,10 +75,12 @@ import { ShowListComponent } from './admin/dashboard/work-area/Shows/show-list/s
     PaypalPaymentExecutorComponent,
     EventListComponent,
     ShowListComponent,
+    PersonalAreaComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
+      {path: 'personalArea', component: PersonalAreaComponent},
       {path: 'admin/dashboard', component: DashboardComponent},
       {path: 'home', component: HomeComponent},
       {path: 'login', component: LoginComponent},
@@ -111,7 +114,7 @@ import { ShowListComponent } from './admin/dashboard/work-area/Shows/show-list/s
     SplitterModule,
     NgxPayPalModule
   ],
-  providers: [CommandColumnService, EditService, PageService, ItemService],
+  providers: [CommandColumnService, EditService, PageService, ItemService,HomeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

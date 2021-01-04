@@ -1,0 +1,94 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card personalCard">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+              <div class="mt-3">
+                <h4>John Doe</h4>
+                <p class="text-secondary mb-1">Full Stack Developer</p>
+                <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                <button class="btn btn-primary">Follow</button>
+                <button class="btn btn-outline-primary">Message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Full Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                Kenneth Valdez
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                fip@jukmuh.al
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                (239) 816-9029
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Mobile</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                (320) 380-4539
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Address</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                Bay Area, San Francisco, CA
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row gutters-sm">
+            <div class="card h-200">
+              <h5 class="panel-title centro">Prenotazioni effettuate</h5>
+              <div class="card-body">
+                <ejs-grid  [dataSource]='data' [enableInfiniteScrolling]='true' height='75vh' [pageSettings]='pageSettings'
+                          [editSettings]='editSettings'  allowTextWrap='true' (actionBegin)="actionBegin($event)">
+                  <e-columns>
+                    <e-column field='bookingId' headerText='Id' width='50' textAlign='Center' isPrimaryKey="true"></e-column>
+                    <e-column field='showName' headerText='Nome' width='180' textAlign='Center' ></e-column>
+                    <e-column field='roomName' headerText='Sala' textAlign='Center' width='100' ></e-column>
+                    <e-column field='seat' headerText='Posto' textAlign='Center' width='150' ></e-column>
+                    <e-column field='date' headerText='Data' type="date" format="yMd" width='160'  textAlign='Center'></e-column>
+                    <e-column field='startTime' headerText='Ora inizio' width='70'  textAlign='Center'></e-column>
+                    <e-column field='price' headerText='Prezzo' width='80'   textAlign='Center'></e-column>
+                    <e-column headerText='Modifica' width='160' [commands]='commands'></e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
