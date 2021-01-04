@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    localStorage.setItem('loggato','false');
+    this.authenticationService.logoutUser().subscribe(response => {console.log(response); localStorage.setItem('loggato', 'false'); });
   }
 
   getItem() {
