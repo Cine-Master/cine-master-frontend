@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         const t = new Toast({
           title: 'Errore login',
           content: 'Username o password sbagliate'
-        }); t.appendTo("#mainDiv"); t.show();
+        }); t.appendTo('#toastDiv'); t.show();
       }
       if (error.status == 404 || error.status==500) {
         alert('Attenzione, servizio momentaneamente non disponibile.');
