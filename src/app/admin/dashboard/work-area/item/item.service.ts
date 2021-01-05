@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { DashboardItem } from './dashboard-item';
-import {SimpleTextComponent} from '../Default/simple-text/simple-text.component';
-import {SimpleListComponent} from '../Default/simple-list/simple-list.component';
-import {ShowCreatorComponent} from '../Shows/show-creator/show-creator.component';
-import {RoomCreatorComponent} from '../Rooms/room-creator/room-creator.component';
-import {RoomsListComponent} from '../Rooms/rooms-list/rooms-list.component';
+import {SimpleTextComponent} from '../default/simple-text/simple-text.component';
+import {SimpleListComponent} from '../default/simple-list/simple-list.component';
+import {ShowCreatorComponent} from '../shows/show-creator/show-creator.component';
+import {RoomCreatorComponent} from '../rooms/room-creator/room-creator.component';
+import {RoomsListComponent} from '../rooms/rooms-list/rooms-list.component';
 import {EventCreatorComponent} from '../event-creator/event-creator.component';
 import {EventListComponent} from '../event-list/event-list.component';
-import {ShowListComponent} from '../Shows/show-list/show-list.component';
+import {ShowListComponent} from '../shows/show-list/show-list.component';
 
 
 @Injectable()

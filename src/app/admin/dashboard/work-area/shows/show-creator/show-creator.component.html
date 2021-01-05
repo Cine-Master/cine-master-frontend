@@ -1,6 +1,6 @@
 <div class="header">
   <h5 id="header" *ngIf="type === 'Add' else elseBlock">Aggiungi Spettacoli</h5>
-  <ng-template #elseBlock><h5 id="header">Modifica Spettacolo {{showId}}</h5></ng-template>
+  <ng-template #elseBlock><h5 id="header">Modifica Spettacolo #{{showId}}</h5></ng-template>
 
 </div>
 <div class="wrap" id="show-creator-container">
