@@ -25,6 +25,11 @@ body{
 h5.panel-title, .h5.panel-title {
   font-size: 30px;
 }
+.btn{
+  background: #ff914d;
+  color: black;
+}
+
 .panel-title {
   position: relative;
   font-size: 30px;
@@ -37,7 +42,9 @@ h5.panel-title, .h5.panel-title {
   min-height: 1px;
   padding: 1rem;
 }
-
+.myContainer{
+  position: center;
+}
 .gutters-sm {
   margin-right: -8px;
   margin-left: -8px;

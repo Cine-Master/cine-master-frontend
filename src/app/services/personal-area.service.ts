@@ -14,6 +14,12 @@ export class PersonalAreaService {
   }
 
   deleteBooking(id): Observable<Object>{
-    return this.httpClient.request('delete', 'http://localhost:8080/booking/delete', {body: {id}, withCredentials: true, responseType: 'text' });
+    return this.httpClient.post( 'http://localhost:8080/booking/remove',  [{id}], {withCredentials: true, responseType: 'text' });
+  }
+  getPersonalData(): Observable<Object>{
+    return this.httpClient.get('http://localhost:8080/user/profile', {withCredentials: true});
+  }
+  savePersonalData(personalData): Observable<Object>{
+    return this.httpClient.post( 'http://localhost:8080/user/update',  {personalData}, {withCredentials: true, responseType: 'text' });
   }
 }
