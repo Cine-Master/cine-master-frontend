@@ -21,6 +21,7 @@ export class PersonalAreaComponent implements OnInit {
   public data: object;
   public personalData: any;
   public modifica: boolean;
+  public male: boolean;
 
 
 
@@ -57,6 +58,10 @@ export class PersonalAreaComponent implements OnInit {
   public loadPersonalData(): void{
     this.service.getPersonalData().subscribe(response => {
       this.personalData=response;
+      if(this.personalData.gender=="MALE")
+        this.male=true;
+      else
+        this.male=false;
     });
 
   }

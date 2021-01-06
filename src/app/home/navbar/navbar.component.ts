@@ -57,6 +57,7 @@ export class NavbarComponent implements OnInit {
 
   resetView() {
     this.parent.userIsSearching = false;
+    this.router.navigate(['home']);
   }
 
   login() {
@@ -69,5 +70,9 @@ export class NavbarComponent implements OnInit {
 
   getItem() {
     return localStorage.getItem('loggato');
+  }
+
+  personalArea() {
+    this.router.navigate(['personalArea']);
   }
 }
