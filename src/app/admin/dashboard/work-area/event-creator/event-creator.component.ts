@@ -1,13 +1,13 @@
 import {AfterContentInit, Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {EventRoom} from '../../../../model/EventRoom';
-import {RoomsListService} from '../Rooms/rooms-list/services/rooms-list.service';
+import {RoomsListService} from '../rooms/rooms-list/services/rooms-list.service';
 import {Show} from '../../../../model/Show';
 import {Event} from '../../../../model/Event';
 import {EventPrice} from '../../../../model/EventPrice';
 import {ItemComponent} from '../item/item.component';
-import {ListService} from '../Default/services/list.service';
+import {ListService} from '../default/services/list.service';
 import {EventCreatorService} from './services/event-creator.service';
-import {ShowService} from '../Shows/services/show.service';
+import {ShowService} from '../shows/services/show.service';
 
 @Component({
   selector: 'app-event-creator',

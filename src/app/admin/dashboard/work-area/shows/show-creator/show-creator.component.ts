@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {UploaderComponent} from '@syncfusion/ej2-angular-inputs';
-import {ListService} from '../../Default/services/list.service';
+import {ListService} from '../../default/services/list.service';
 import {Show} from '../../../../../model/Show';
 import {ShowActor} from '../../../../../model/ShowActor';
 import {ShowDirector} from '../../../../../model/ShowDirector';
@@ -46,7 +46,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   showReleaseDate: Date;
   showProductionLocation: string;
   showLanguage: string;
-  showActorsSelected: any;
+  showActorsSelected: string[];
   showDirectorsSelected: any;
   showCategoriesSelected: any;
   showComingSoon: boolean;
@@ -68,7 +68,7 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   }
 
   ngOnInit(): void {
-    if (this.info != null ) {
+    if (this.info != null) {
       this.showId = this.info.id;
       this.showName = this.info.name;
       this.showDescription = this.info.description;

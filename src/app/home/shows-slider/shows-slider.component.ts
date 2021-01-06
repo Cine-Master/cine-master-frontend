@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Show} from '../../model/Show';
 import {Event} from '../../model/Event';
-import {ListService} from '../../admin/dashboard/work-area/Default/services/list.service';
+import {ListService} from '../../admin/dashboard/work-area/default/services/list.service';
 import {SearchService} from '../../services/search.service';
 
 @Component({
