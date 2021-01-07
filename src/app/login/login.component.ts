@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     // this.authenticationService.authenticateUserBis(this.user, this.pass).subscribe(response => {
     this.authenticationService.authenticateUser(this.loginForm.value).subscribe(response => {
-    console.log(response);
       if (response.type === 'ADMIN') {
         localStorage.setItem("loggato", "true");
         this.router.navigate(['admin/dashboard', this.username]);

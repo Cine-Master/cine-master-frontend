@@ -62,6 +62,11 @@ export class RegistrationComponent implements OnInit {
       this.showModal = false;
       this.loaded = true;
       this.router.navigate(['home']);
+      let loginValue={"username":this.registerForm.value.username,"password":this.registerForm.value.password};
+      console.log(loginValue);
+      this.authenticationService.authenticateUser(loginValue).subscribe(response => {
+        localStorage.setItem("loggato", "true");
+      });
     }, error => {
       // tslint:disable-next-line:triple-equals
       if (error.status == 400) {

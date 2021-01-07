@@ -13,7 +13,6 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient) { }
 
   authenticateUser(loginData): any {
-    console.log(loginData);
     // TODO concordare URL e dati restituiti da REST
     return this.httpClient.post<string>('http://localhost:8080/login', {username: loginData.username,
       password: loginData.password}, { withCredentials: true });
