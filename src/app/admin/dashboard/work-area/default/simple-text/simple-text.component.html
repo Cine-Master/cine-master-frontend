@@ -1,7 +1,7 @@
 <div class="header">
   <h5>Inserisci {{type}}</h5>
 </div>
-<div class="col-lg-8 control-section inplace-editor-control-section form-layout" #formlayout id='inplace-editor-control'>
+<div class="control-section inplace-editor-control-section form-layout" #formlayout id='inplace-editor-control'>
   <div class="content-wrapper" style="margin-bottom: 25px">
     <div id="confirmation">
       <div id="submitDialog"></div>
@@ -13,11 +13,38 @@
                              name='Title' [validationRules]='titleRule' data-underline="false" [model]="titleEditorModel"></ejs-inplaceeditor>
         </div>
         <div class="btn-container">
-          <button (click)="storeElement()" class="btn btn-success">Salva</button>
+          <button (click)="storeElement()" class="btn primary-color">Salva</button>
         </div>
       </form>
 
     </div>
   </div>
+
+  <ejs-toast cssClass="e-toast-danger" #invalidResponseToastAlert [position]='position'>
+    <ng-template #title>
+      <div>Errore!</div>
+    </ng-template>
+    <ng-template #content>
+      <div>E' stato riscontrato un errore... Riprova per favore!</div>
+    </ng-template>
+  </ejs-toast>
+
+  <ejs-toast cssClass="e-toast-success" #correctResponseToastAlert [position]='position'>
+    <ng-template #title>
+      <div>Ottimo!</div>
+    </ng-template>
+    <ng-template #content>
+      <div>Elemento aggiunto correttamente</div>
+    </ng-template>
+  </ejs-toast>
+
+  <ejs-toast cssClass="e-toast-danger" #invalidNameToastAlert [position]='position'>
+    <ng-template #title>
+      <div>Errore!</div>
+    </ng-template>
+    <ng-template #content>
+      <div>Inserisci un nome valido e riprova!</div>
+    </ng-template>
+  </ejs-toast>
 </div>
 

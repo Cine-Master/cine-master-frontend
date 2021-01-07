@@ -1,7 +1,10 @@
 <div class="header">
   <h5>Inserisci {{type}}</h5>
 </div>
-<div id="target" class="control-section default-splitter">
+<div *ngIf="!loaded" class="spinner">
+  <div class="spinner-border"></div>
+</div>
+<div id="target" class="control-section default-splitter" *ngIf="loaded">
   <div class="pane1">
     <ejs-splitter separatorSize=3 width='100%'>
       <e-panes>
@@ -70,3 +73,20 @@
     </ejs-splitter>
   </div>
 </div>
+<ejs-toast cssClass="e-toast-danger" #invalidResponseToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Errore!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>E' stato riscontrato un errore... Riprova per favore!</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #correctResponseToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Ottimo!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Sala aggiunta correttamente</div>
+  </ng-template>
+</ejs-toast>

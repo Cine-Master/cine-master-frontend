@@ -26,10 +26,36 @@ export class ShowListComponent implements OnInit, ItemComponent {
   public loaded = false;
   @ViewChild('grid')
   public grid: GridComponent;
+  @ViewChild('invalidResponseToastAlert') invalidResponseAlert;
+  @ViewChild('correctResponseToastAlert') correctResponseAlert;
+  @ViewChild('correctDeleteToastAlert') correctDeleteToastAlert;
+  public position = { X: 'Left'};
 
   constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: ShowService, private router: Router) {}
 
   public ngOnInit(): void {
+
+    this.loadData();
+
+    this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
+      showDeleteConfirmDialog: true };
+    // this.editSettings = { allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
+    //   showDeleteConfirmDialog: true };
+    this.titleRules = { required: true };
+    this.descriptionRules = { required: true };
+    this.editParams = {  params: { popupHeight: '300px' }};
+    this.coverRules = { required: true };
+    this.pageSettings = { pageSize: 50 };
+    /*this.commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
+      { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }  },
+      { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
+      { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];*/
+    this.commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
+      { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } },
+    ];
+  }
+
+  public loadData(): void {
     this.service.getShows().subscribe(response => {
       this.data = response;
       for (const show of this.data) {
@@ -51,26 +77,13 @@ export class ShowListComponent implements OnInit, ItemComponent {
       }
       this.loaded = true;
     }, error => {
-      alert('Devi effettuare l\'accesso come amministratore. Sarai reindirizzato alla pagina di login.');
-      this.router.navigate(['login']);
+      if (error.error === 'You are not authorized') {
+        this.router.navigate(['login']);
+      }
+      else {
+        this.invalidResponseAlert.show();
+      }
     });
-
-    this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
-      showDeleteConfirmDialog: true };
-    // this.editSettings = { allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
-    //   showDeleteConfirmDialog: true };
-    this.titleRules = { required: true };
-    this.descriptionRules = { required: true };
-    this.editParams = {  params: { popupHeight: '300px' }};
-    this.coverRules = { required: true };
-    this.pageSettings = { pageSize: 50 };
-    /*this.commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
-      { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }  },
-      { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
-      { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];*/
-    this.commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
-      { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } },
-    ];
   }
 
   public actionBegin(args: any): void {
@@ -86,12 +99,13 @@ export class ShowListComponent implements OnInit, ItemComponent {
         this.data[args.rowIndex]));
     }
     else if (args.requestType === 'delete') {
-      this.service.deleteShow(args.data[0].id).subscribe(response => {
-        alert('Oggetto eliminato!');
-        this.parent.loadComponent(new DashboardItem(ShowListComponent, 'Spettacoli', null));
-      }, error => {
-        alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
-        this.parent.loadComponent(new DashboardItem(ShowListComponent, 'Spettacoli', null));
+      this.loaded = false;
+      this.service.deleteShow(args.data[0].id).subscribe(() => { }, error => {
+        this.loadData();
+        this.invalidResponseAlert.show();
+      }, () => {
+        this.loadData();
+        this.correctDeleteToastAlert.show();
       });
     }
   }

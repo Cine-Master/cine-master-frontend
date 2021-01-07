@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ItemComponent} from '../../item/item.component';
 import {WorkAreaComponent} from '../../work-area.component';
 import {RoomCreatorService} from './services/room-creator.service';
@@ -20,6 +20,12 @@ export class RoomCreatorComponent implements OnInit, ItemComponent {
   public premium: string[] = [];
   public vip: string[] = [];
   public actual = 'standard';
+  public loaded = true;
+
+  @ViewChild('invalidResponseToastAlert') invalidResponseAlert;
+  @ViewChild('correctResponseToastAlert') correctResponseAlert;
+  public position = { X: 'Left'};
+
   private rowName(n): string {
     const ordA = 'A'.charCodeAt(0);
     const ordZ = 'Z'.charCodeAt(0);
@@ -108,11 +114,14 @@ export class RoomCreatorComponent implements OnInit, ItemComponent {
   }
 
   public saveRoom(): void {
+    this.loaded = false;
     const room = this.parseRoom();
     this.service.saveRoom(room).subscribe(response => {
-      alert('Stanza Salvata');
+      this.correctResponseAlert.show();
+      this.loaded = true;
     }, error => {
-      alert('Ops.. C\'è stato un problema! \nRiprova perfavore...');
+      this.invalidResponseAlert.show();
+      this.loaded = true;
     });
   }
 

@@ -3,7 +3,6 @@ import { CommandModel, GridComponent, ToolbarService} from '@syncfusion/ej2-angu
 import { ListService } from '../services/list.service';
 import {ItemComponent} from '../../item/item.component';
 import {WorkAreaComponent} from '../../work-area.component';
-import {DashboardItem} from '../../item/dashboard-item';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -27,41 +26,17 @@ export class SimpleListComponent implements OnInit, ItemComponent {
 
   @ViewChild('grid')
   public grid: GridComponent;
+  @ViewChild('invalidResponseToastAlert') invalidResponseAlert;
+  @ViewChild('correctResponseToastAlert') correctResponseAlert;
+  @ViewChild('correctDeleteToastAlert') correctDeleteToastAlert;
+  public position = { X: 'Left'};
 
   constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: ListService) {
   }
 
   public ngOnInit(): void {
 
-    // tslint:disable:new-parens
-    switch (this.type){
-      case 'Attori':
-        this.service.getActors().subscribe(response => {
-          this.data = response;
-          this.loaded = true;
-        }, error => {
-        alert('Qualcosa è andato storto!');
-      });
-        break;
-      case 'Registi':
-        this.service.getDirectors().subscribe(response => {
-          this.data = response;
-          this.loaded = true;
-        }, error => {
-        alert('Qualcosa è andato storto!');
-        });
-        break;
-      case 'Categorie':
-        this.service.getCategories().subscribe(response => {
-          this.data = response;
-          this.loaded = true;
-        }, error => {
-          alert('Qualcosa è andato storto!');
-        });
-        break;
-      default:
-        this.data = null;
-    }
+    this.loadData();
 
     this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
       showDeleteConfirmDialog: true};
@@ -76,65 +51,98 @@ export class SimpleListComponent implements OnInit, ItemComponent {
       { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
   }
 
+  public loadData(): void {
+    switch (this.type){
+      case 'Attori':
+        this.service.getActors().subscribe(response => {
+          this.data = response;
+          this.loaded = true;
+        }, error => {
+          this.invalidResponseAlert.show();
+        });
+        break;
+      case 'Registi':
+        this.service.getDirectors().subscribe(response => {
+          this.data = response;
+          this.loaded = true;
+        }, error => {
+          this.invalidResponseAlert.show();
+        });
+        break;
+      case 'Categorie':
+        this.service.getCategories().subscribe(response => {
+          this.data = response;
+          this.loaded = true;
+        }, error => {
+          this.invalidResponseAlert.show();
+        });
+        break;
+      default:
+        this.data = null;
+    }
+  }
+
   public actionBegin(args: any): void {
     if (args.requestType === 'save'){
+      this.loaded = false;
       switch (this.type){
         case 'Attori':
-          this.service.updateActor(args.data).subscribe(response => {
-            alert('Oggetto salvato!');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Attori', null));
-            }, error => {
-            alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Attori', null));
+          this.service.updateActor(args.data).subscribe(response => {}, error => {
+            this.loadData();
+            this.invalidResponseAlert.show();
+          }, () => {
+            this.loadData();
+            this.correctResponseAlert.show();
           });
           break;
         case 'Registi':
-          this.service.updateDirector(args.data).subscribe(response => {
-            alert('Oggetto salvato!');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Registi', null));
-            }, error => {
-            alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Registi', null));
+          this.service.updateDirector(args.data).subscribe(response => {}, error => {
+            this.loadData();
+            this.invalidResponseAlert.show();
+          }, () => {
+            this.loadData();
+            this.correctResponseAlert.show();
           });
           break;
         case 'Categorie':
-          this.service.updateCategorie(args.data).subscribe(response => {
-            alert('Oggetto salvato!');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Categorie', null));
-            }, error => {
-            alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Categorie', null));
+          this.service.updateCategorie(args.data).subscribe(response => {}, error => {
+            this.loadData();
+            this.invalidResponseAlert.show();
+          }, () => {
+            this.loadData();
+            this.correctResponseAlert.show();
           });
           break;
       }
     }
     else if (args.requestType === 'delete'){
+      this.loaded = false;
       switch (this.type){
         case 'Attori':
-          this.service.deleteActor(args.data[0].id).subscribe(response => {
-            alert('Oggetto eliminato correttamente!');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Attori', null));
-            }, error => {
-            alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Attori', null));
+          this.service.deleteActor(args.data[0].id).subscribe(response => {}, error => {
+            this.loadData();
+            this.invalidResponseAlert.show();
+          }, () => {
+            this.loadData();
+            this.correctDeleteToastAlert.show();
           });
           break;
         case 'Registi':
-          this.service.deleteDirector(args.data[0].id).subscribe(response => {
-            alert('Oggetto eliminato correttamente!');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Registi', null));
-            }, error => {
-            alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Registi', null));
+          this.service.deleteDirector(args.data[0].id).subscribe(response => {}, error => {
+            this.loadData();
+            this.invalidResponseAlert.show();
+          }, () => {
+            this.loadData();
+            this.correctDeleteToastAlert.show();
           });
           break;
         case 'Categorie':
-          this.service.deleteCategorie(args.data[0].id).subscribe(response => {
-            alert('Oggetto eliminato correttamente!');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Catgorie', null));
-            }, error => {
-            alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
-            this.parent.loadComponent(new DashboardItem(SimpleListComponent, 'Catgorie', null));
+          this.service.deleteCategorie(args.data[0].id).subscribe(response => {}, error => {
+            this.loadData();
+            this.invalidResponseAlert.show();
+          }, () => {
+            this.loadData();
+            this.correctDeleteToastAlert.show();
           });
           break;
       }

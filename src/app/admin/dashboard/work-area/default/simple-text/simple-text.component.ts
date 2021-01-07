@@ -17,6 +17,10 @@ export class SimpleTextComponent implements OnInit, ItemComponent {
 
   @ViewChild('inplaceTitleEditor')
   public titleEditorObj: InPlaceEditorComponent;
+  @ViewChild('invalidResponseToastAlert') invalidResponseAlert;
+  @ViewChild('correctResponseToastAlert') correctResponseAlert;
+  @ViewChild('invalidNameToastAlert') invalidNameToastAlert;
+  public position = { X: 'Left'};
 
   public titleEditorValue = 'Inserisci il nome';
   public scrollParent: HTMLElement;
@@ -38,28 +42,40 @@ export class SimpleTextComponent implements OnInit, ItemComponent {
     if (this.titleEditorObj.value !== null){
       switch (this.type){
         case 'Attori':
-          this.service.addActor({name: this.titleEditorObj.value}).subscribe(response => {
-            alert('Oggetto salvato!');
-          }, error => { alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...'); });
+          this.service.addActor({name: this.titleEditorObj.value}).subscribe(() => {}, error => {
+              this.invalidResponseAlert.show();
+            },
+            () => {
+              this.correctResponseAlert.show();
+            });
           break;
         case 'Registi':
-          this.service.addDirector({name: this.titleEditorObj.value}).subscribe(response => {
-            alert('Oggetto salvato!');
-          }, error => { alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...'); });
+          this.service.addDirector({name: this.titleEditorObj.value}).subscribe(() => {}, error => {
+              this.invalidResponseAlert.show();
+            },
+            () => {
+              this.correctResponseAlert.show();
+            });
           break;
         case 'Generi':
-          this.service.addActor({name: this.titleEditorObj.value}).subscribe(response => {
-            alert('Oggetto salvato!');
-          }, error => { alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...'); });
+          this.service.addActor({name: this.titleEditorObj.value}).subscribe(() => {}, error => {
+              this.invalidResponseAlert.show();
+            },
+            () => {
+              this.correctResponseAlert.show();
+            });
           break;
         case 'Sale':
-          this.service.addRoom({name: this.titleEditorObj.value}).subscribe(response => {
-            alert('Oggetto salvato!');
-          }, error => { alert('Ops.. Qualcosa è andato storto! \n Può essere che l\'elemento esiste già nel database! \n Riprova per favore...'); });
+          this.service.addRoom({name: this.titleEditorObj.value}).subscribe(() => {}, error => {
+              this.invalidResponseAlert.show();
+            },
+            () => {
+              this.correctResponseAlert.show();
+            });
           break;
       }
     } else {
-      alert('Inserisci un nome valido e riprova per favore...');
+      this.invalidNameToastAlert.show();
     }
   }
 

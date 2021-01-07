@@ -46,5 +46,28 @@
     </div>
   </div>
 </div>
+<ejs-toast cssClass="e-toast-danger" #invalidResponseToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Errore!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>E' stato riscontrato un errore... Riprova per favore!</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #correctResponseToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Ottimo!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Sala modificata correttamente</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #correctDeleteToastAlert [position]='position'>
+  <ng-template #content>
+    <div>Sala eliminata correttamente</div>
+  </ng-template>
+</ejs-toast>
 
 

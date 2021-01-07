@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ItemComponent} from '../../item/item.component';
 import {EventRoom} from '../../../../../model/EventRoom';
 import {WorkAreaComponent} from '../../work-area.component';
@@ -20,6 +20,11 @@ export class RoomsListComponent implements OnInit, ItemComponent {
   public columnNumber: number[];
   public actualPlant: string;
 
+  @ViewChild('invalidResponseToastAlert') invalidResponseAlert;
+  @ViewChild('correctResponseToastAlert') correctResponseAlert;
+  @ViewChild('correctDeleteToastAlert') correctDeleteToastAlert;
+  public position = { X: 'Left'};
+
   private rowName(n): string {
     const ordA = 'A'.charCodeAt(0);
     const ordZ = 'Z'.charCodeAt(0);
@@ -36,12 +41,16 @@ export class RoomsListComponent implements OnInit, ItemComponent {
   constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: RoomsListService) {}
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  public loadData(): void {
     this.service.getRooms().subscribe(response => {
       this.data = response;
       this.loaded = true;
       this.renderPlant(this.data[0]);
     }, error => {
-      alert('Qualcosa è andato storto!');
+      this.invalidResponseAlert.show();
     });
   }
 

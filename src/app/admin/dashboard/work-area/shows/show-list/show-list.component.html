@@ -1,7 +1,7 @@
 <div class="header">
   <h5>Lista Spettacoli</h5>
 </div>
-<div *ngIf="!loaded" style="text-align: center; margin-top: 5%; color: #ff914d;">
+<div *ngIf="!loaded" class="spinner">
   <div class="spinner-border"></div>
 </div>
 <div *ngIf="loaded" class="control-section">
@@ -25,3 +25,26 @@
     </e-columns>
   </ejs-grid>
 </div>
+<ejs-toast cssClass="e-toast-danger" #invalidResponseToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Errore!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>E' stato riscontrato un errore... Riprova per favore!</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #correctResponseToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Ottimo!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Spettacolo modificato correttamente</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #correctDeleteToastAlert [position]='position'>
+  <ng-template #content>
+    <div>Spettacolo eliminato correttamente</div>
+  </ng-template>
+</ejs-toast>

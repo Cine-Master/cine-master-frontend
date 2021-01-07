@@ -114,7 +114,7 @@ import { PersonalAreaComponent } from './personal-area/personal-area.component';
     SplitterModule,
     NgxPayPalModule
   ],
-  providers: [CommandColumnService, EditService, PageService, ItemService,HomeComponent],
+  providers: [CommandColumnService, EditService, PageService, ItemService, HomeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

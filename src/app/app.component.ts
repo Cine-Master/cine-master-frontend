@@ -34,7 +34,7 @@ export class AppComponent implements OnInit{
           Browse : 'Scegli file'
         },
         grid: {
-          ConfirmDelete : 'Sicuro di voler rimuovere lo spettacolo?',
+          ConfirmDelete : 'Sicuro di voler rimuovere l\'elemento?',
           EmptyRecord: 'Nessun elemento disponibile'
         },
         pager: {

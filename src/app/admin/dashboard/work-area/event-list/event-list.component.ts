@@ -28,18 +28,16 @@ export class EventListComponent implements OnInit, ItemComponent {
 
   @ViewChild('grid')
   public grid: GridComponent;
+  @ViewChild('invalidResponseToastAlert') invalidResponseAlert;
+  @ViewChild('correctResponseToastAlert') correctResponseAlert;
+  @ViewChild('correctDeleteToastAlert') correctDeleteToastAlert;
+  public position = { X: 'Left'};
 
   constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: EventListService, private router: Router) {}
 
   ngOnInit(): void {
-    this.service.getEvents().subscribe(response => {
-      this.data = response;
-      this.loaded = true;
-    }, error => {
-      alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
-      this.router.navigate(['login']);
-    });
 
+    this.loadData();
 
     // this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
     //  showDeleteConfirmDialog: true };
@@ -55,6 +53,15 @@ export class EventListComponent implements OnInit, ItemComponent {
     //   { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }  },
     //   { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
     //   { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
+  }
+
+  public loadData(): void {
+    this.service.getEvents().subscribe(response => {
+      this.data = response;
+      this.loaded = true;
+    }, error => {
+      this.invalidResponseAlert.show();
+    });
   }
 
 }
