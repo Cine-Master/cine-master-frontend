@@ -2,7 +2,10 @@ import {Component, Inject, Input, OnInit, ViewChild, ViewEncapsulation} from '@a
 import {ItemComponent} from '../../item/item.component';
 import {EventRoom} from '../../../../../model/EventRoom';
 import {WorkAreaComponent} from '../../work-area.component';
-import {RoomsListService} from './services/rooms-list.service';
+import {RoomService} from '../services/room.service';
+import {DashboardItem} from '../../item/dashboard-item';
+import {ShowCreatorComponent} from '../../shows/show-creator/show-creator.component';
+import {RoomCreatorComponent} from '../room-creator/room-creator.component';
 
 @Component({
   selector: 'app-rooms-list',
@@ -19,6 +22,12 @@ export class RoomsListComponent implements OnInit, ItemComponent {
   public rowLetters: string[] ;
   public columnNumber: number[];
   public actualPlant: string;
+  public editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
+    showDeleteConfirmDialog: true };
+  public commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
+       { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }  },
+       { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
+       { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
 
   @ViewChild('invalidResponseToastAlert') invalidResponseAlert;
   @ViewChild('correctResponseToastAlert') correctResponseAlert;
@@ -38,7 +47,7 @@ export class RoomsListComponent implements OnInit, ItemComponent {
   }
 
 
-  constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: RoomsListService) {}
+  constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: RoomService) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -85,6 +94,23 @@ export class RoomsListComponent implements OnInit, ItemComponent {
       else if (seat.seatType === 'VIP') {
         this.vip.push(seat.row.concat(String(seat.column)));
       }
+    }
+  }
+
+  public actionBegin(arg0: any): void {
+    if (arg0.requestType === 'delete') {
+      this.loaded = false;
+      this.service.deleteRoom(arg0.data[0].id).subscribe(() => {}, error => {
+        this.loadData();
+        this.invalidResponseAlert.show();
+      }, () => {
+        this.loadData();
+        this.correctDeleteToastAlert.show();
+      });
+    }
+    else if (arg0.requestType === 'beginEdit') {
+      this.parent.loadComponent(new DashboardItem(RoomCreatorComponent, 'Modify-' + this.data[arg0.rowIndex].id,
+        this.data[arg0.rowIndex]));
     }
   }
 

@@ -7,9 +7,9 @@
 <div *ngIf="loaded" id="target" class="control-section default-splitter">
   <div class="pane">
     <div class="container-fluid">
-      <ejs-grid #grid [dataSource]='data'>
+      <ejs-grid #grid [dataSource]='data' [editSettings]='editSettings' (actionBegin)="actionBegin($event)">
         <e-columns>
-          <e-column field='id' headerText='Id' width='50' textAlign='Center'></e-column>
+          <e-column field='id' headerText='Id' width='50' textAlign='Center' isPrimaryKey="true"></e-column>
           <e-column field='name' headerText='Nome' width='100' textAlign='Center'></e-column>
           <e-column field='nRows' headerText='Numero Righe' width='50' textAlign='Center'></e-column>
           <e-column field='nColumns' headerText='Numero Colonne' width='40' textAlign='Center'></e-column>
@@ -18,7 +18,7 @@
               <button class="btn primary-color" (click)="renderPlant(data)">Visualizza Piantina</button>
             </ng-template>
           </e-column>
-          <!--<e-column headerText='Modifica' width='160' [commands]='commands'></e-column>-->
+          <e-column headerText='Modifica' width='100' [commands]='commands'></e-column>
         </e-columns>
       </ejs-grid>
     </div>

@@ -1,6 +1,5 @@
 import {AfterContentInit, Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {EventRoom} from '../../../../model/EventRoom';
-import {RoomsListService} from '../rooms/rooms-list/services/rooms-list.service';
 import {Show} from '../../../../model/Show';
 import {Event} from '../../../../model/Event';
 import {EventPrice} from '../../../../model/EventPrice';
@@ -8,6 +7,7 @@ import {ItemComponent} from '../item/item.component';
 import {ListService} from '../default/services/list.service';
 import {EventCreatorService} from './services/event-creator.service';
 import {ShowService} from '../shows/services/show.service';
+import {RoomService} from '../rooms/services/room.service';
 
 @Component({
   selector: 'app-event-creator',
@@ -45,7 +45,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   requestResponseEvent: Event;
   eventId: string;
 
-  constructor(private roomService: RoomsListService, private showService: ShowService, private eventCreatorService: EventCreatorService) {}
+  constructor(private roomService: RoomService, private showService: ShowService, private eventCreatorService: EventCreatorService) {}
 
   ngOnInit(): void {
     this.timeSlotsViewCreated = 1;

@@ -1,5 +1,6 @@
 <div class="header">
-  <h5>Inserisci {{type}}</h5>
+  <h5 id="header" *ngIf="type === 'Add' else elseBlock">Aggiungi Sale</h5>
+  <ng-template #elseBlock><h5 id="header">Modifica Sala #{{roomId}}</h5></ng-template>
 </div>
 <div *ngIf="!loaded" class="spinner">
   <div class="spinner-border"></div>
@@ -87,6 +88,6 @@
     <div>Ottimo!</div>
   </ng-template>
   <ng-template #content>
-    <div>Sala aggiunta correttamente</div>
+    <div>Sala salvata correttamente</div>
   </ng-template>
 </ejs-toast>

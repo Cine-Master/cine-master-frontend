@@ -38,7 +38,7 @@ export class ItemService {
       case '11':
         return new DashboardItem(RoomsListComponent, 'Sale', null);
       case '12':
-        return new DashboardItem(RoomCreatorComponent, 'Sale', null);
+        return new DashboardItem(RoomCreatorComponent, 'Add', null);
       default:
         return null;
     }
