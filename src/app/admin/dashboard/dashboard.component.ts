@@ -5,6 +5,8 @@ import { enableRipple } from '@syncfusion/ej2-base';
 import { ItemService } from './work-area/item/item.service';
 import { DashboardItem } from './work-area/item/dashboard-item';
 import {WorkAreaComponent} from './work-area/work-area.component';
+import {AuthenticationService} from '../../services/authentication.service';
+import {Router} from '@angular/router';
 
 enableRipple(true);
 
@@ -28,7 +30,7 @@ export class DashboardComponent implements OnInit{
   item: DashboardItem;
   private loaded = false;
 
-  constructor(private itemService: ItemService) {}
+  constructor(private itemService: ItemService, private authService: AuthenticationService, private router: Router) {}
 
   public menuItems: MenuItemModel[] = [
     {
@@ -114,7 +116,8 @@ export class DashboardComponent implements OnInit{
   }
 
   doLogout(): void {
-    console.log('logout');
+    this.authService.logoutUser().subscribe(response => {localStorage.setItem('loggato', 'false'); this.router.navigate(['login'])});
+    // console.log('logout');
   }
 
 
