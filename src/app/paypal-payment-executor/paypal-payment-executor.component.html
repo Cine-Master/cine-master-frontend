@@ -1,8 +1,18 @@
 <ngx-paypal *ngIf="bookingCompleted && !bookingConfirmation" [config]="payPalConfig"></ngx-paypal>
 
+<div *ngIf="!bookingTrying && !couponTrying" class='textboxes'>
+  <ejs-textbox placeholder="Inserisci il Codice Coupon e confermalo con il bottone sottostante" floatLabelType="Auto" [(value)]="couponCode"></ejs-textbox>
+  <button ejs-button cssClass="e-custom e-block" (click)="verifyCouponAvailability()">Applica Codice Coupon</button>
+  <br><br>
+</div>
+
+<div class="booking-spinner" *ngIf="couponTrying" style="text-align: center; margin-top: 5%; color: #ff914d;">
+  <div class="spinner-border"></div>
+</div>
+
 <button *ngIf="!bookingTrying" ejs-button cssClass="e-custom e-block" (click)="checkBookingAvailability()">Prenota e procedi al pagamento</button>
 
-<div id="booking-spinner" *ngIf="(bookingTrying && !bookingCompleted) || bookingConfirmation" style="text-align: center; margin-top: 5%; color: #ff914d;">
+<div class="booking-spinner" *ngIf="(bookingTrying && !bookingCompleted) || bookingConfirmation" style="text-align: center; margin-top: 5%; color: #ff914d;">
   <div class="spinner-border"></div>
 </div>
 
@@ -24,6 +34,15 @@
   </ng-template>
 </ejs-toast>
 
+<ejs-toast cssClass="e-toast-danger" #couponInvalidAlert [position]='position'>
+  <ng-template #title>
+    <div>Errore!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Il coupon inserito non è valido</div>
+  </ng-template>
+</ejs-toast>
+
 <ejs-toast cssClass="e-toast-success" #bookingCompletedToastAlert [position]='position'>
   <ng-template #title>
     <div>Ottimo!</div>
@@ -39,5 +58,14 @@
   </ng-template>
   <ng-template #content>
     <div>Pagamento eseguito correttamente</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #couponValidAlert [position]='position'>
+  <ng-template #title>
+    <div>Ottimo!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Il coupon inserito è valido e lo sconto è stato applicato</div>
   </ng-template>
 </ejs-toast>

@@ -40,6 +40,15 @@ export class ShowsSliderComponent implements OnInit {
     this.searchService.getShowsWithEvents().subscribe(
       (data) => {
         this.availableSliderShows = data;
+      },
+      error => {},
+      () => {
+        this.loaded = true;
+      }
+    );
+
+    this.searchService.getComgingSoonShows().subscribe(
+      (data) => {
         this.comingSoonSliderShows = data;
       },
       error => {},

@@ -39,4 +39,8 @@ export class SearchService {
     const params = new HttpParams().set('category', catName);
     return this.httpClient.get('http://localhost:8080/shows/search', {withCredentials: true, params});
   }
+
+  getComgingSoonShows(): Observable<Show[]> {
+    return this.httpClient.get<Show[]>('http://localhost:8080/shows/search?coming-soon=true', { withCredentials: true });
+  }
 }

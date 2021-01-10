@@ -11,15 +11,20 @@ export class PaypalPaymentExecutorComponent implements OnInit {
 
   @ViewChild('bookingFailedToastAlert') bookingFailedAlert;
   @ViewChild('paymentFailedToastAlert') paymentFailedAlert;
+  @ViewChild('couponInvalidAlert') couponInvalidAlert;
   @ViewChild('bookingCompletedToastAlert') bookingCompletedAlert;
   @ViewChild('paymentCompletedToastAlert') paymentCompletedAlert;
+  @ViewChild('couponValidAlert') couponValidAlert;
   public position = { X: 'Left'};
 
   public payPalConfig?: IPayPalConfig;
   bookingCompleted: boolean;
   bookingTrying: boolean;
   bookingConfirmation: boolean;
+  couponTrying: boolean;
   bookingIdentifier: object;
+  couponCode: string;
+  discount: number;
   @Input() eventsBookingDetails: object[];
   @Input() eventsBookingTotalPrice: number;
 
@@ -29,6 +34,7 @@ export class PaypalPaymentExecutorComponent implements OnInit {
     this.bookingCompleted = false;
     this.bookingTrying = false;
     this.bookingConfirmation = false;
+    this.couponTrying = false;
   }
 
   private countTotalSeatsBooked(bookingDetails: object[]): number {
@@ -53,6 +59,26 @@ export class PaypalPaymentExecutorComponent implements OnInit {
       () => {
         this.bookingCompletedAlert.show();
         this.bookingCompleted = true;
+        this.initConfig();
+      }
+    );
+  }
+
+  private verifyCouponAvailability(): void {
+    this.couponTrying = true;
+    this.bookingEventService.verifiyCouponValidity(this.couponCode).subscribe(
+      data => {
+        console.log(data);
+        this.discount = data;
+      },
+      error => {
+        this.couponInvalidAlert.show();
+        this.couponTrying = false;
+      },
+      () => {
+        this.couponValidAlert.show();
+        this.couponTrying = false;
+        this.eventsBookingTotalPrice -= this.discount;
         this.initConfig();
       }
     );

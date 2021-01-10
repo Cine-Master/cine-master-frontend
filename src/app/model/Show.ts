@@ -21,4 +21,7 @@ export interface Show {
   highlighted: boolean;
   length: number | string;
   releaseDate: string;
+  urlHighlighted: string;
+  urlTrailer: string;
+  rating: string;
 }

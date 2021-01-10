@@ -38,6 +38,9 @@ export class ShowDetailComponent implements OnInit {
       photoUrl: string;
       productionLocation: string;
       releaseDate: string;
+      urlHighlighted: string;
+      urlTrailer: string;
+      rating: string;
     };
     type myEvent = {
       hour: string,

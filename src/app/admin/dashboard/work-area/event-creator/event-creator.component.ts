@@ -30,6 +30,9 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   timeSlotsViewCreated: number;
   invalidFields: boolean;
 
+  eventRoomsLoaded: boolean;
+  showsLoaded: boolean;
+
   availablesShowsList: string[] = [];
   eventRoomsList: number[] = [];
 
@@ -56,9 +59,16 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
     };
 
     this.eventTimeSlotsSelected = [];
-
-    this.roomService.getRooms().subscribe( (responseData) => this.assignRooms(responseData));
-    this.showService.getShows().subscribe( (responseData) => this.assignShows(responseData));
+    this.eventRoomsLoaded = false;
+    this.showsLoaded = false;
+    this.roomService.getRooms().subscribe( (responseData) => {
+      this.assignRooms(responseData);
+      this.eventRoomsLoaded = true;
+    });
+    this.showService.getShows().subscribe( (responseData) => {
+      this.assignShows(responseData);
+      this.showsLoaded = true;
+    });
   }
 
   insertNewTimeSlot(): void {
@@ -177,11 +187,10 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
       };
 
       this.eventCreatorService.createNewEvent(eventToAdd).subscribe(
-        data => {
-          this.requestResponseEvent = data;
-        },
+        data => {},
         error => {
           this.invalidResponseAlert.show();
+          console.log(error);
         },
         () => {
           this.correctResponseAlert.show();

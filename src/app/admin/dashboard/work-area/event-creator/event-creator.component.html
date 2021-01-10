@@ -5,8 +5,10 @@
 <div class="wrap" id="event-creator-container">
 
   <h6>Spettacolo trasmesso</h6>
-  <ejs-dropdownlist [(value)]="showSelectedName" [dataSource]='availablesShowsList' placeholder = 'Seleziona lo spettacolo che verrà trasmesso' floatLabelType="Auto"></ejs-dropdownlist>
-
+  <ejs-dropdownlist *ngIf="showsLoaded" [(value)]="showSelectedName" [dataSource]='availablesShowsList' placeholder = 'Seleziona lo spettacolo che verrà trasmesso' floatLabelType="Auto"></ejs-dropdownlist>
+  <div *ngIf="!showsLoaded" style="text-align: center; margin-top: 5%; color: #ff914d;">
+    <div class="spinner-border"></div>
+  </div>
   <br>
 
   <h6>Data di inizio dell'evento</h6>
@@ -35,8 +37,10 @@
   <br><br>
 
   <h6>Sala di riproduzione</h6>
-  <ejs-dropdownlist [(value)]="eventRoomNameSelected" id='event-room-selector' [dataSource]='eventRoomsList' placeholder = "Seleziona la sala nella quale verrà trasmesso l'evento" floatLabelType="Auto"></ejs-dropdownlist>
-
+  <ejs-dropdownlist *ngIf="eventRoomsLoaded" [(value)]="eventRoomNameSelected" id='event-room-selector' [dataSource]='eventRoomsList' placeholder = "Seleziona la sala nella quale verrà trasmesso l'evento" floatLabelType="Auto"></ejs-dropdownlist>
+  <div *ngIf="!eventRoomsLoaded" style="text-align: center; margin-top: 5%; color: #ff914d;">
+    <div class="spinner-border"></div>
+  </div>
   <br><br>
 
   <h6>Orario inizio spettacolo</h6>

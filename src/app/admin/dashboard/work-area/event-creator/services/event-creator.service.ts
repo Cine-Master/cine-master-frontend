@@ -10,8 +10,7 @@ export class EventCreatorService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createNewEvent(event: Event): Observable<Event> {
-
-    return this.httpClient.post<Event>('http://localhost:8080/admin/events', event, { withCredentials: true });
+  createNewEvent(event: Event): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/admin/events', event, { withCredentials: true, responseType: 'text'});
   }
 }

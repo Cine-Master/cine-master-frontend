@@ -33,6 +33,11 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   showDirectorsList: string[] = [];
   showCategoriesList: string[] = [];
   showActorsList: string[] = [];
+  showRatingList: string[] = ['VM14', 'VM18', 'PT', 'BA'];
+
+  showDirectorsLoaded: boolean;
+  showCategoriesLoaded: boolean;
+  showActorsLoaded: boolean;
 
   // TODO: To be used in the next Sprints
   /*
@@ -53,6 +58,9 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
   showPhotoUrl: string;
   showIsHighlighted: boolean;
   showLength: number;
+  showTrailerUrl: string;
+  showHighlightedUrl: string;
+  showRating: string;
   showId: number;
 
   @ViewChild('coverUploader')
@@ -79,10 +87,26 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
       this.showPhotoUrl = this.info.photoUrl;
       this.showIsHighlighted = this.info.highlighted;
       this.showLength = +this.info.length;
+      this.showTrailerUrl = this.info.urlTrailer;
+      this.showHighlightedUrl = this.info.urlHighlighted;
     }
-    this.listService.getCategories().subscribe( (responseData) => this.assignCategories(responseData));
-    this.listService.getActors().subscribe( (responseData) => this.assignActors(responseData));
-    this.listService.getDirectors().subscribe( (responseData) => this.assignDirectors(responseData));
+
+    this.showDirectorsLoaded = false;
+    this.showCategoriesLoaded = false;
+    this.showActorsLoaded = false;
+
+    this.listService.getCategories().subscribe( (responseData) => {
+      this.assignCategories(responseData);
+      this.showCategoriesLoaded = true;
+    });
+    this.listService.getActors().subscribe( (responseData) => {
+      this.assignActors(responseData);
+      this.showActorsLoaded = true;
+    });
+    this.listService.getDirectors().subscribe( (responseData) => {
+      this.assignDirectors(responseData);
+      this.showDirectorsLoaded = true;
+    });
   }
 
   createNewShow(): void {
@@ -101,6 +125,9 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
     this.evaluateShowDirectorsSelected();
     this.evaluateShowIsHighlighted();
     this.evaluateShowLenght();
+    this.evaluateShowRating();
+    this.evaluateShowHighlightedUrl();
+    this.evaluateShowTrailerUrl();
     this.showComingSoon = true;
 
 
@@ -180,11 +207,15 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
         }
       }
 
+      if(!this.showIsHighlighted)
+        this.showHighlightedUrl = '';
+
       const showToAdd: Show = {id: null, name: this.showName, description: this.showDescription,
         photoUrl: this.showPhotoUrl, releaseDate: formattedShowReleaseDate,
         productionLocation: this.showProductionLocation, language: this.showLanguage, actors,
         directors, categories, comingSoon: this.showComingSoon,
-        highlighted: this.showIsHighlighted, length: this.showLength};
+        highlighted: this.showIsHighlighted, length: this.showLength, rating: this.showRating,
+        urlHighlighted: this.showHighlightedUrl, urlTrailer: this.showTrailerUrl};
 
       this.showCreationService.createNewShow(showToAdd).subscribe(
         data => {
@@ -232,6 +263,24 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
     return true;
   }
 
+  evaluateShowTrailerUrl(): boolean {
+    if (this.showTrailerUrl === '') {
+      this.invalidFields = true;
+      return false;
+    }
+
+    return true;
+  }
+
+  evaluateShowHighlightedUrl(): boolean {
+    if (this.showIsHighlighted && this.showHighlightedUrl === '') {
+      this.invalidFields = true;
+      return false;
+    }
+
+    return true;
+  }
+
   evaluateShowCoverImage(): boolean {
 
     // TODO: To implement in the next Sprint
@@ -261,6 +310,15 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
 
   evaluateShowProductionLocation(): boolean {
     if (this.showProductionLocation === undefined || this.showProductionLocation === null){
+      this.invalidFields = true;
+      return false;
+    }
+
+    return true;
+  }
+
+  evaluateShowRating(): boolean {
+    if (this.showRating === undefined || this.showRating === null){
       this.invalidFields = true;
       return false;
     }
@@ -355,6 +413,9 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
       this.evaluateShowDirectorsSelected();
       this.evaluateShowIsHighlighted();
       this.evaluateShowLenght();
+      this.evaluateShowTrailerUrl();
+      this.evaluateShowHighlightedUrl();
+      this.evaluateShowRating();
 
       if (this.invalidFields) {
       this.invalidFieldsAlert.show();
@@ -431,11 +492,12 @@ export class ShowCreatorComponent implements OnInit, ItemComponent {
         }
       }
 
-      const showToAdd: Show = { id: this.showId, name: this.showName, description: this.showDescription,
+      const showToAdd: Show = {id: null, name: this.showName, description: this.showDescription,
         photoUrl: this.showPhotoUrl, releaseDate: formattedShowReleaseDate,
         productionLocation: this.showProductionLocation, language: this.showLanguage, actors,
         directors, categories, comingSoon: this.showComingSoon,
-        highlighted: this.showIsHighlighted, length: this.showLength};
+        highlighted: this.showIsHighlighted, length: this.showLength, rating: this.showRating,
+        urlHighlighted: this.showHighlightedUrl, urlTrailer: this.showTrailerUrl};
 
       this.showCreationService.updateShow(showToAdd).subscribe(
         data => {
