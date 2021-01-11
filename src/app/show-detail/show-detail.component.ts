@@ -20,6 +20,7 @@ export class ShowDetailComponent implements OnInit {
   @ViewChild('paypalPaymentExecutorComponent')
   public paypalPaymentExecutorComponent: PaypalPaymentExecutorComponent;
   public show: Show;
+  public totalAmount: number;
   public seatReservationCompleted: boolean;
   public showLoaded = false;
   public eventsLoaded = false;
@@ -58,12 +59,17 @@ export class ShowDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.seatReservationCompleted = false;
+    this.totalAmount = 0;
     this.loadDetail();
     this.loadEvents();
   }
 
   private setSeatReservationCompleted(): void {
     this.seatReservationCompleted = true;
+  }
+
+  private priceToPayChanged(newPrice: number): void {
+    this.totalAmount = newPrice;
   }
 
   private loadDetail(): void {
