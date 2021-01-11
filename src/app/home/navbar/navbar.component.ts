@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {HomeComponent} from '../home.component';
 import {SearchService} from '../../services/search.service';
 import {AuthenticationService} from '../../services/authentication.service';
+import {Toast} from '@syncfusion/ej2-notifications';
 
 
 @Component({
@@ -32,10 +33,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-
-
   ngOnInit(): void {
-
     this.searchService.getAllCategories().subscribe(response => {this.categoryList = response; }, error => {console.log(error); });
   }
 
@@ -65,11 +63,26 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.authenticationService.logoutUser().subscribe(response => {console.log(response); localStorage.setItem('loggato', 'false'); });
+    this.authenticationService.logoutUser().subscribe(response => {console.log(response); localStorage.setItem('loggatoUser', 'false');
+    const t = new Toast({
+      title: 'Operazione effettuata',
+      content: 'Logout effettuato correttamente.',
+      cssClass: 'e-toast-success'
+    }); t.appendTo('#toastDiv'); t.show();
+
+    if (window.location.href.split('/')[3] === 'personalArea') {
+      this.router.navigate(['home']);
+    }
+    }, error => {const t = new Toast({
+      title: 'Operazione non effettuata',
+      content: 'Logout non effettuato, riprova più tardi.',
+      cssClass: 'e-toast-danger'
+    }); t.appendTo('#toastDiv'); t.show();});
+
   }
 
   getItem() {
-    return localStorage.getItem('loggato');
+    return localStorage.getItem('loggatoUser');
   }
 
   personalArea() {

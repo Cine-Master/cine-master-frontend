@@ -3,7 +3,7 @@
     <div class="amy-movie-item-inner">
       <div class="amy-movie-item-front">
         <div class="amy-movie-item-poster">
-          <a href="#">
+          <a href="{{urlTrailer}}">
             <img width="196" height="336" [src]="photoUrl" class="attachment-196x336 size-196x336" alt="" sizes="(max-width: 196px) 100vw, 196px">
           </a>
           <span class="amy-movie-field-imdb"><i class="fa fa-film" aria-hidden="true"></i></span>
@@ -14,7 +14,7 @@
           <h3 class="amy-movie-field-title"><a href="#">{{name}}</a></h3>
 
           <div class="amy-movie-item-meta">
-            <span class="amy-movie-field-mpaa">P.T.</span>
+            <span class="amy-movie-field-mpaa">{{rating}}</span>
             <span class="amy-movie-field-duration"><i class="fa fa-clock-o"></i>{{length}} minuti</span>
           </div>
           <div class="amy-movie-field-desc"><p>{{description}}</p></div>
@@ -50,8 +50,6 @@
           </div>
         </div>
         <div class="amy-movie-item-button">
-          <a href="#" class="amy-btn-icon-text link-detail fancybox.iframe amy-fancybox">
-            <i class="fa fa-play"></i>Trailer</a>
           <a class="amy-btn-icon-text link-detail" (click)="navigateToShowDetail();">
             <i class="fa fa-info"></i>Detail</a>
         </div>

@@ -1,4 +1,8 @@
 <app-navbar></app-navbar>
+<div id="toastDiv" aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+  <div class="toast" style="position: absolute; top: 0; right: 0;">
+  </div>
+</div>
 <div class="container">
   <div class="main-body">
     <div class="row gutters-sm">
@@ -10,8 +14,6 @@
               <img *ngIf="!male" src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="Admin" class="rounded-circle" width="150">
               <div class="mt-3">
                 <h4>{{personalData.firstName}} {{personalData.lastName}}</h4>
-                <p class="text-secondary mb-1">Full Stack Developer</p>
-                <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
               </div>
             </div>
           </div>
@@ -71,7 +73,7 @@
                 <h6 class="mb-0">Password</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input class="e-input" type="password" #password value="********" [readonly]="!modifica">
+                <input class="e-input" type="password" #password value="********" [readonly]="!modificaPassword">
               </div>
             </div>
             <hr>
@@ -83,8 +85,11 @@
                 <input class="e-input" #gender value="{{personalData.gender}}" [readonly]="!modifica">
               </div>
               <div class="col-sm-5">
-                <button ejs-button *ngIf="!modifica" class="btn" (click)="modificaDati()">Modifica dati</button>
-                <button ejs-button *ngIf="modifica" class="btn" (click)="salvaDati(name.value,surname.value,username.value,email.value,birthDate.value,gender.value,password.value)">Salva dati</button>
+                <button ejs-button *ngIf="!modifica && !modificaPassword" class="btn" (click)="modificaDati()">Modifica dati</button>
+                <button ejs-button *ngIf="!modificaPassword && !modifica" class="btn" (click)="modificaPass()">Modifica password</button>
+                <button ejs-button *ngIf="modifica" class="btn" (click)="salvaDati(name.value,surname.value,username.value,email.value,birthDate.value,gender.value)">Salva dati</button>
+                <button ejs-button *ngIf="modificaPassword" class="btn" (click)="salvaPassword(password.value)">Salva password</button>
+
               </div>
             </div>
           </div>

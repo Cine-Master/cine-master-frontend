@@ -29,29 +29,55 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if (localStorage.getItem('loggatoAdmin') === 'true') {
+      this.router.navigate(['admin/dashboard']);
+    }
+    if (localStorage.getItem('loggatoUser') === 'true') {
+      this.router.navigate(['home']);
+    }
+    if (localStorage.getItem('loggatoCashier') === 'true') {
+      this.router.navigate(['cashier']);
+    }
+
   }
 
 
   onSubmit(): void {
     // this.authenticationService.authenticateUserBis(this.user, this.pass).subscribe(response => {
     this.authenticationService.authenticateUser(this.loginForm.value).subscribe(response => {
+
       if (response.type === 'ADMIN') {
-        localStorage.setItem("loggato", "true");
+        const t = new Toast({
+          title: 'Login effettuato',
+          content: 'Benvenuto amministratore.',
+          cssClass: 'e-toast-success'
+        }); t.appendTo('#toastDiv'); t.show();
+        localStorage.setItem('loggatoAdmin', 'true');
         this.router.navigate(['admin/dashboard', this.username]);
       }
       if (response.type === 'USER') {
-        localStorage.setItem("loggato", "true");
+        const t = new Toast({
+          title: 'Login effettuato',
+          content: 'Benvenuto',
+          cssClass: 'e-toast-success'
+        }); t.appendTo('#toastDiv'); t.show();
+        localStorage.setItem('loggatoUser', 'true');
         this.router.navigate(['home', this.username]);
       }
     }, error => {
       if (error.status == 400) {
         const t = new Toast({
           title: 'Errore login',
-          content: 'Username o password sbagliate'
+          content: 'Username o password sbagliate',
+          cssClass: 'e-toast-danger'
         }); t.appendTo('#toastDiv'); t.show();
       }
-      if (error.status == 404 || error.status==500) {
-        alert('Attenzione, servizio momentaneamente non disponibile.');
+      if (error.status == 404 || error.status == 500) {
+        const t = new Toast({
+          title: 'Errore',
+          content: 'Ops,qualcosa è andato storto.',
+          cssClass: 'e-toast-danger'
+        }); t.appendTo('#toastDiv'); t.show();
       }
     });
     this.loginForm.reset();

@@ -9,7 +9,7 @@
     <div class="amy-section wpb_row  "><div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="amy-movie-layout-list "><div class="amy-movie-list">
 
       <div *ngFor="let result of searchResults">
-        <app-result-item [id] = "result.id" [releaseDate]="result.releaseDate" [length]="result.length" [photoUrl]="result.photoUrl" [name]="result.name" [language]="result.language" [description]="result.description" [categories]="result.categories" [directors]="result.directors" [actors]="result.actors"></app-result-item>
+        <app-result-item [id] = "result.id" [urlTrailer]="result.urlTrailer" [rating]="result.rating" [releaseDate]="result.releaseDate" [length]="result.length" [photoUrl]="result.photoUrl" [name]="result.name" [language]="result.language" [description]="result.description" [categories]="result.categories" [directors]="result.directors" [actors]="result.actors"></app-result-item>
 
       </div>
 

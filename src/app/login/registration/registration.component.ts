@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
+import {Toast} from '@syncfusion/ej2-notifications';
 
 
 @Component({
@@ -60,17 +61,26 @@ export class RegistrationComponent implements OnInit {
     // tslint:disable-next-line:prefer-const
     this.authenticationService.registrationUser(this.registerForm.value).subscribe(response => {
       this.showModal = false;
-      this.loaded = true;
       this.router.navigate(['home']);
-      let loginValue={"username":this.registerForm.value.username,"password":this.registerForm.value.password};
+      const loginValue = {username: this.registerForm.value.username, password: this.registerForm.value.password};
       console.log(loginValue);
+      const t = new Toast({
+        title: 'Registrazione effettuata',
+        content: 'Stai per essere reindirizzato alla home page.',
+        cssClass: 'e-toast-success'
+      }); t.appendTo('#toastDiv'); t.show();
       this.authenticationService.authenticateUser(loginValue).subscribe(response => {
-        localStorage.setItem("loggato", "true");
+        this.loaded = true;
+        localStorage.setItem('loggatoUser', 'true');
       });
     }, error => {
       // tslint:disable-next-line:triple-equals
       if (error.status == 400) {
-        alert('Attenzione, esiste già un account con questo username.');
+        const t = new Toast({
+          title: 'Operazione non effettuata',
+          content: 'Esiste già un utente con questo username.',
+          cssClass: 'e-toast-danger'
+        }); t.appendTo('#toastDiv'); t.show();
       }
     });
 
