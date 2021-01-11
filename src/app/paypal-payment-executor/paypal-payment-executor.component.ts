@@ -25,9 +25,11 @@ export class PaypalPaymentExecutorComponent implements OnInit {
   bookingIdentifier: object;
   couponCode: string;
   discount: number;
+  numberOfSeatsBooked: number;
   @Input() eventsBookingDetails: object[];
   @Input() eventsBookingTotalPrice: number;
   @Output() bookingCompletedEmitter = new EventEmitter<boolean>();
+  @Output() totalPriceChanged = new EventEmitter<number>();
 
   constructor(private bookingEventService: BookingEventService) { }
 
@@ -60,7 +62,6 @@ export class PaypalPaymentExecutorComponent implements OnInit {
       () => {
         this.bookingCompletedAlert.show();
         this.bookingCompleted = true;
-        this.bookingCompletedEmitter.emit(true);
         if(this.eventsBookingTotalPrice > 0){
           this.initConfig();
         } else {
@@ -102,6 +103,7 @@ export class PaypalPaymentExecutorComponent implements OnInit {
         this.couponValidAlert.show();
         this.couponTrying = false;
         this.eventsBookingTotalPrice -= this.discount;
+        this.totalPriceChanged.emit(this.eventsBookingTotalPrice);
         if(this.eventsBookingTotalPrice < 0)
           this.eventsBookingTotalPrice = 0;
       }
@@ -109,6 +111,8 @@ export class PaypalPaymentExecutorComponent implements OnInit {
   }
 
   private initConfig(): void {
+    this.numberOfSeatsBooked = this.countTotalSeatsBooked(this.eventsBookingDetails);
+    this.bookingCompletedEmitter.emit(true);
     this.payPalConfig = {
       currency: 'EUR',
       clientId: 'AUuQsZ6W_kSfRMWY_JWNer6Ho-eU3XDcVAgce3CZYj8LhYJO4ZiL9AME6LMbWHPxGkbTVp3zHpoQudsR',
@@ -128,8 +132,8 @@ export class PaypalPaymentExecutorComponent implements OnInit {
             },
             items: [
               {
-                name: 'Prenotazione Biglietti CineMaster',
-                quantity: this.countTotalSeatsBooked(this.eventsBookingDetails).toString(),
+                name: 'Prenotazione di ' + this.numberOfSeatsBooked.toString() + ' Biglietti CineMaster',
+                quantity: '1',
                 category: 'DIGITAL_GOODS',
                 unit_amount: {
                   currency_code: 'EUR',
@@ -167,6 +171,7 @@ export class PaypalPaymentExecutorComponent implements OnInit {
             this.bookingCompleted = false;
             this.bookingTrying = false;
             this.bookingConfirmation = false;
+            this.bookingCompletedEmitter.emit(false);
           }
         );
       },

@@ -138,6 +138,7 @@ export class SeatReservationComponent implements OnInit {
     for (const e of this.plants) {
       if (e.selected.length > 0) {
         this.showDetail.wantsToBuy = true;
+        this.showDetail.totalAmount = this.getAmount();
         return;
       }
     }
