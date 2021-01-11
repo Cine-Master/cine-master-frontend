@@ -40,7 +40,6 @@ export class SimpleListComponent implements OnInit, ItemComponent {
 
     this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
       showDeleteConfirmDialog: true};
-    this.toolbar = ['Add', 'Edit', 'Delete'];
     this.nameRules = { required: true };
     this.idRules = { required: false, maxLenghth: 0 };
     this.editParams = {  params: { popupHeight: '300px' }};

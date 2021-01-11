@@ -1,0 +1,13 @@
+.container-fluid {
+  min-height: 100%;
+}
+
+.header {
+  text-align: center;
+  font-family: Bangers;
+  font-size: 40px;
+}
+
+.title {
+  padding-top: 1%;
+}

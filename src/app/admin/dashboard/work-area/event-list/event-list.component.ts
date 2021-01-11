@@ -1,7 +1,7 @@
 import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {ItemComponent} from '../item/item.component';
 import {CommandModel, GridComponent} from '@syncfusion/ej2-angular-grids';
-import {Event} from '../../../../model/Event';
+import {AddEvent} from '../../../../model/AddEvent';
 import {WorkAreaComponent} from '../work-area.component';
 import {Router} from '@angular/router';
 import {EventListService} from './services/event-list.service';
@@ -13,7 +13,7 @@ import {EventListService} from './services/event-list.service';
 })
 export class EventListComponent implements OnInit, ItemComponent {
   @Input() type: string;
-  public data: Event[];
+  public data: AddEvent[];
   public editSettings: object;
   public showRules: object;
   public roomRules: object;

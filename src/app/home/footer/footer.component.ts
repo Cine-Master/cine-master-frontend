@@ -22,7 +22,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    const defaultLayers = this.platform.createDefaultLayers();
+    /*const defaultLayers = this.platform.createDefaultLayers();
     const map = new H.Map(
       this.mapElement.nativeElement,
       defaultLayers.vector.normal.map,
@@ -34,7 +34,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
     const parisMarker = new H.map.Marker({lat: 39.355735, lng: 16.227279});
     map.addObject(parisMarker);
     window.addEventListener('resize', () => map.getViewPort().resize());
-    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));*/
   }
 
 }

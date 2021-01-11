@@ -104,17 +104,20 @@ export class SeatReservationComponent implements OnInit {
                 return 'selected-vip';
               }
               return 'vip';
-          } else if (this.plants[index].standard.indexOf(seatPos) !== -1) {
-            if (this.plants[index].selected.indexOf(seatPos) !== -1) {
-              return 'selected-standard';
-            }
-            return 'standard';
-          } else if (this.plants[index].premium.indexOf(seatPos) !== -1) {
-            if (this.plants[index].selected.indexOf(seatPos) !== -1) {
-              return 'selected-premium';
-            }
-            return 'premium';
-          }
+      }
+      else if (this.plants[index].standard.indexOf(seatPos) !== -1) {
+        if (this.plants[index].selected.indexOf(seatPos) !== -1) {
+          return 'selected-standard';
+        }
+        return 'standard';
+      }
+      else if (this.plants[index].premium.indexOf(seatPos) !== -1) {
+        if (this.plants[index].selected.indexOf(seatPos) !== -1) {
+          return 'selected-premium';
+        }
+        return 'premium';
+      }
+      return 'white';
     }
   }
 
@@ -126,10 +129,10 @@ export class SeatReservationComponent implements OnInit {
       this.plants[index].selected.splice(index1, 1);
     } else {
       // push to selected array only if it is not reserved
-      if ( this.plants[index].reserved.indexOf(seatPos) === -1 ) {
+      if ( this.plants[index].reserved.indexOf(seatPos) === -1 && (this.plants[index].premium.indexOf(seatPos) !== -1 ||
+        this.plants[index].vip.indexOf(seatPos) !== -1 || this.plants[index].standard.indexOf(seatPos) !== -1)) {
         this.plants[index].selected.push(seatPos);
       }
-
     }
     for (const e of this.plants) {
       if (e.selected.length > 0) {

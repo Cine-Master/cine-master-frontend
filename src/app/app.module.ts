@@ -47,6 +47,7 @@ import { PaypalPaymentExecutorComponent } from './paypal-payment-executor/paypal
 import { EventListComponent } from './admin/dashboard/work-area/event-list/event-list.component';
 import { ShowListComponent } from './admin/dashboard/work-area/shows/show-list/show-list.component';
 import { PersonalAreaComponent } from './personal-area/personal-area.component';
+import { CashierComponent } from './cashier/cashier.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { PersonalAreaComponent } from './personal-area/personal-area.component';
     EventListComponent,
     ShowListComponent,
     PersonalAreaComponent,
+    CashierComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,8 +88,9 @@ import { PersonalAreaComponent } from './personal-area/personal-area.component';
       {path: 'login', component: LoginComponent},
       {path: 'show/:id', component: ShowDetailComponent},
       {path: 'seats', component: SeatReservationComponent},
+      {path: 'cashier', component: CashierComponent},
       {path: '**', component: ErrorPageComponent},
-      {path: 'error404', component: ErrorPageComponent}
+      {path: 'error404', component: ErrorPageComponent},
     ]),
     ReactiveFormsModule,
     HttpClientModule,

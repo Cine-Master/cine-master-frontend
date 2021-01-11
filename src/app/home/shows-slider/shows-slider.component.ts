@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Show} from '../../model/Show';
-import {Event} from '../../model/Event';
+import {AddEvent} from '../../model/AddEvent';
 import {ListService} from '../../admin/dashboard/work-area/default/services/list.service';
 import {SearchService} from '../../services/search.service';
 
@@ -25,13 +25,13 @@ export class ShowsSliderComponent implements OnInit {
     arrows: true,
     infinite: true,
     centerMode: true,
-    responsive: [
+    /*responsive: [
       {breakpoint: 480,
         settings: {slidesToShow: 1, slidesToScroll: 1}},
       {breakpoint: 979, settings: {slidesToShow: 3, slidesToScroll: 3}},
       {breakpoint: 1199, settings: {slidesToShow: 5, slidesToScroll: 5}},
       {breakpoint: 1999, settings: {slidesToShow: 7, slidesToScroll: 7}},
-      {breakpoint: 4999, settings: {slidesToShow: 7, slidesToScroll: 7}}],
+      {breakpoint: 4999, settings: {slidesToShow: 7, slidesToScroll: 7}}],*/
     dots: false
   };
 
@@ -40,6 +40,7 @@ export class ShowsSliderComponent implements OnInit {
     this.searchService.getShowsWithEvents().subscribe(
       (data) => {
         this.availableSliderShows = data;
+        console.log(data);
       },
       error => {},
       () => {

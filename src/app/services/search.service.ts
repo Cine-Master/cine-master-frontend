@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Event} from '../model/Event';
+import {AddEvent} from '../model/AddEvent';
 import {Observable} from 'rxjs';
 import {Show} from '../model/Show';
 
@@ -27,8 +27,8 @@ export class SearchService {
   }
 
 
-  getEvents(): Observable<Event[]> {
-    return this.httpClient.get<Event[]>('http://localhost:8080/admin/events', { withCredentials: true });
+  getEvents(): Observable<AddEvent[]> {
+    return this.httpClient.get<AddEvent[]>('http://localhost:8080/admin/events', { withCredentials: true });
   }
 
   getShowsWithEvents(): Observable<Show[]> {

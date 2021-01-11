@@ -1,7 +1,7 @@
 import {AfterContentInit, Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {EventRoom} from '../../../../model/EventRoom';
 import {Show} from '../../../../model/Show';
-import {Event} from '../../../../model/Event';
+import {AddEvent} from '../../../../model/AddEvent';
 import {EventPrice} from '../../../../model/EventPrice';
 import {ItemComponent} from '../item/item.component';
 import {ListService} from '../default/services/list.service';
@@ -45,7 +45,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   eventStardDate: Date;
   eventEndDate: Date;
   eventTimeSlotsSelected: Date[];
-  requestResponseEvent: Event;
+  requestResponseEvent: AddEvent;
   eventId: string;
 
   constructor(private roomService: RoomService, private showService: ShowService, private eventCreatorService: EventCreatorService) {}
@@ -176,7 +176,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
         startTimes.push(startTimeHours + ':' + startTimeMinutes);
       }
 
-      const eventToAdd: Event = {
+      const eventToAdd: AddEvent = {
         id: null,
         show,
         price: this.eventPriceSelected,

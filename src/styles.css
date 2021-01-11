@@ -12,6 +12,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 40px 50px !important;
 }
 
+.color-primary {
+  color: #ff914d;
+}
+
 .primary-color {
   background-color: #ff914d;
   color: white;
@@ -23,3 +27,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #ff914d;
 }
 
+@font-face {
+  font-family: "Bangers";
+  src: local(Bangers), url(./assets/fonts/Bangers-Regular.ttf) format("truetype");
+}

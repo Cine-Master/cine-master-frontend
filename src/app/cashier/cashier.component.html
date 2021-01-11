@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-md bg-light justify-content-end">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <button class="btn primary-color" (click)="doLogout()">Logout</button>
+    </li>
+  </ul>
+</nav>
+<div class="container-fluid">
+  <div class="header">
+    <h2 class="color-primary title">cine Cashier</h2>
+  </div>
+  <div class="control-section e-tab-section">
+    <div class="e-sample-resize-container">
+      <!-- Render the Tab Component -->
+      <ejs-tab id="tab_default" heightAdjustMode='Auto'>
+        <e-tabitems>
+          <e-tabitem [header]="headerText[0]">
+            <ng-template #content>
+              <ejs-grid  #grid2 [dataSource]='events' [enableInfiniteScrolling]='true' height='75vh' allowTextWrap='true'>
+                <e-columns>
+                  <e-column field='show.name' headerText='Show' width='100' textAlign='Center'></e-column>
+                  <e-column field='show.description' headerText='Show' width='100' textAlign='Center'></e-column>
+                  <e-column field='room.name' headerText='Sala' width='60' textAlign='Center'></e-column>
+                  <e-column field='price.standardPrice' headerText='Prezzo Standard' width='60' format='C2' textAlign='Center'></e-column>
+                  <e-column field='price.premiumPrice' headerText='Prezzo Premium' width='60' format='C2' textAlign='Center'></e-column>
+                  <e-column field='price.vipPrice' headerText='Prezzo Vip' width='60' format='C2' textAlign='Center'></e-column>
+                  <e-column field='startTime' headerText='Orario inizio' textAlign='Center' width='80' type="time" editType="timepickeredit">></e-column>
+                  <e-column field='endTime' headerText='Orario fine' textAlign='Center' width='80' type="time" editType="timepickeredit"></e-column>
+                  <e-column headerText='Piantina' width='70' textAlign='Center'>
+                    <ng-template #template let-data>
+                      <button class="btn primary-color" (click)="renderPlant(data)">{{data.room.name}}</button>
+                    </ng-template>
+                  </e-column>
+                </e-columns>
+              </ejs-grid>
+            </ng-template>
+          </e-tabitem>
+          <e-tabitem [header]="headerText[1]">
+            <ng-template #content>
+              <ejs-grid  #grid2 [dataSource]='purchases' [enableInfiniteScrolling]='true' height='75vh'
+                         [editSettings]='editSettings'  allowTextWrap='true' (actionBegin)="actionBegin($event)">
+                <e-columns>
+                  <e-column field='id' headerText='ID' width='100' textAlign='Center'></e-column>
+                  <e-column field='show.description' headerText='Posti' width='100' textAlign='Center'></e-column>
+                  <e-column field='room.name' headerText='Sala' width='60' textAlign='Center'></e-column>
+                  <e-column field='price.standardPrice' headerText='Prezzo Standard' width='60' format='C2' textAlign='Center'></e-column>
+                  <e-column field='price.premiumPrice' headerText='Prezzo Premium' width='60' format='C2' textAlign='Center'></e-column>
+                  <e-column field='price.vipPrice' headerText='Prezzo Vip' width='60' format='C2' textAlign='Center'></e-column>
+                  <e-column field='startTime' headerText='Orario inizio' textAlign='Center' width='80' type="time" editType="timepickeredit">></e-column>
+                  <e-column field='endTime' headerText='Orario fine' textAlign='Center' width='80' type="time" editType="timepickeredit"></e-column>
+                  <e-column headerText='Piantina' width='70' textAlign='Center'>
+                    <ng-template #template let-data>
+                      <button class="btn primary-color" (click)="renderPlant(data)">{{data.room.name}}</button>
+                    </ng-template>
+                  </e-column>
+                  <e-column headerText='Elimina' width='150' [commands]='commands'></e-column>
+                </e-columns>
+              </ejs-grid>
+            </ng-template>
+          </e-tabitem>
+        </e-tabitems>
+      </ejs-tab>
+    </div>
+  <div>
+    <!--<app-seat-reservation #seatReservationComponent></app-seat-reservation>-->
+  </div>
+</div>
+</div>
+
+<ejs-toast cssClass="e-toast-danger" #invalidResponseToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Errore!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>E' stato riscontrato un errore... Riprova per favore!</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #correctResponseToastAlert [position]='position'>
+  <ng-template #title>
+    <div>Ottimo!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Sala modificata correttamente</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-success" #correctDeleteToastAlert [position]='position'>
+  <ng-template #content>
+    <div>Sala eliminata correttamente</div>
+  </ng-template>
+</ejs-toast>
