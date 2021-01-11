@@ -64,8 +64,8 @@ export class ShowDetailComponent implements OnInit {
     this.loadEvents();
   }
 
-  private setSeatReservationCompleted(): void {
-    this.seatReservationCompleted = true;
+  private setSeatReservationCompleted(status: boolean): void {
+    this.seatReservationCompleted = status;
   }
 
   private priceToPayChanged(newPrice: number): void {

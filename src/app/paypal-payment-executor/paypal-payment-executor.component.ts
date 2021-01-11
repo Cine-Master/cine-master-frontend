@@ -62,7 +62,6 @@ export class PaypalPaymentExecutorComponent implements OnInit {
       () => {
         this.bookingCompletedAlert.show();
         this.bookingCompleted = true;
-        this.bookingCompletedEmitter.emit(true);
         if(this.eventsBookingTotalPrice > 0){
           this.initConfig();
         } else {
@@ -113,6 +112,7 @@ export class PaypalPaymentExecutorComponent implements OnInit {
 
   private initConfig(): void {
     this.numberOfSeatsBooked = this.countTotalSeatsBooked(this.eventsBookingDetails);
+    this.bookingCompletedEmitter.emit(true);
     this.payPalConfig = {
       currency: 'EUR',
       clientId: 'AUuQsZ6W_kSfRMWY_JWNer6Ho-eU3XDcVAgce3CZYj8LhYJO4ZiL9AME6LMbWHPxGkbTVp3zHpoQudsR',
@@ -171,6 +171,7 @@ export class PaypalPaymentExecutorComponent implements OnInit {
             this.bookingCompleted = false;
             this.bookingTrying = false;
             this.bookingConfirmation = false;
+            this.bookingCompletedEmitter.emit(false);
           }
         );
       },
