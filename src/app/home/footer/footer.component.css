@@ -70,4 +70,7 @@ textarea:focus, input:focus {
 .social:hover {
   color: #ff914d;
 }
+.left{
+  text-align: left;
+}
 
