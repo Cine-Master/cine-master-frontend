@@ -43,5 +43,13 @@ export class AppComponent implements OnInit{
         }
       }
     });
+    console.log(localStorage.getItem('loggatoUser'));
+    if(localStorage.getItem('loggatoUser')==null)
+      localStorage.setItem('loggatoUser','false');
+    if(localStorage.getItem('loggatoAdmin')==null)
+      localStorage.setItem('loggatoAdmin','false');
+    if(localStorage.getItem('loggatoCashier')==null)
+      localStorage.setItem('loggatoCashier','false');
+
   }
 }

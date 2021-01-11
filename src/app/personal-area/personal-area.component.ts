@@ -59,9 +59,17 @@ export class PersonalAreaComponent implements OnInit {
     if (args.requestType === 'delete') {
       this.service.deleteBooking(args.data[0].bookingId).subscribe(response => {
         this.loadBooking();
+        const t = new Toast({
+          title: 'Operazione effettuata',
+          content: 'Prenotazione rimossa correttamente.',
+          cssClass: 'e-toast-success'
+        }); t.appendTo('#toastDiv'); t.show();
       },error => {
-          console.log(error);
-          alert('Ops.. Qualcosa è andato storto! \n Riprova per favore...');
+        const t = new Toast({
+          title: 'Qualcosa è andat storto.',
+          content: 'La prenotazione non è stata rimossa correttamente.',
+          cssClass: 'e-toast-danger'
+        }); t.appendTo('#toastDiv'); t.show();
           this.loadBooking();
         });
     }
