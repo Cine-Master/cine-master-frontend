@@ -6,10 +6,6 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
-  public loggato = false;
-
-
   constructor(private httpClient: HttpClient) { }
 
   authenticateUser(loginData): any {

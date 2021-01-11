@@ -4,6 +4,7 @@ import {CommandModel, GridComponent} from '@syncfusion/ej2-angular-grids';
 import {PersonalAreaService} from '../services/personal-area.service';
 import {Timestamp} from 'rxjs/internal-compatibility';
 import {DashboardItem} from '../admin/dashboard/work-area/item/dashboard-item';
+import {Router} from '@angular/router';
 import {Toast} from '@syncfusion/ej2-notifications';
 
 @Component({
@@ -28,11 +29,17 @@ export class PersonalAreaComponent implements OnInit {
 
 
 
-  constructor(private service: PersonalAreaService) {
+  constructor(private service: PersonalAreaService, private router: Router) {
 
   }
 
   ngOnInit(): void {
+
+    if (localStorage.getItem('loggatoAdmin') === 'true' || localStorage.getItem('loggatoUser') === 'false') {
+      this.router.navigate(['login']);
+      return;
+    }
+
     this.personalData={"firstName":"","username":"","lastName":"","email":"","birthdate":"","gender":"","hashedPassword":""};
     this.modifica=false;
     this.modificaPassword=false;
@@ -126,7 +133,7 @@ export class PersonalAreaComponent implements OnInit {
     if(password!="********" && password!="")
       newData.hashedPassword = password;
     else
-      newData.hashedPassword=null;
+      newData.hashedPassword = null;
     this.service.savePassword(newData).subscribe(response => {
       const t = new Toast({
         title: 'Operazione effettuata',

@@ -15,9 +15,11 @@ export class ResultItemComponent implements OnInit {
   @Input() length: number;
   @Input() releaseDate: string;
   @Input() description: string;
+  @Input() rating: string;
   @Input() categories: object[];
   @Input() directors: object[];
   @Input() actors: object[];
+  @Input() urlTrailer: string;
 
   constructor(private router: Router) { }
 

@@ -92,6 +92,11 @@ export class DashboardComponent implements OnInit{
   ];
 
   ngOnInit(): void {
+    if (localStorage.getItem('loggatoAdmin') === 'false') {
+      this.router.navigate(['login']);
+      return;
+    }
+
     this.item = this.itemService.getItem('1');
   }
 
@@ -116,7 +121,7 @@ export class DashboardComponent implements OnInit{
   }
 
   doLogout(): void {
-    this.authService.logoutUser().subscribe(response => {localStorage.setItem('loggato', 'false'); this.router.navigate(['login'])});
+    this.authService.logoutUser().subscribe(response => {localStorage.setItem('loggatoAdmin', 'false'); this.router.navigate(['login'])});
     // console.log('logout');
   }
 
