@@ -20,6 +20,10 @@ export class PersonalAreaService {
     return this.httpClient.get('http://localhost:8080/user/profile', {withCredentials: true});
   }
   savePersonalData(personalData): Observable<Object>{
-    return this.httpClient.post( 'http://localhost:8080/user/update',  {personalData}, {withCredentials: true, responseType: 'text' });
+    return this.httpClient.post( 'http://localhost:8080/user/update',  personalData, {withCredentials: true, responseType: 'text' });
   }
+  savePassword(personalData): Observable<Object>{
+    return this.httpClient.post( 'http://localhost:8080/user/change-password',  personalData, {withCredentials: true, responseType: 'text' });
+  }
+
 }

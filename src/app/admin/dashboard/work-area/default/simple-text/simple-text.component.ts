@@ -57,8 +57,8 @@ export class SimpleTextComponent implements OnInit, ItemComponent {
               this.correctResponseAlert.show();
             });
           break;
-        case 'Generi':
-          this.service.addActor({name: this.titleEditorObj.value}).subscribe(() => {}, error => {
+        case 'Categorie':
+          this.service.addGenre({name: this.titleEditorObj.value}).subscribe(() => {}, error => {
               this.invalidResponseAlert.show();
             },
             () => {
