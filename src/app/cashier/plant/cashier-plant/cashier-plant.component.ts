@@ -1,16 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ShowDetailComponent} from '../show-detail.component';
-import {ShowDetailService} from '../services/show-detail.service';
-import {EventRoom} from '../../model/EventRoom';
-import {newArray} from '@angular/compiler/src/util';
-import {CashierComponent} from '../../cashier/cashier.component';
+import {CashierComponent} from '../../cashier.component';
+import {CashierService} from '../../services/cashier.service';
 
 @Component({
-  selector: 'app-seat-reservation',
-  templateUrl: './seat-reservation.component.html',
-  styleUrls: ['./seat-reservation.component.css']
+  selector: 'app-cashier-plant',
+  templateUrl: './cashier-plant.component.html',
+  styleUrls: ['./cashier-plant.component.css']
 })
-export class SeatReservationComponent implements OnInit {
+export class CashierPlantComponent implements OnInit {
 
   public movieTitle: string;
   public date: string;
@@ -33,62 +30,58 @@ export class SeatReservationComponent implements OnInit {
     return s;
   }
 
-  constructor(@Inject(ShowDetailComponent) private showDetail: ShowDetailComponent, private service: ShowDetailService) {
-    this.movieTitle = this.showDetail.show.name;
-    this.plants = [];
-  }
+  constructor(@Inject(CashierComponent) private cashier: CashierComponent, private service: CashierService) {}
 
-  public loadData(date, hour, rooms): void {
+  public loadData(event): void {
+    this.movieTitle = event.show.name;
     this.loaded = false;
-    this.date = date;
-    this.hour = hour;
+    this.date = event.date;
+    this.hour = event.startTime;
     this.plants = [];
-    for (const room of rooms) {
-      const obj = {
-        name: room.room.name,
-        rowLetters: new Array(room.room.nRows),
-        columnNumber: Array.from({length: room.room.nColumns}, (_, i) => i + 1),
-        rows: room.room.nRows,
-        columns: room.room.nColumns,
-        reserved: [],
-        selected: [],
-        standard: [],
-        premium: [],
-        vip: [],
-        ids: new Map(),
-        price: {
-          standardPrice: room.price.standardPrice,
-          premiumPrice: room.price.premiumPrice,
-          vipPrice: room.price.vipPrice,
-        },
-        eventId: room.id
-      };
+    const obj = {
+      name: event.room.name,
+      rowLetters: new Array(event.room.nRows),
+      columnNumber: Array.from({length: event.room.nColumns}, (_, i) => i + 1),
+      rows: event.room.nRows,
+      columns: event.room.nColumns,
+      reserved: [],
+      selected: [],
+      standard: [],
+      premium: [],
+      vip: [],
+      ids: new Map(),
+      price: {
+        standardPrice: event.price.standardPrice,
+        premiumPrice: event.price.premiumPrice,
+        vipPrice: event.price.vipPrice,
+      },
+      eventId: event.id
+    };
 
-      for (let i = 0; i < obj.rows; i++) {
-        obj.rowLetters[i] = this.rowName(i);
-      }
-      for (const seat of room.room.seats) {
-        if (seat.seatType === 'VIP') {
-          obj.vip.push(seat.row + seat.column);
-        }
-        if (seat.seatType === 'PREMIUM') {
-          obj.premium.push(seat.row + seat.column);
-        }
-        if (seat.seatType === 'STANDARD') {
-          obj.standard.push(seat.row + seat.column);
-        }
-        obj.ids.set(seat.row + seat.column, seat.id);
-      }
-      this.service.getBookedSeats(obj.eventId).subscribe(response => {
-        for (const seats of response) {
-          obj.reserved.push(seats.row.concat(seats.column));
-        }
-        this.loaded = true;
-        this.firstLoad = false;
-      }, error => {
-      });
-      this.plants.push(obj);
+    for (let i = 0; i < obj.rows; i++) {
+      obj.rowLetters[i] = this.rowName(i);
     }
+    for (const seat of event.room.seats) {
+      if (seat.seatType === 'VIP') {
+        obj.vip.push(seat.row + seat.column);
+      }
+      if (seat.seatType === 'PREMIUM') {
+        obj.premium.push(seat.row + seat.column);
+      }
+      if (seat.seatType === 'STANDARD') {
+        obj.standard.push(seat.row + seat.column);
+      }
+      obj.ids.set(seat.row + seat.column, seat.id);
+    }
+    this.service.getBookedSeats(obj.eventId).subscribe(response => {
+      for (const seats of response) {
+        obj.reserved.push(seats.row.concat(seats.column));
+      }
+      this.loaded = true;
+      this.firstLoad = false;
+    }, error => {
+    });
+    this.plants.push(obj);
   }
 
   ngOnInit(): void {
@@ -101,10 +94,10 @@ export class SeatReservationComponent implements OnInit {
     }
     else {
       if (this.plants[index].vip.indexOf(seatPos) !== -1) {
-              if (this.plants[index].selected.indexOf(seatPos) !== -1) {
-                return 'selected-vip';
-              }
-              return 'vip';
+        if (this.plants[index].selected.indexOf(seatPos) !== -1) {
+          return 'selected-vip';
+        }
+        return 'vip';
       }
       else if (this.plants[index].standard.indexOf(seatPos) !== -1) {
         if (this.plants[index].selected.indexOf(seatPos) !== -1) {
@@ -137,11 +130,11 @@ export class SeatReservationComponent implements OnInit {
     }
     for (const e of this.plants) {
       if (e.selected.length > 0) {
-        this.showDetail.wantsToBuy = true;
+        this.cashier.wantsToBuy = true;
         return;
       }
     }
-    this.showDetail.wantsToBuy = false;
+    this.cashier.wantsToBuy = false;
   }
 
   public seatSelected(): string[] {
@@ -149,7 +142,7 @@ export class SeatReservationComponent implements OnInit {
     for (const plant of this.plants) {
       let s = plant.name + ': ';
       for ( const e of plant.selected ) {
-         s += e + ' ';
+        s += e + ' ';
       }
       retVal.push(s);
     }

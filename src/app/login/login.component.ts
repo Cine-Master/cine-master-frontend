@@ -64,6 +64,15 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('loggatoUser', 'true');
         this.router.navigate(['home', this.username]);
       }
+      if (response.type === 'CASHIER') {
+        const t = new Toast({
+          title: 'Login effettuato',
+          content: 'Benvenuto Cassiere',
+          cssClass: 'e-toast-success'
+        }); t.appendTo('#toastDiv'); t.show();
+        localStorage.setItem('loggatoCashier', 'true');
+        this.router.navigate(['cashier', this.username]);
+      }
     }, error => {
       if (error.status == 400) {
         const t = new Toast({

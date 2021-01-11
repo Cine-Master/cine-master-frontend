@@ -28,6 +28,7 @@ export class AuthenticationService {
   }
 
   logoutUser(): any {
-    return this.httpClient.request('post', 'http://localhost:8080/logout', {body: {}, withCredentials: true, responseType: 'text' });  }
+    return this.httpClient.request('post', 'http://localhost:8080/logout', {body: {}, withCredentials: true, responseType: 'text' });
+  }
 
 }

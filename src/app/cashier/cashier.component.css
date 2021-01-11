@@ -1,5 +1,9 @@
 .container-fluid {
-  min-height: 100%;
+  min-height: 70%;
+}
+.container {
+  margin-bottom: 2%;
+  padding: 3%;
 }
 
 .header {

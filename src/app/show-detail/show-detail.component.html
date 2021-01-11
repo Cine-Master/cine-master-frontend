@@ -1,18 +1,17 @@
-<link rel="stylesheet" id="amy-movie-style-css" href="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/themes/amy-movie/css/style.css?ver=1.0.0" type="text/css" media="all">
+<!--<link rel="stylesheet" id="amy-movie-style-css" href="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/themes/amy-movie/css/style.css?ver=1.0.0" type="text/css" media="all">-->
 <app-navbar></app-navbar>
 <div *ngIf="!showLoaded" style="text-align: center; margin-top: 5%; color: #ff914d">
   <div class="spinner-border text-primary"></div>
 </div>
 <div id="content" class="site-content" *ngIf="showLoaded">
 
-  <section class="main-content single-movie layout-full  no-banner">
+  <section class="main-content single-movie layout-full no-banner">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="page-content">
 
-            <article id="post-88"
-                     class="post-88 amy_movie type-amy_movie status-publish amy_genre-magic amy_genre-sci-fi amy_actor-alexander-cattly amy_actor-cartin-hollia amy_director-gally-peckin">
+            <article id="post-88" class="">
               <div class="row amy-single-movie">
                 <div class="col-md-4 col-sm-4">
                   <div class="entry-thumb">
@@ -33,31 +32,31 @@
                     <ul class="info-list">
                       <li>
                         <label>Attori:</label>
-                        <span class="elements">{{show.actors}}</span>
+                        <span style="color: #fe7900" class="elements">{{show.actors}}</span>
                       </li>
 
                       <li>
                         <label>Registi:</label>
-                        <span class="elements">{{show.directors}}</span>
+                        <span style="color: #fe7900" class="elements">{{show.directors}}</span>
                       </li>
 
                       <li>
                         <label>Generi:</label>
-                        <span class="elements">{{show.categories}}</span>
+                        <span style="color: #fe7900" class="elements">{{show.categories}}</span>
                       </li>
 
                       <li>
                         <label>Uscita:</label>
-                        <span class="elements">{{show.releaseDate}}</span>
+                        <span style="color: #fe7900" class="elements">{{show.releaseDate}}</span>
                       </li>
 
                       <li>
                         <label>Lingua:</label>
-                        <span class="elements">{{show.language}} </span>
+                        <span style="color: #fe7900" class="elements">{{show.language}} </span>
                       </li>
                       <li>
                         <label>Produzione:</label>
-                        <span class="elements">{{show.productionLocation}} </span>
+                        <span style="color: #fe7900" class="elements">{{show.productionLocation}} </span>
                       </li>
                     </ul>
                   </div>
@@ -116,5 +115,6 @@
     </div>
   </section>
 </div>
+<app-footer></app-footer>
 
 

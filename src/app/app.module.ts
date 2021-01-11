@@ -48,6 +48,7 @@ import { EventListComponent } from './admin/dashboard/work-area/event-list/event
 import { ShowListComponent } from './admin/dashboard/work-area/shows/show-list/show-list.component';
 import { PersonalAreaComponent } from './personal-area/personal-area.component';
 import { CashierComponent } from './cashier/cashier.component';
+import { CashierPlantComponent } from './cashier/plant/cashier-plant/cashier-plant.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { CashierComponent } from './cashier/cashier.component';
     ShowListComponent,
     PersonalAreaComponent,
     CashierComponent,
+    CashierPlantComponent,
   ],
   imports: [
     BrowserModule,
