@@ -71,7 +71,7 @@
               </div>
 
 
-              <div class="entry-showtime single-cinema" *ngIf="eventsLoaded">
+              <div class="entry-showtime single-cinema" *ngIf="eventsLoaded && !seatReservationCompleted">
                 <div class="clearfix">
                   <h3 class="info-name amy-title">Programmazione</h3>
                 </div>
@@ -88,10 +88,11 @@
                 </div>
               </div>
 
-              <div class="entry-map single-cinema">
+              <div class="entry-map single-cinema" *ngIf="!seatReservationCompleted">
                 <app-seat-reservation #seatReservationComponent></app-seat-reservation>
               </div>
               <div class="entry-map single-cinema container-fluid" *ngIf="wantsToBuy">
+                <br>
                 <h3 class="info-name amy-title">Riepilogo prenotazione</h3>
                 <h3>{{show.name}} - {{seatReservation.date}} - {{seatReservation.hour}} </h3>
                 <div *ngFor="let e of seatReservation.plants">
@@ -106,7 +107,7 @@
                 <h4>Totale:</h4>
                 <h6>&nbsp;&nbsp;&nbsp;&nbsp; {{seatReservation.getAmount()}} €</h6>
                 <div>
-                  <app-paypal-payment-executor [eventsBookingTotalPrice]="this.seatReservation.getAmount()" [eventsBookingDetails]="this.seatReservation.getReservedSeatByEvent()"></app-paypal-payment-executor><!-- paypal button -->
+                  <app-paypal-payment-executor #paypalPaymentExecutorComponent (bookingCompletedEmitter)="setSeatReservationCompleted()" [eventsBookingTotalPrice]="this.seatReservation.getAmount()" [eventsBookingDetails]="this.seatReservation.getReservedSeatByEvent()"></app-paypal-payment-executor><!-- paypal button -->
                 </div>
               </div>
             </article>

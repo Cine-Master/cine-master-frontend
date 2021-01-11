@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ICreateOrderRequest, IPayPalConfig} from 'ngx-paypal';
 import {BookingEventService} from './services/booking-event.service';
 
@@ -27,6 +27,7 @@ export class PaypalPaymentExecutorComponent implements OnInit {
   discount: number;
   @Input() eventsBookingDetails: object[];
   @Input() eventsBookingTotalPrice: number;
+  @Output() bookingCompletedEmitter = new EventEmitter<boolean>();
 
   constructor(private bookingEventService: BookingEventService) { }
 
@@ -59,7 +60,30 @@ export class PaypalPaymentExecutorComponent implements OnInit {
       () => {
         this.bookingCompletedAlert.show();
         this.bookingCompleted = true;
-        this.initConfig();
+        this.bookingCompletedEmitter.emit(true);
+        if(this.eventsBookingTotalPrice > 0){
+          this.initConfig();
+        } else {
+          this.bookingConfirmation = true;
+          this.bookingEventService.paymentCompletedNotification([{
+            booking: this.bookingIdentifier[0],
+            price: this.eventsBookingTotalPrice
+          }]).subscribe(
+            value => {
+
+            },
+            error => {
+              this.paymentFailedAlert.show();
+            },
+            () => {
+              this.paymentCompletedAlert.show();
+              this.bookingCompleted = false;
+              this.bookingTrying = false;
+              this.bookingConfirmation = false;
+            }
+          );
+        }
+
       }
     );
   }
@@ -68,7 +92,6 @@ export class PaypalPaymentExecutorComponent implements OnInit {
     this.couponTrying = true;
     this.bookingEventService.verifiyCouponValidity(this.couponCode).subscribe(
       data => {
-        console.log(data);
         this.discount = data;
       },
       error => {
@@ -79,7 +102,8 @@ export class PaypalPaymentExecutorComponent implements OnInit {
         this.couponValidAlert.show();
         this.couponTrying = false;
         this.eventsBookingTotalPrice -= this.discount;
-        this.initConfig();
+        if(this.eventsBookingTotalPrice < 0)
+          this.eventsBookingTotalPrice = 0;
       }
     );
   }

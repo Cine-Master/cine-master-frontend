@@ -5,6 +5,7 @@ import {SeatReservationComponent} from './seat-reservation/seat-reservation.comp
 import {Show} from '../model/Show';
 import {HomeComponent} from '../home/home.component';
 import {EventRoom} from '../model/EventRoom';
+import {PaypalPaymentExecutorComponent} from '../paypal-payment-executor/paypal-payment-executor.component';
 
 @Component({
   selector: 'app-show-detail',
@@ -16,7 +17,10 @@ export class ShowDetailComponent implements OnInit {
 
   @ViewChild('seatReservationComponent')
   public seatReservation: SeatReservationComponent;
+  @ViewChild('paypalPaymentExecutorComponent')
+  public paypalPaymentExecutorComponent: PaypalPaymentExecutorComponent;
   public show: Show;
+  public seatReservationCompleted: boolean;
   public showLoaded = false;
   public eventsLoaded = false;
   public events: Map<string, any>;
@@ -53,8 +57,13 @@ export class ShowDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.seatReservationCompleted = false;
     this.loadDetail();
     this.loadEvents();
+  }
+
+  private setSeatReservationCompleted(): void {
+    this.seatReservationCompleted = true;
   }
 
   private loadDetail(): void {
