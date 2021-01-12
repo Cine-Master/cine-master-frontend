@@ -22,7 +22,7 @@ export class PaypalPaymentExecutorComponent implements OnInit {
   bookingTrying: boolean;
   bookingConfirmation: boolean;
   couponTrying: boolean;
-  bookingIdentifier: object;
+  bookingIdentifier: object[];
   couponCode: string;
   discount: number;
   numberOfSeatsBooked: number;
@@ -49,6 +49,33 @@ export class PaypalPaymentExecutorComponent implements OnInit {
     return seats;
   }
 
+  private createBookingConfirmationDetails(bookingDetails: object[], bookingIdentifiers: object[]): object[] {
+
+    const bookingConfirmationDetails = [];
+
+    for (let i = 0; i < bookingIdentifiers.length; i++) {
+      for (let j = 0; j < bookingDetails.length; j++) {
+        let find = false;
+        for (let k = 0; k < bookingDetails[j]['seats'].length; k++) {
+          if(bookingDetails[j]['seats'][k]['id'] === bookingIdentifiers[i]['seat']['id']){
+            find = true;
+            bookingConfirmationDetails.push(
+              {
+                booking: this.bookingIdentifier[i],
+                price: bookingDetails[j]['seats'][k]['price']
+              });
+            break;
+          }
+        }
+
+        if(find)
+          break;
+      }
+    }
+
+    return bookingConfirmationDetails;
+  }
+
   private checkBookingAvailability(): void{
     this.bookingTrying = true;
     this.bookingEventService.bookEventsSeats(this.eventsBookingDetails).subscribe(
@@ -66,10 +93,8 @@ export class PaypalPaymentExecutorComponent implements OnInit {
           this.initConfig();
         } else {
           this.bookingConfirmation = true;
-          this.bookingEventService.paymentCompletedNotification([{
-            booking: this.bookingIdentifier[0],
-            price: this.eventsBookingTotalPrice
-          }]).subscribe(
+          const bookingConfirmationDetails = this.createBookingConfirmationDetails(this.eventsBookingDetails, this.bookingIdentifier);
+          this.bookingEventService.paymentCompletedNotification(bookingConfirmationDetails).subscribe(
             value => {
 
             },
@@ -156,10 +181,8 @@ export class PaypalPaymentExecutorComponent implements OnInit {
       },
       onClientAuthorization: (data) => {
         this.bookingConfirmation = true;
-        this.bookingEventService.paymentCompletedNotification([{
-          booking: this.bookingIdentifier[0],
-          price: this.eventsBookingTotalPrice
-        }]).subscribe(
+        const bookingConfirmationDetails = this.createBookingConfirmationDetails(this.eventsBookingDetails, this.bookingIdentifier);
+        this.bookingEventService.paymentCompletedNotification(bookingConfirmationDetails).subscribe(
           value => {
 
           },

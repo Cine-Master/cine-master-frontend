@@ -25,6 +25,7 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
   @ViewChild('correctResponseToastAlert') correctResponseAlert;
   public position = { X: 'Left'};
 
+  invalidResponseAlertBodyText: string;
   timeFormat = 'HH:mm';
   timeInterval = 15;
   timeSlotsViewCreated: number;
@@ -189,8 +190,8 @@ export class EventCreatorComponent implements OnInit, ItemComponent {
       this.eventCreatorService.createNewEvent(eventToAdd).subscribe(
         data => {},
         error => {
+          this.invalidResponseAlertBodyText = error.error +' perché la sala è già occupata da altri eventi';
           this.invalidResponseAlert.show();
-          console.log(error);
         },
         () => {
           this.correctResponseAlert.show();

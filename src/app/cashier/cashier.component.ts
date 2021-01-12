@@ -24,6 +24,7 @@ export class CashierComponent implements OnInit {
   public purchases: object[];
   public loaded = false;
   public loading = false;
+  public bookingIdentifier: object[];
   public commands = [{ type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }  }];
 
   public headerText: object = [{ text: 'Lista Eventi'}, { text: 'Storico Acquisti'}];
@@ -85,16 +86,45 @@ export class CashierComponent implements OnInit {
     });
   }
 
+  private createBookingConfirmationDetails(bookingDetails: object[], bookingIdentifiers: object[]): object[] {
+
+    const bookingConfirmationDetails = [];
+
+    for (let i = 0; i < bookingIdentifiers.length; i++) {
+      for (let j = 0; j < bookingDetails.length; j++) {
+        let find = false;
+        for (let k = 0; k < bookingDetails[j]['seats'].length; k++) {
+          if(bookingDetails[j]['seats'][k]['id'] === bookingIdentifiers[i]['seat']['id']){
+            find = true;
+            bookingConfirmationDetails.push(
+              {
+                booking: this.bookingIdentifier[i],
+                price: bookingDetails[j]['seats'][k]['price']
+              });
+            break;
+          }
+        }
+
+        if(find)
+          break;
+      }
+    }
+
+    return bookingConfirmationDetails;
+  }
+
   public confirm(): void {
     this.loading = true;
     this.service.bookEventsSeats(this.seatReservation.getReservedSeatByEvent()).subscribe( response => {
-        this.service.paymentCompletedNotification([{
-                      booking: response[0],
-                      price: this.seatReservation.getAmount()
-          }]).subscribe(() => {},
-          error => { this.invalidResponseAlert.show(); }, () => { this.bookingCompletedToastAlert.show(); this.loading = false;
-                                                                  this.loadPurchases(); });
-        }, error => { this.bookingCompletedToastAlert.show(); }
+          this.bookingIdentifier = response;
+        },
+        error => { this.bookingCompletedToastAlert.show(); },
+        () => {
+          const bookingConfirmationDetails = this.createBookingConfirmationDetails(this.seatReservation.getReservedSeatByEvent(), this.bookingIdentifier);
+          this.service.paymentCompletedNotification(bookingConfirmationDetails).subscribe(() => {},
+            error => { this.invalidResponseAlert.show(); }, () => { this.bookingCompletedToastAlert.show(); this.loading = false;
+              this.loadPurchases(); });
+        }
       );
   }
 

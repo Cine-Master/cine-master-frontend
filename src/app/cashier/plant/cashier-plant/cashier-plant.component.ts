@@ -174,7 +174,19 @@ export class CashierPlantComponent implements OnInit {
         seats: []
       };
       for ( const e of plant.selected ) {
-        obj.seats.push({id: plant.ids.get(e)});
+
+        let price = 0;
+
+        if (plant.vip.indexOf(e) !== -1){
+          price = plant.price.vipPrice;
+        }
+        else if (plant.standard.indexOf(e) !== -1){
+          price = plant.price.standardPrice;
+        }else if (plant.premium.indexOf(e) !== -1){
+          price = plant.price.premiumPrice;
+        }
+
+        obj.seats.push({id: plant.ids.get(e), price: price});
       }
       if ( obj.seats.length > 0) {
         retval.push(obj);

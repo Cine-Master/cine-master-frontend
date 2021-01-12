@@ -5,7 +5,7 @@
   <div class="spinner-border"></div>
 </div>
 <div *ngIf="loaded" class="control-section">
-  <ejs-grid #grid [dataSource]='data' [enableInfiniteScrolling]='true' height='75vh' [pageSettings]='pageSettings'
+  <ejs-grid #grid [dataSource]='data' [enableInfiniteScrolling]='true' height='75vh' [allowPaging]='true' [pageSettings]='pageSettings'
             [editSettings]='editSettings'  allowTextWrap='true' (actionBegin)="actionBegin($event)">
     <e-columns>
       <e-column field='id' headerText='Id' width='50' textAlign='Center' isPrimaryKey="true"></e-column>

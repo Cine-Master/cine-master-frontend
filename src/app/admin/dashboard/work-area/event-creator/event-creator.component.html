@@ -72,10 +72,10 @@
 
   <ejs-toast cssClass="e-toast-danger" #invalidResponseToastAlert [position]='position'>
     <ng-template #title>
-      <div>Errore!</div>
+      <div>I seguenti eventi non sono stati aggiunti</div>
     </ng-template>
     <ng-template #content>
-      <div>E' stato riscontrato un errore durante l'aggiunta dell'evento</div>
+      <div>{{invalidResponseAlertBodyText}}</div>
     </ng-template>
   </ejs-toast>
 
