@@ -49,12 +49,17 @@ export class CashierComponent implements OnInit {
       this.loaded = true;
       console.log(this.purchases);
     }, error => {
-      this.invalidResponseAlert.show();
+      if (error.error === 'You are not authorized') {
+        this.router.navigate(['login']);
+      }
+      else {
+        this.invalidResponseAlert.show();
+      }
     });
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('loggatoAdmin') === 'false') {
+    if (localStorage.getItem('loggatoCashier') === 'false') {
       this.router.navigate(['login']);
       return;
     }
