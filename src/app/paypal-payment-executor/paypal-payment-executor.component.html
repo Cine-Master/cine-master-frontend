@@ -43,6 +43,15 @@
   </ng-template>
 </ejs-toast>
 
+<ejs-toast cssClass="e-toast-danger" #notAuthorizedAlert [position]='position'>
+  <ng-template #title>
+    <div>Errore!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Effettua il log-in prima di poter prenotare un pagamento</div>
+  </ng-template>
+</ejs-toast>
+
 <ejs-toast cssClass="e-toast-success" #bookingCompletedToastAlert [position]='position'>
   <ng-template #title>
     <div>Ottimo!</div>

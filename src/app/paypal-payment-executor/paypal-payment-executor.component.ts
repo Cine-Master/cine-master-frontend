@@ -14,6 +14,7 @@ export class PaypalPaymentExecutorComponent implements OnInit {
   @ViewChild('couponInvalidAlert') couponInvalidAlert;
   @ViewChild('bookingCompletedToastAlert') bookingCompletedAlert;
   @ViewChild('paymentCompletedToastAlert') paymentCompletedAlert;
+  @ViewChild('notAuthorizedAlert') notAuthorizedAlert;
   @ViewChild('couponValidAlert') couponValidAlert;
   public position = { X: 'Left'};
 
@@ -83,7 +84,10 @@ export class PaypalPaymentExecutorComponent implements OnInit {
         this.bookingIdentifier = data;
       },
       error => {
-        this.bookingFailedAlert.show();
+        if(error.status === 403)
+          this.notAuthorizedAlert.show();
+        else
+          this.bookingFailedAlert.show();
         this.bookingTrying = false;
       },
       () => {
