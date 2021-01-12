@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
   private platform: any;
   constructor() {
     this.platform = new H.service.Platform({
-      apikey: '4dvChLnlVU4kBCq9eXr9OMspNtQuIlOYKLRS1tiG9iE'
+      apikey: '2SQVaEghiPQxlD2M-ivuJGwS1XoVq2FqN9-YpqOJy14'
     });
   }
 
@@ -22,19 +22,19 @@ export class FooterComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    /*const defaultLayers = this.platform.createDefaultLayers();
+    const defaultLayers = this.platform.createDefaultLayers();
     const map = new H.Map(
       this.mapElement.nativeElement,
       defaultLayers.vector.normal.map,
       {
-        zoom: 30,
+        zoom: 10,
         center: { lat: 39.355735, lng: 16.227279 }
       }
     );
     const parisMarker = new H.map.Marker({lat: 39.355735, lng: 16.227279});
     map.addObject(parisMarker);
     window.addEventListener('resize', () => map.getViewPort().resize());
-    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));*/
+    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
   }
 
 }

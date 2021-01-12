@@ -39,8 +39,6 @@ export class EventListComponent implements OnInit, ItemComponent {
 
     this.loadData();
 
-    // this.editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
-    //  showDeleteConfirmDialog: true };
     this.showRules = { required: true };
     this.roomRules = { required: true };
     this.pricesRules = { required: true };
@@ -49,10 +47,6 @@ export class EventListComponent implements OnInit, ItemComponent {
     this.editparams = {  params: { popupHeight: '300px' }};
     this.pageSettings = { pageSize: 50 };
 
-    // this.commands = [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
-    //   { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }  },
-    //   { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
-    //   { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
   }
 
   public loadData(): void {

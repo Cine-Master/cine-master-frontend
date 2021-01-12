@@ -16,9 +16,11 @@ footer::after {
 }
 
 footer {
+  margin-top: 15px;
   display: block;
   position: relative;
   background-color: #434a52;
+  padding-top: 3%;
 }
 
 h3, .title{
