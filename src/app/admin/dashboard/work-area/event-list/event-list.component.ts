@@ -14,7 +14,6 @@ import {EventListService} from './services/event-list.service';
 export class EventListComponent implements OnInit, ItemComponent {
   @Input() type: string;
   public data: AddEvent[];
-  public editSettings: object;
   public showRules: object;
   public roomRules: object;
   public pricesRules: object;
@@ -22,7 +21,6 @@ export class EventListComponent implements OnInit, ItemComponent {
   public endDateRules: object;
   public editparams: object;
   public pageSettings: object;
-  public commands: CommandModel[];
   public loaded = false;
   it: any;
 
@@ -31,6 +29,10 @@ export class EventListComponent implements OnInit, ItemComponent {
   @ViewChild('invalidResponseToastAlert') invalidResponseAlert;
   @ViewChild('correctResponseToastAlert') correctResponseAlert;
   @ViewChild('correctDeleteToastAlert') correctDeleteToastAlert;
+
+  public commands = [{ type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' }  }];
+  public editSettings = { allowEditing: true, allowDeleting: true, mode: 'Dialog', allowEditOnDblClick: false,
+    showDeleteConfirmDialog: true };
   public position = { X: 'Left'};
 
   constructor(@Inject(WorkAreaComponent) private parent: WorkAreaComponent, private service: EventListService, private router: Router) {}
@@ -56,6 +58,19 @@ export class EventListComponent implements OnInit, ItemComponent {
     }, error => {
       this.invalidResponseAlert.show();
     });
+  }
+
+  public actionBegin(arg0: any): void {
+    if (arg0.requestType === 'delete') {
+      this.loaded = false;
+      this.service.deleteEvent(arg0.data[0].id).subscribe(() => { }, error => {
+        this.loadData();
+        this.invalidResponseAlert.show();
+      }, () => {
+        this.loadData();
+        this.correctDeleteToastAlert.show();
+      });
+    }
   }
 
 }

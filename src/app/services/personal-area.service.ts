@@ -9,21 +9,22 @@ export class PersonalAreaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getBookings(): Observable<Object>{
+  getBookings(): Observable<any>{
     return this.httpClient.get('http://localhost:8080/user/tickets', {withCredentials: true});
   }
 
-  deleteBooking(id): Observable<Object>{
+  deleteBooking(id): Observable<any>{
     return this.httpClient.post( 'http://localhost:8080/booking/remove',  [{id}], {withCredentials: true, responseType: 'text' });
   }
-  getPersonalData(): Observable<Object>{
+  getPersonalData(): Observable<any>{
     return this.httpClient.get('http://localhost:8080/user/profile', {withCredentials: true});
   }
-  savePersonalData(personalData): Observable<Object>{
+  savePersonalData(personalData): Observable<any>{
     return this.httpClient.post( 'http://localhost:8080/user/update',  personalData, {withCredentials: true, responseType: 'text' });
   }
-  savePassword(personalData): Observable<Object>{
-    return this.httpClient.post( 'http://localhost:8080/user/change-password',  personalData, {withCredentials: true, responseType: 'text' });
+  savePassword(personalData): Observable<any>{
+    return this.httpClient.post( 'http://localhost:8080/user/change-password',  personalData,
+      {withCredentials: true, responseType: 'text' });
   }
 
 }

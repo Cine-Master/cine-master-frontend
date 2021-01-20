@@ -6,7 +6,7 @@
 </div>
 <div *ngIf="loaded" class="control-section">
   <ejs-grid #grid [dataSource]='data' [enableInfiniteScrolling]='true' height='75vh' [allowPaging]='true' [pageSettings]='pageSettings'
-            [editSettings]='editSettings'> <!--(actionBegin)="actionBegin($event)"-->
+            [editSettings]='editSettings' (actionBegin)="actionBegin($event)"> <!--(actionBegin)="actionBegin($event)"-->
     <e-columns>
       <e-column field='id' headerText='ID' width='50' textAlign='Center' isPrimaryKey="true"></e-column>
       <e-column field='show.name' headerText='Show' width='100' textAlign='Center' [validationRules]='showRules' isPrimaryKey="true"></e-column>
@@ -17,7 +17,7 @@
       <e-column field='date' headerText='Data' textAlign='Center' width='80' type='date' format='yMd' editType='datepickeredit'></e-column>
       <e-column field='startTime' headerText='Orario inizio' textAlign='Center' width='80' type="time" editType="timepickeredit">></e-column>
       <e-column field='endTime' headerText='Orario fine' textAlign='Center' width='80' type="time" editType="timepickeredit"></e-column>
-      <!--<e-column headerText='Modifica' width='160' [commands]='commands'></e-column>-->
+      <e-column headerText='Elimina' width='160' [commands]='commands'></e-column>
     </e-columns>
   </ejs-grid>
 </div>
