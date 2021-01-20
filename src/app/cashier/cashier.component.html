@@ -93,7 +93,7 @@
     <div>Errore!</div>
   </ng-template>
   <ng-template #content>
-    <div>E' stato riscontrato un errore... Riprova per favore!</div>
+    <div>E' stato riscontrato un errore interno... Riprova per favore!</div>
   </ng-template>
 </ejs-toast>
 
@@ -119,5 +119,14 @@
   </ng-template>
   <ng-template #content>
     <div>Prenotazione completata!</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-danger" #noSeatsAlert [position]='position'>
+  <ng-template #title>
+    <div>Ops!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>Prenotazione non andata a buon fine, può essere che ci sia stato un errore interno o che i posti non siano più disponibili.</div>
   </ng-template>
 </ejs-toast>

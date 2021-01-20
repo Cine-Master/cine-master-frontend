@@ -18,6 +18,7 @@ export class CashierComponent implements OnInit {
   @ViewChild('correctDeleteToastAlert') correctDeleteToastAlert;
   @ViewChild('bookingCompletedToastAlert') bookingCompletedToastAlert;
   @ViewChild('bookingFailedToastAlert') bookingFailedToastAlert;
+  @ViewChild('noSeatsAlert') noSeatsAlert;
   @ViewChild('seatReservationComponent') seatReservation: CashierPlantComponent;
   public position = { X: 'Left'};
   public events: any[];
@@ -123,11 +124,12 @@ export class CashierComponent implements OnInit {
     this.service.bookEventsSeats(this.seatReservation.getReservedSeatByEvent()).subscribe( response => {
           this.bookingIdentifier = response;
         },
-        error => { this.bookingCompletedToastAlert.show(); },
+        error => { this.noSeatsAlert.show(); },
         () => {
-          const bookingConfirmationDetails = this.createBookingConfirmationDetails(this.seatReservation.getReservedSeatByEvent(), this.bookingIdentifier);
+          const bookingConfirmationDetails = this.createBookingConfirmationDetails(this.seatReservation.getReservedSeatByEvent(),
+            this.bookingIdentifier);
           this.service.paymentCompletedNotification(bookingConfirmationDetails).subscribe(() => {},
-            error => { this.invalidResponseAlert.show(); }, () => { this.bookingCompletedToastAlert.show(); this.loading = false;
+            error => { this.noSeatsAlert.show(); }, () => { this.bookingCompletedToastAlert.show(); this.loading = false;
               this.loadPurchases(); });
         }
       );
