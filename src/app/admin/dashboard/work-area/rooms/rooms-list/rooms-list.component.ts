@@ -1,10 +1,9 @@
-import {Component, Inject, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import {ItemComponent} from '../../item/item.component';
 import {EventRoom} from '../../../../../model/EventRoom';
 import {WorkAreaComponent} from '../../work-area.component';
 import {RoomService} from '../services/room.service';
 import {DashboardItem} from '../../item/dashboard-item';
-import {ShowCreatorComponent} from '../../shows/show-creator/show-creator.component';
 import {RoomCreatorComponent} from '../room-creator/room-creator.component';
 
 @Component({
@@ -32,6 +31,7 @@ export class RoomsListComponent implements OnInit, ItemComponent {
   @ViewChild('invalidResponseToastAlert') invalidResponseAlert;
   @ViewChild('correctResponseToastAlert') correctResponseAlert;
   @ViewChild('correctDeleteToastAlert') correctDeleteToastAlert;
+  @ViewChild('roomOccuped') roomOccuped;
   public position = { X: 'Left'};
 
   private rowName(n): string {
@@ -102,7 +102,13 @@ export class RoomsListComponent implements OnInit, ItemComponent {
       this.loaded = false;
       this.service.deleteRoom(arg0.data[0].id).subscribe(() => {}, error => {
         this.loadData();
-        this.invalidResponseAlert.show();
+        if ( error.error === 'Events present' ) {
+          this.roomOccuped.show();
+        }
+        else {
+          this.invalidResponseAlert.show();
+        }
+        this.loaded = true;
       }, () => {
         this.loadData();
         this.correctDeleteToastAlert.show();

@@ -1,7 +1,6 @@
-<!--<link rel="stylesheet" id="amy-movie-style-css" href="http://demo.amytheme.com/movie/demo/single-cinema/wp-content/themes/amy-movie/css/style.css?ver=1.0.0" type="text/css" media="all">-->
 <app-navbar></app-navbar>
-<div *ngIf="!showLoaded" style="text-align: center; margin-top: 5%; color: #ff914d">
-  <div class="spinner-border text-primary"></div>
+<div *ngIf="!showLoaded" class="spinner">
+  <div class="spinner-border"></div>
 </div>
 <div id="content" class="site-content" *ngIf="showLoaded">
 

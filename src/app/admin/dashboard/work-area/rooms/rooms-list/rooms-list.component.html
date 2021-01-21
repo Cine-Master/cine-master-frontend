@@ -13,7 +13,7 @@
           <e-column field='name' headerText='Nome' width='100' textAlign='Center'></e-column>
           <e-column field='nRows' headerText='Numero Righe' width='50' textAlign='Center'></e-column>
           <e-column field='nColumns' headerText='Numero Colonne' width='40' textAlign='Center'></e-column>
-          <e-column headerText='Piantina' width='70' textAlign='Center'>
+          <e-column headerText='Piantina' width='170' textAlign='Center'>
             <ng-template #template let-data>
               <button class="btn primary-color" (click)="renderPlant(data)">Visualizza Piantina</button>
             </ng-template>
@@ -67,6 +67,15 @@
 <ejs-toast cssClass="e-toast-success" #correctDeleteToastAlert [position]='position'>
   <ng-template #content>
     <div>Sala eliminata correttamente</div>
+  </ng-template>
+</ejs-toast>
+
+<ejs-toast cssClass="e-toast-danger" #roomOccuped [position]='position'>
+  <ng-template #title>
+    <div>Ops!</div>
+  </ng-template>
+  <ng-template #content>
+    <div>La sala è occupata da alcuni spettacoli, aspetta he si liberi e procedi all'eliminzaione!</div>
   </ng-template>
 </ejs-toast>
 

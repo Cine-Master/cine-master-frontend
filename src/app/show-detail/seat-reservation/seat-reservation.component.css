@@ -100,3 +100,7 @@ main::before {
   color: #ce4844;
 }
 
+.noSeat {
+  color: rgba(0,0,0,0);
+}
+
