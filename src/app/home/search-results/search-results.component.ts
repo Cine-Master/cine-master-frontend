@@ -11,6 +11,7 @@ export class SearchResultsComponent implements OnInit {
   constructor(private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.searchResults = [];
   }
 
   updateSearchResults(searchResults: any): void {

@@ -92,4 +92,7 @@ export class LoginComponent implements OnInit {
     this.loginForm.reset();
   }
 
+  goHome() {
+    this.router.navigate(['home']);
+  }
 }
