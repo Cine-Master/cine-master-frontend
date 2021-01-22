@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
   private platform: any;
   constructor() {
     this.platform = new H.service.Platform({
-      apikey: '2SQVaEghiPQxlD2M-ivuJGwS1XoVq2FqN9-YpqOJy14'
+      apikey: 'uN6wNcHYZzQKP-pDQtavBtkuhtsfxjkG2I0JM5szMRw'
     });
   }
 
